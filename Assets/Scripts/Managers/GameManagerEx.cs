@@ -10,7 +10,6 @@ public class GameManagerEx
     //Dictionary<int, GameObject> _player = new Dictionary<int, GameObject>();
     HashSet<GameObject> _monster = new HashSet<GameObject>();
     public Action<int> OnSpawnEvent;
-    public Dictionary<String, Action<Int>>
 
     public GameObject getPlayer() { return _player; }
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
@@ -28,8 +27,6 @@ public class GameManagerEx
             case Define.WorldObject.Player:
                 _player = go;
                 break;
-            case Define.WorldObject.Weapon:
-                case "knife"
         }
 
         return go;

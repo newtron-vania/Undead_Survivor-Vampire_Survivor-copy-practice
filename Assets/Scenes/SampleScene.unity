@@ -24239,6 +24239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d917e8562d05c48a6b69936771b8df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level: 0
 --- !u!1 &1536096131
 GameObject:
   m_ObjectHideFlags: 0
@@ -24634,16 +24635,20 @@ MonoBehaviour:
   - Type: 2
     spawnTime: 0.7
     spriteType: 0
-    health: 10
+    maxHp: 0
     speed: 1.5
+    attack: 0
+    Defense: 0
   - Type: 2
     spawnTime: 0.5
     spriteType: 1
-    health: 20
+    maxHp: 0
     speed: 2.5
+    attack: 0
+    Defense: 0
   _spawnUnit: []
   MaxSpawnUnit: 50
-  count: 0
+  enemyCount: 0
 --- !u!1 &1768402193
 GameObject:
   m_ObjectHideFlags: 0
