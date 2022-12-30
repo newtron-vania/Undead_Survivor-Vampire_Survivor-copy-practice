@@ -1,18 +1,13 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : BaseController
 {
-    [SerializeField]
-    Vector2 _inputVec;
-    public Vector2 _lastDirVec;
+    [SerializeField] Vector2 _inputVec;
+    [SerializeField] public Vector2 _lastDirVec = new Vector2(1, 0);
     float _damagedTime = 0f;
 
-
     Slider _slider;
-
 
     private void Awake()
     {
@@ -25,22 +20,24 @@ public class PlayerController : BaseController
 
     void Start()
     {
-        
     }
 
     void Update()
     {
         _inputVec.x = Input.GetAxisRaw("Horizontal");
         _inputVec.y = Input.GetAxisRaw("Vertical");
-
     }
 
     private void FixedUpdate()
     {
-        Vector2 nextVec = _inputVec.normalized * _stat.MoveSpeed * Time.fixedDeltaTime;
-        //À§Ä¡ ÀÌµ¿
-        _rigid.MovePosition(_rigid.position +  nextVec);
+        Vector2 nextVec = _inputVec.normalized * (_stat.MoveSpeed * Time.fixedDeltaTime);
+        //ï¿½ï¿½Ä¡ ï¿½Ìµï¿½
+        _rigid.MovePosition(_rigid.position + nextVec);
 
+        if (_inputVec.normalized.magnitude != 0)
+        {
+            _lastDirVec = _inputVec.normalized;
+        }
     }
 
     private void LateUpdate()
@@ -52,10 +49,14 @@ public class PlayerController : BaseController
         }
     }
 
-    private void OnDamaged(Collision2D collision)
+    private void OnDamaged(Collision2D collision, float gameTime)
     {
-        _damagedTime = Time.deltaTime;
+        _damagedTime = gameTime;
         Stat EnemyStat = collision.transform.GetComponent<EnemyStat>();
+
+        Debug.Log(
+            $"{collision.gameObject.name} attacked to the player at the time(${_damagedTime}). and enemyStat is {EnemyStat.Attack}");
+
         _stat.HP -= Mathf.Max(EnemyStat.Attack - _stat.Defense, 1);
     }
 
@@ -63,9 +64,12 @@ public class PlayerController : BaseController
     {
         if (collision.transform.tag == "Enemy")
         {
-            if(Time.deltaTime - _damagedTime > 0.1f)
+            Debug.Log($"{collision.gameObject.name} was collided to the player");
+
+            float currentTime = Managers.GameTime;
+            if (currentTime - _damagedTime > 1f)
             {
-                OnDamaged(collision);
+                OnDamaged(collision, currentTime);
             }
         }
     }

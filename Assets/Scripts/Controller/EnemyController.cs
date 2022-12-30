@@ -24,7 +24,7 @@ public class EnemyController : BaseController
             return;
 
         Vector2 dirVec = _target.position - _rigid.position;
-        Vector2 nextVec = dirVec.normalized *_stat.MoveSpeed * Time.fixedDeltaTime;
+        Vector2 nextVec = dirVec.normalized * (_stat.MoveSpeed * Time.fixedDeltaTime);
 
         _rigid.MovePosition(_rigid.position + nextVec);
         _rigid.velocity = Vector2.zero;
@@ -40,7 +40,6 @@ public class EnemyController : BaseController
         _target = Managers.Instance._player.GetComponent<Rigidbody2D>();
         _isLive = true;
         _stat.HP = _stat.MaxHP;
-
     }
 
     public void Init(SpawnData data)

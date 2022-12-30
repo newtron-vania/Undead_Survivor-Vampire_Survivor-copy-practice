@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class EnemyStat : Stat
 {
     void Awake()
@@ -16,11 +12,10 @@ public class EnemyStat : Stat
 
     public override void OnDead()
     {
-        if(HP <= 0)
+        if (HP <= 0)
         {
             HP = 0;
             Managers.Resource.Destroy(gameObject);
         }
     }
-
 }

@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using Data;
 using UnityEngine;
 
 public class KnifeSpawner : WeaponSpawner
 {
-    List<Data.WeaponLevelData> knifeStat;
-
+    List<WeaponLevelData> knifeStat;
 
 
     float time = 0;
+
     void Start()
     {
         knifeStat = weaponData[1].weaponLevelData;
@@ -16,7 +17,6 @@ public class KnifeSpawner : WeaponSpawner
 
     void Update()
     {
-
         if (Managers.GameTime - time > knifeStat[level].cooldown)
         {
             for (int i = 0; i < knifeStat[level].createPerCount; i++)
@@ -34,15 +34,16 @@ public class KnifeSpawner : WeaponSpawner
         GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
         Knife knifeStat = go.GetComponent<Knife>();
         SetWeaponStat(knifeStat);
-        go.transform.position = transform.position;
-        if (_player.GetComponent<SpriteRenderer>().flipX)
-            go.GetComponent<Knife>().dir = new Vector3(-1, 0, 0);
-        else
-            go.GetComponent<Knife>().dir = new Vector3(1, 0, 0);
     }
 
     protected void SetWeaponStat(Knife knife)
     {
+        knife.transform.position = transform.position;
+        PlayerController controller = _player.GetComponent<PlayerController>();
+        Vector2 dirOfPlayer = controller._lastDirVec;
+
+        knife.dir = new Vector3(dirOfPlayer.x, dirOfPlayer.y, 0);
+
         PlayerStat playerStat = _player.GetComponent<PlayerStat>();
         knife.damage = knifeStat[level].damage * playerStat.Attack;
     }
