@@ -51,7 +51,7 @@ public class PlayerController : BaseController
         }
     }
 
-    private void OnDamaged(Collision2D collision, float gameTime)
+    private void OnDamaged(Collision2D collision)
     {
         _isDamaged = true;
         Stat EnemyStat = collision.transform.GetComponent<EnemyStat>();
@@ -74,7 +74,7 @@ public class PlayerController : BaseController
             float currentTime = Managers.GameTime;
             if (!_isDamaged)
             {
-                OnDamaged(collision, currentTime);
+                OnDamaged(collision);
                 StartCoroutine(OnDamagedColor());
             }
         }

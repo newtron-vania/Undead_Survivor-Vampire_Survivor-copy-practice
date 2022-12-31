@@ -100,8 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dir: {x: 0, y: 0, z: 0}
-  attack: 0
-  speed: 2
+  damage: 10
+  speed: 5
+  lifeTime: 3
+  createTime: 0
 --- !u!61 &156914533638325169
 BoxCollider2D:
   m_ObjectHideFlags: 0

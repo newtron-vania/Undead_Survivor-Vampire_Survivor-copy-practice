@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2702394253058453772}
   - component: {fileID: 3199448754188548999}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 934439955072129908}
   - component: {fileID: 8928286282934739868}
   - component: {fileID: 5293320050685595371}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,8 +222,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5804cb2670bf4ec4abcb06630df725e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _anime: {fileID: 0}
+  _type: 0
   _inputVec: {x: 0, y: 0}
-  _movSpeed: 3
+  _lastDirVec: {x: 0, y: 0}
 --- !u!95 &5293320050685595371
 Animator:
   serializedVersion: 4

@@ -50,6 +50,11 @@ public class EnemyController : BaseController
         _stat.HP = _stat.MaxHP;
     }
 
+    public void OnDamaged(int damage)
+    {
+        _stat.HP -= Mathf.Max(damage - _stat.Defense, 1);
+        OnDead();
+    }
     public override void OnDead()
     {
         if(_stat.HP <= 0)

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1085060567}
   - component: {fileID: 1085060568}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Area
   m_TagString: Area
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1682672563}
   - component: {fileID: 1682672564}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,8 +104,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoint: []
   spawnData: []
+  _spawnUnit: []
   MaxSpawnUnit: 50
-  count: 0
+  enemyCount: 0
 --- !u!1 &6097877082915252153
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +122,7 @@ GameObject:
   - component: {fileID: 6097877082915252134}
   - component: {fileID: 6270601201515782472}
   - component: {fileID: 6097877082915252135}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Player0
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -247,8 +248,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5804cb2670bf4ec4abcb06630df725e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _anime: {fileID: 0}
+  _type: 0
   _inputVec: {x: 0, y: 0}
-  _movSpeed: 3
+  _lastDirVec: {x: 0, y: 0}
 --- !u!114 &6270601201515782472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6097877083617249286}
   - component: {fileID: 6097877083617249287}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Shadow
   m_TagString: Untagged
   m_Icon: {fileID: 0}

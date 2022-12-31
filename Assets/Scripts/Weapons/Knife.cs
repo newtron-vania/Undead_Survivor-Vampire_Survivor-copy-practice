@@ -29,11 +29,8 @@ public class Knife : MonoBehaviour
         GameObject go = other.gameObject;
         if (go.CompareTag("Enemy"))
         {
-            EnemyStat stat = go.GetComponent<EnemyStat>();
-            stat.HP -= Mathf.Max(damage - stat.Defense, 1);
+            go.GetComponent<EnemyController>().OnDamaged(damage);
             Managers.Resource.Destroy(gameObject);
-
-            go.GetComponent<EnemyController>().OnDead();
         }
     }
 }

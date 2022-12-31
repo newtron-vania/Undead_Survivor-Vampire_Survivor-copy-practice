@@ -11,4 +11,9 @@ public abstract class BaseController : MonoBehaviour
     public Define.WorldObject _type = Define.WorldObject.Unknown;
 
     public abstract void OnDead();
+
+    public virtual void OnDamaged()
+    {
+
+    }
 }
