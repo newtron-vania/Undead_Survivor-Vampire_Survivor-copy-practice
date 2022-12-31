@@ -17,22 +17,21 @@ public class KnifeSpawner : WeaponSpawner
 
     void Update()
     {
-        if (Managers.GameTime - time > knifeStat[level].cooldown)
-        {
-            for (int i = 0; i < knifeStat[level].createPerCount; i++)
-            {
-                Spawn();
-                StartCoroutine(SpawnDelay());
-            }
-
-            time = Managers.GameTime;
-        }
+        Spawn();
     }
 
     protected override void Spawn()
     {
-        GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
-        SetWeaponStat(go);
+        if (Managers.GameTime - time > knifeStat[level].cooldown)
+        {
+            for (int i = 0; i < knifeStat[level].createPerCount; i++)
+            {
+                GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
+                SetWeaponStat(go);
+            }
+            time = Managers.GameTime;
+        }
+        
     }
 
     protected override void SetWeaponStat(GameObject weapon)
@@ -50,8 +49,4 @@ public class KnifeSpawner : WeaponSpawner
         knife.speed = knifeStat[level].movSpeed;
     }
 
-    IEnumerator SpawnDelay()
-    {
-        yield return new WaitForSeconds(1f);
-    }
 }

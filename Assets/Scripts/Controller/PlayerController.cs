@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,7 +6,8 @@ public class PlayerController : BaseController
 {
     [SerializeField] Vector2 _inputVec;
     [SerializeField] public Vector2 _lastDirVec = new Vector2(1, 0);
-    float _damagedTime = 0f;
+    bool _isDamaged = false;
+    float _invincibility_time = 1f;
 
     Slider _slider;
 
@@ -51,13 +53,14 @@ public class PlayerController : BaseController
 
     private void OnDamaged(Collision2D collision, float gameTime)
     {
-        _damagedTime = gameTime;
+        _isDamaged = true;
         Stat EnemyStat = collision.transform.GetComponent<EnemyStat>();
 
         Debug.Log(
-            $"{collision.gameObject.name} attacked to the player at the time(${_damagedTime}). and enemyStat is {EnemyStat.Attack}");
+            $"{collision.gameObject.name} attacked to the player. and enemyStat is {EnemyStat.Attack}");
 
         _stat.HP -= Mathf.Max(EnemyStat.Attack - _stat.Defense, 1);
+        
         if (_stat.HP <= 0)
             OnDead();
     }
@@ -69,12 +72,24 @@ public class PlayerController : BaseController
             Debug.Log($"{collision.gameObject.name} was collided to the player");
 
             float currentTime = Managers.GameTime;
-            if (currentTime - _damagedTime > 1f)
+            if (!_isDamaged)
             {
                 OnDamaged(collision, currentTime);
+                StartCoroutine(OnDamagedColor());
             }
         }
     }
+
+    IEnumerator OnDamagedColor()
+    {
+        _sprite.color = Color.red;
+
+        yield return new WaitForSeconds(_invincibility_time);
+
+        _isDamaged = false;
+        _sprite.color = Color.white;
+    }
+
 
     public override void OnDead()
     {
