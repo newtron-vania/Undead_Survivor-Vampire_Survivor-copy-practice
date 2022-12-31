@@ -21,8 +21,8 @@ public class KnifeSpawner : WeaponSpawner
         {
             for (int i = 0; i < knifeStat[level].createPerCount; i++)
             {
-                Spawn();
-                StartCoroutine(SpawnDelay());
+                // Spawn();
+                // StartCoroutine(SpawnDelay());
             }
 
             time = Managers.GameTime;

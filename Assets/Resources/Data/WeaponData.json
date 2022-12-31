@@ -71,6 +71,42 @@
           "createPerCount": "4"
         }
       ]
+    },
+    {
+      "weaponID": "3",
+      "weaponName": "Spin",
+      "weaponLevelData": [
+        {
+          "level": "1",
+          "damage": "20",
+          "cooldown": "4",
+          "createPerCount": "1"
+        },
+        {
+          "level": "2",
+          "damage": "30",
+          "cooldown": "4",
+          "createPerCount": "1"
+        },
+        {
+          "level": "3",
+          "damage": "40",
+          "cooldown": "2",
+          "createPerCount": "2"
+        },
+        {
+          "level": "4",
+          "damage": "40",
+          "cooldown": "1",
+          "createPerCount": "3"
+        },
+        {
+          "level": "5",
+          "damage": "60",
+          "cooldown": "0.7",
+          "createPerCount": "4"
+        }
+      ]
     }
   ]
 }
