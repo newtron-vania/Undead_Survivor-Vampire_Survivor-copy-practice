@@ -22,9 +22,9 @@ public class WeaponSpawner : MonoBehaviour
 
     }
 
-    protected virtual void SetWeaponStat(List<Data.WeaponLevelData> weapon)
+    protected virtual void SetWeaponStat(GameObject weapon)
     {
-
+        
     }
 
 }

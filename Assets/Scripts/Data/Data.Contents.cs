@@ -48,6 +48,8 @@ namespace Data
 	{
 		public int level;
 		public int damage;
+		public float movSpeed;
+		public float Force;
 		public float cooldown;
 		public int createPerCount;
 	}

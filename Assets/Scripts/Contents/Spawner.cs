@@ -14,7 +14,6 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     int MaxSpawnUnit = 50;
 
-    Queue<GameObject> _spawnUnits = new Queue<GameObject>();
 
     public int enemyCount = 0;
     public void AddEnemyCount(int value) { enemyCount += value; }
@@ -35,7 +34,6 @@ public class Spawner : MonoBehaviour
             SpawnMonster();
             timer = 0f;
         }
-        enemyCount = _spawnUnits.Count;
     }
 
     void SpawnMonster()

@@ -15213,7 +15213,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 10.666667
+  orthographic size: 7.111111
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -24635,14 +24635,14 @@ MonoBehaviour:
   - Type: 2
     spawnTime: 0.7
     spriteType: 0
-    maxHp: 0
+    maxHp: 30
     speed: 1.5
     attack: 0
     Defense: 0
   - Type: 2
     spawnTime: 0.5
     spriteType: 1
-    maxHp: 0
+    maxHp: 50
     speed: 2.5
     attack: 0
     Defense: 0
@@ -32095,7 +32095,7 @@ GameObject:
   - component: {fileID: 1975883190}
   - component: {fileID: 1975883191}
   m_Layer: 0
-  m_Name: SplashWeaponSpawner
+  m_Name: SpinWeaponSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32129,6 +32129,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  _objSize: 5
+  _objSpeed: 500
 --- !u!1 &2006171112
 GameObject:
   m_ObjectHideFlags: 0

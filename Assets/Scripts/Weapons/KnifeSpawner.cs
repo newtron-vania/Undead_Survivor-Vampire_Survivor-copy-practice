@@ -21,8 +21,8 @@ public class KnifeSpawner : WeaponSpawner
         {
             for (int i = 0; i < knifeStat[level].createPerCount; i++)
             {
-                // Spawn();
-                // StartCoroutine(SpawnDelay());
+                Spawn();
+                StartCoroutine(SpawnDelay());
             }
 
             time = Managers.GameTime;
@@ -32,24 +32,26 @@ public class KnifeSpawner : WeaponSpawner
     protected override void Spawn()
     {
         GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
-        Knife knifeStat = go.GetComponent<Knife>();
-        SetWeaponStat(knifeStat);
+        SetWeaponStat(go);
     }
 
-    protected void SetWeaponStat(Knife knife)
+    protected override void SetWeaponStat(GameObject weapon)
     {
-        knife.transform.position = transform.position;
-        PlayerController controller = _player.GetComponent<PlayerController>();
-        Vector2 dirOfPlayer = controller._lastDirVec;
+        Knife knife = weapon.GetComponent<Knife>();
+        //Create Knife to ranmdom range position
+        knife.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+
+        Vector2 dirOfPlayer = _player.GetComponent<PlayerController>()._lastDirVec;
 
         knife.dir = new Vector3(dirOfPlayer.x, dirOfPlayer.y, 0);
 
         PlayerStat playerStat = _player.GetComponent<PlayerStat>();
         knife.damage = knifeStat[level].damage * playerStat.Attack;
+        knife.speed = knifeStat[level].movSpeed;
     }
 
     IEnumerator SpawnDelay()
     {
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(1f);
     }
 }

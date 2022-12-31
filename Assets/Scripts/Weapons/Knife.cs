@@ -18,7 +18,6 @@ public class Knife : MonoBehaviour
     {
         if (Managers.GameTime - createTime > lifeTime)
         {
-            Debug.Log("Knife lifetime is over!");
             Managers.Resource.Destroy(gameObject);
         }
 
@@ -33,9 +32,8 @@ public class Knife : MonoBehaviour
             EnemyStat stat = go.GetComponent<EnemyStat>();
             stat.HP -= Mathf.Max(damage - stat.Defense, 1);
             Managers.Resource.Destroy(gameObject);
-            Debug.Log($"{this.name} damaged to the enemy. enemy's hp is ${stat.HP}");
 
-            stat.OnDead();
+            go.GetComponent<EnemyController>().OnDead();
         }
     }
 }

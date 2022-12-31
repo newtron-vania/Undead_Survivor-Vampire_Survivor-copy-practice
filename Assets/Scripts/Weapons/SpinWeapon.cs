@@ -16,10 +16,6 @@ public class SpinWeapon : MonoBehaviour
         createTime = Managers.GameTime;
     }
 
-    void Update()
-    {
-        
-    }
 
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -31,7 +27,7 @@ public class SpinWeapon : MonoBehaviour
             stat.HP -= Mathf.Max(damage - stat.Defense, 1);
             Debug.Log($"{this.name} damaged to the enemy. enemy's hp is ${stat.HP}");
 
-            stat.OnDead();
+            go.GetComponent<EnemyController>().OnDead();
         }
     }
 }

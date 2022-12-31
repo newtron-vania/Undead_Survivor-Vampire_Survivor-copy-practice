@@ -1,6 +1,6 @@
 public class EnemyStat : Stat
 {
-    void Awake()
+    void Start()
     {
         Level = 1;
         HP = 10;
@@ -8,14 +8,5 @@ public class EnemyStat : Stat
         MoveSpeed = 2.0f;
         Attack = 1;
         Defense = 0;
-    }
-
-    public override void OnDead()
-    {
-        if (HP <= 0)
-        {
-            HP = 0;
-            Managers.Resource.Destroy(gameObject);
-        }
     }
 }

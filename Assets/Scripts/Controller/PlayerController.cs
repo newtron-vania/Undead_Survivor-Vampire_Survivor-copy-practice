@@ -58,6 +58,8 @@ public class PlayerController : BaseController
             $"{collision.gameObject.name} attacked to the player at the time(${_damagedTime}). and enemyStat is {EnemyStat.Attack}");
 
         _stat.HP -= Mathf.Max(EnemyStat.Attack - _stat.Defense, 1);
+        if (_stat.HP <= 0)
+            OnDead();
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -72,5 +74,10 @@ public class PlayerController : BaseController
                 OnDamaged(collision, currentTime);
             }
         }
+    }
+
+    public override void OnDead()
+    {
+        _stat.HP = 0;
     }
 }

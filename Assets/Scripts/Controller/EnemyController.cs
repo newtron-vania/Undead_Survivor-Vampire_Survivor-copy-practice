@@ -49,4 +49,14 @@ public class EnemyController : BaseController
         _stat.MaxHP = data.maxHp;
         _stat.HP = _stat.MaxHP;
     }
+
+    public override void OnDead()
+    {
+        if(_stat.HP <= 0)
+        {
+            _isLive = false;
+            _stat.HP = 0;
+            Managers.Game.Despawn(gameObject);
+        }
+    }
 }
