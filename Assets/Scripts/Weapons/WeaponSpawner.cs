@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponSpawner : MonoBehaviour
+public abstract class WeaponSpawner : MonoBehaviour
 {
     protected GameObject _player;
-    protected Dictionary<int, Data.WeaponData> weaponData;
+    protected Dictionary<int, Data.WeaponData> _weaponData;
     Animator _anime;
 
     [SerializeField]
@@ -13,7 +13,7 @@ public class WeaponSpawner : MonoBehaviour
     void Awake()
     {
         _player = transform.parent.gameObject;
-        weaponData = Managers.Data.WeaponData;
+        _weaponData = Managers.Data.WeaponData;
         _anime = transform.GetComponent<Animator>();
     }
 
@@ -26,5 +26,16 @@ public class WeaponSpawner : MonoBehaviour
     {
         
     }
+
+    protected Dictionary<int, Data.WeaponLevelData> MakeLevelDataDict(int weaponID)
+    {
+        Dictionary<int, Data.WeaponLevelData> _weaponLevelData = new Dictionary<int, Data.WeaponLevelData>();
+        foreach (Data.WeaponLevelData weaponLevelData in _weaponData[weaponID].weaponLevelData)
+            _weaponLevelData.Add(weaponLevelData.level, weaponLevelData);
+        return _weaponLevelData;
+
+    }
+
+    
 
 }

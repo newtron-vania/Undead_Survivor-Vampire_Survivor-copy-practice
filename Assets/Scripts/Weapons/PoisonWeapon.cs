@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoisonWeapon : MonoBehaviour
+public class PoisonWeapon : WeaponSpawner
 {
-    int _damage = 5;
-    float _coolTime = 1f;
+    Dictionary<int, Data.WeaponLevelData> _posionWeapon;
     bool _isAttack = false;
 
+    private void Start()
+    {
+        _posionWeapon = MakeLevelDataDict(4);
+    }
 
     private void Update()
     {
@@ -18,17 +21,21 @@ public class PoisonWeapon : MonoBehaviour
             foreach(Collider2D coll in collider2Ds)
             {
                 GameObject go = coll.gameObject;
-                go.GetComponent<EnemyController>().OnDamaged(_damage);
+                go.GetComponent<EnemyController>().OnDamaged(_posionWeapon[level].damage);
             }
-            Debug.Log($"Poison Field is Activated! Monster {collider2Ds.Length} count are received {_damage} damage!");
         }
 
+    }
+
+    protected override void SetWeaponStat(GameObject weapon)
+    {
+        base.SetWeaponStat(weapon);
     }
 
     IEnumerator DamageCoolTime()
     {
         _isAttack = true;
-        yield return new WaitForSeconds(_coolTime);
+        yield return new WaitForSeconds(_posionWeapon[level].cooldown);
         _isAttack = false;
     }
 }

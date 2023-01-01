@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpinWeaponSpawner : WeaponSpawner
 {
-    List<WeaponLevelData> _spinWeaponStat;
+    Dictionary<int, WeaponLevelData> _spinWeaponStat;
     private List<GameObject> _spinWeapons = new List<GameObject>();
     [SerializeField] private int _objSize = 5;
     private float _circleR = 4;
@@ -14,7 +14,7 @@ public class SpinWeaponSpawner : WeaponSpawner
 
     void Start()
     {
-        _spinWeaponStat = weaponData[3].weaponLevelData;
+        _spinWeaponStat = MakeLevelDataDict(3);
         SetSpinStat(level);
     }
 
@@ -40,7 +40,7 @@ public class SpinWeaponSpawner : WeaponSpawner
         }
     }
 
-
+    //Todo
     protected override void SetWeaponStat(GameObject weapon)
     {
         SpinWeapon spin = weapon.GetComponent<SpinWeapon>();

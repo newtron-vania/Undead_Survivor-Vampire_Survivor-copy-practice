@@ -6,42 +6,52 @@
       "weaponLevelData": [
         {
           "level": "1",
-          "damage": "5",
-          "movSpeed": "5",
-          "Force": "2",
+          "damage": "10",
+          "movSpeed": "10",
+          "force": "2",
           "cooldown": "1",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "1"
         },
         {
           "level": "2",
-          "damage": "10",
-          "movSpeed": "5",
-          "Force": "2",
+          "damage": "15",
+          "movSpeed": "10",
+          "force": "2",
           "cooldown": "1",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "2"
         },
         {
           "level": "3",
-          "damage": "10",
-          "movSpeed": "5",
-          "Force": "2",
+          "damage": "20",
+          "movSpeed": "10",
+          "force": "2",
           "cooldown": "0.5",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "2"
         },
         {
           "level": "4",
-          "damage": "15",
-          "movSpeed": "5",
-          "Force": "2",
+          "damage": "20",
+          "movSpeed": "10",
+          "force": "2",
           "cooldown": "0.3",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "3"
         },
         {
           "level": "5",
-          "damage": "20",
-          "movSpeed": "5",
-          "Force": "2",
+          "damage": "30",
+          "movSpeed": "10",
+          "force": "2",
           "cooldown": "0.1",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "4"
         }
       ]
@@ -52,42 +62,50 @@
       "weaponLevelData": [
         {
           "level": "1",
-          "damage": "20",
-          "movSpeed": "5",
-          "Force": "2",
-          "cooldown": "4",
+          "damage": "40",
+          "movSpeed": "9",
+          "force": "2",
+          "cooldown": "8",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "1"
         },
         {
           "level": "2",
-          "damage": "30",
-          "movSpeed": "5",
-          "Force": "2",
-          "cooldown": "4",
+          "damage": "60",
+          "movSpeed": "9",
+          "force": "2",
+          "cooldown": "7",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "1"
         },
         {
           "level": "3",
-          "damage": "40",
-          "movSpeed": "5",
-          "Force": "2",
-          "cooldown": "2",
+          "damage": "80",
+          "movSpeed": "9",
+          "force": "2",
+          "cooldown": "7",
           "createPerCount": "2"
         },
         {
           "level": "4",
-          "damage": "40",
-          "movSpeed": "5",
-          "Force": "2",
-          "cooldown": "1",
+          "damage": "90",
+          "movSpeed": "9",
+          "force": "2",
+          "cooldown": "6",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "3"
         },
         {
           "level": "5",
-          "damage": "60",
-          "movSpeed": "5",
-          "Force": "2",
-          "cooldown": "0.7",
+          "damage": "100",
+          "movSpeed": "9",
+          "force": "2",
+          "cooldown": "4",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "4"
         }
       ]
@@ -98,43 +116,109 @@
       "weaponLevelData": [
         {
           "level": "1",
-          "damage": "20",
+          "damage": "15",
           "movSpeed": "50",
-          "Force": "2",
+          "force": "2",
           "cooldown": "0",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "1"
         },
         {
           "level": "2",
-          "damage": "30",
+          "damage": "20",
           "movSpeed": "100",
-          "Force": "2",
+          "force": "2",
           "cooldown": "0",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "2"
         },
         {
           "level": "3",
-          "damage": "40",
+          "damage": "25",
           "movSpeed": "200",
-          "Force": "2",
+          "force": "2",
           "cooldown": "0",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "3"
         },
         {
           "level": "4",
-          "damage": "40",
+          "damage": "30",
           "movSpeed": "300",
-          "Force": "2",
+          "force": "2",
           "cooldown": "0",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "4"
         },
         {
           "level": "5",
-          "damage": "60",
+          "damage": "40",
           "movSpeed": "500",
-          "Force": "2",
+          "force": "2",
           "cooldown": "0",
+          "size": "1",
+          "penetrate": "1",
           "createPerCount": "5"
+        }
+      ]
+    },
+    {
+      "weaponID": "4",
+      "weaponName": "Poison",
+      "weaponLevelData": [
+        {
+          "level": "1",
+          "damage": "5",
+          "movSpeed": "0",
+          "force": "2",
+          "cooldown": "1",
+          "size": "1",
+          "penetrate": "1",
+          "createPerCount": "1"
+        },
+        {
+          "level": "2",
+          "damage": "7",
+          "movSpeed": "0",
+          "force": "2",
+          "cooldown": "0.9",
+          "size": "1",
+          "penetrate": "1",
+          "createPerCount": "1"
+        },
+        {
+          "level": "3",
+          "damage": "9",
+          "movSpeed": "0",
+          "force": "2",
+          "cooldown": "0.8",
+          "size": "1",
+          "penetrate": "1",
+          "createPerCount": "1"
+        },
+        {
+          "level": "4",
+          "damage": "11",
+          "movSpeed": "0",
+          "force": "2",
+          "cooldown": "0.7",
+          "size": "1",
+          "penetrate": "1",
+          "createPerCount": "1"
+        },
+        {
+          "level": "5",
+          "damage": "13",
+          "movSpeed": "0",
+          "force": "2",
+          "cooldown": "0.5",
+          "size": "1",
+          "penetrate": "1",
+          "createPerCount": "1"
         }
       ]
     }

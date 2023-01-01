@@ -56,8 +56,6 @@ public class PlayerController : BaseController
         _isDamaged = true;
         Stat EnemyStat = collision.transform.GetComponent<EnemyStat>();
 
-        Debug.Log(
-            $"{collision.gameObject.name} attacked to the player. and enemyStat is {EnemyStat.Attack}");
 
         _stat.HP -= Mathf.Max(EnemyStat.Attack - _stat.Defense, 1);
         
@@ -69,8 +67,6 @@ public class PlayerController : BaseController
     {
         if (collision.transform.tag == "Enemy")
         {
-            Debug.Log($"{collision.gameObject.name} was collided to the player");
-
             float currentTime = Managers.GameTime;
             if (!_isDamaged)
             {

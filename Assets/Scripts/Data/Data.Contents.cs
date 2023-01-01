@@ -49,8 +49,10 @@ namespace Data
 		public int level;
 		public int damage;
 		public float movSpeed;
-		public float Force;
+		public float force;
 		public float cooldown;
+		public int size;
+		public int penetrate;
 		public int createPerCount;
 	}
 

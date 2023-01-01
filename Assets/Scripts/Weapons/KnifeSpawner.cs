@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class KnifeSpawner : WeaponSpawner
 {
-    List<WeaponLevelData> knifeStat;
+    Dictionary<int, Data.WeaponLevelData> knifeStat;
 
 
-    float time = 0;
+    float _cooldown = 2;
+    float _termKnifeThrow = 1f;
+    bool _isThrowing = false;
+
 
     void Start()
     {
-        knifeStat = weaponData[1].weaponLevelData;
+        knifeStat = MakeLevelDataDict(1);
+        _cooldown = knifeStat[level].cooldown;
     }
 
     void Update()
@@ -22,16 +26,11 @@ public class KnifeSpawner : WeaponSpawner
 
     protected override void Spawn()
     {
-        if (Managers.GameTime - time > knifeStat[level].cooldown)
+        if (!_isThrowing)
         {
-            for (int i = 0; i < knifeStat[level].createPerCount; i++)
-            {
-                GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
-                SetWeaponStat(go);
-            }
-            time = Managers.GameTime;
+            StartCoroutine(KnifeThrowingOneTime());
         }
-        
+
     }
 
     protected override void SetWeaponStat(GameObject weapon)
@@ -49,4 +48,27 @@ public class KnifeSpawner : WeaponSpawner
         knife.speed = knifeStat[level].movSpeed;
     }
 
+    IEnumerator StartKnifeCoolTime()
+    {
+
+        yield return new WaitForSeconds(_cooldown);
+        _isThrowing = false;
+    }
+
+    IEnumerator KnifeThrowingOneTime()
+    {
+        _isThrowing = true;
+        for (int i = 0; i < knifeStat[level].createPerCount; i++)
+        {
+            GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
+            SetWeaponStat(go);
+            Debug.Log($"knife Thrown {i + 1} per {_termKnifeThrow} second!");
+            if (i == knifeStat[level].createPerCount)
+                break;
+            yield return new WaitForSeconds(_termKnifeThrow);
+        }
+        Debug.Log($"knife Throwing over! cooltime start : {_cooldown}");
+
+        StartCoroutine(StartKnifeCoolTime());
+    }
 }

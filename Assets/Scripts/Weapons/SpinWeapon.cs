@@ -3,13 +3,10 @@ using UnityEngine;
 
 public class SpinWeapon : MonoBehaviour
 {
+    Dictionary<int, Data.WeaponLevelData> _posionWeapon
     public int damage = 10;
-    [SerializeField] private float createTime = 0f;
+    private float createTime = 0f;
 
-    private void Start()
-    {
-        Debug.Log("Spin weapon started");
-    }
 
     private void OnEnable()
     {
@@ -25,7 +22,6 @@ public class SpinWeapon : MonoBehaviour
         {
             EnemyStat stat = go.GetComponent<EnemyStat>();
             stat.HP -= Mathf.Max(damage - stat.Defense, 1);
-            Debug.Log($"{this.name} damaged to the enemy. enemy's hp is ${stat.HP}");
 
             go.GetComponent<EnemyController>().OnDead();
         }
