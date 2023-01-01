@@ -24,7 +24,8 @@ public abstract class WeaponSpawner : MonoBehaviour
 
     protected virtual void SetWeaponStat(GameObject weapon)
     {
-        
+        if(level > 5)
+            level = 5;
     }
 
     protected Dictionary<int, Data.WeaponLevelData> MakeLevelDataDict(int weaponID)

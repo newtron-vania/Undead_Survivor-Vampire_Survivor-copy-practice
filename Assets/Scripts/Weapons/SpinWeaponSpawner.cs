@@ -49,6 +49,7 @@ public class SpinWeaponSpawner : WeaponSpawner
 
     void SetSpinStat(int level)
     {
+        base.SetWeaponStat(gameObject);
         _objSize = _spinWeaponStat[level].createPerCount;
         _objSpeed = _spinWeaponStat[level].movSpeed;
 

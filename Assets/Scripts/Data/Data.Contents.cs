@@ -51,7 +51,7 @@ namespace Data
 		public float movSpeed;
 		public float force;
 		public float cooldown;
-		public int size;
+		public float size;
 		public int penetrate;
 		public int createPerCount;
 	}

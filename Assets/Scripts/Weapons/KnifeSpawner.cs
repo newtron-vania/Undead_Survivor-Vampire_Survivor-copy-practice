@@ -35,6 +35,7 @@ public class KnifeSpawner : WeaponSpawner
 
     protected override void SetWeaponStat(GameObject weapon)
     {
+        base.SetWeaponStat(weapon);
         Knife knife = weapon.GetComponent<Knife>();
         //Create Knife to ranmdom range position
         knife.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);

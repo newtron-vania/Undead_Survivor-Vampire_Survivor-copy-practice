@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Managers : MonoBehaviour
 {
@@ -31,7 +33,7 @@ public class Managers : MonoBehaviour
 
     public static float GameTime { get; set; } = 0;
     public static bool gameStop = false;
-
+    public TextMeshProUGUI GameTimeText;
 
     void Awake()
     {
@@ -63,6 +65,11 @@ public class Managers : MonoBehaviour
     private void Update()
     {
         GameTime += Time.deltaTime;
+        int minute = 0;
+        int second = 0;
+        minute = Mathf.FloorToInt(GameTime / 60);
+        second = Mathf.FloorToInt(GameTime % 60);
+        GameTimeText.text = string.Format("{0:D2}:{0:D2}", minute, second);
     }
 
     public static void Clear()
