@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class SpinWeapon : MonoBehaviour
 {
-    Dictionary<int, Data.WeaponLevelData> _posionWeapon
+
     public int damage = 10;
     private float createTime = 0f;
 
@@ -20,6 +20,7 @@ public class SpinWeapon : MonoBehaviour
         GameObject go = other.gameObject;
         if (go.CompareTag("Enemy"))
         {
+            go.GetComponent<EnemyController>().OnDamaged(damage);
             EnemyStat stat = go.GetComponent<EnemyStat>();
             stat.HP -= Mathf.Max(damage - stat.Defense, 1);
 

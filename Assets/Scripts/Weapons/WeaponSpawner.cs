@@ -8,8 +8,8 @@ public abstract class WeaponSpawner : MonoBehaviour
     protected Dictionary<int, Data.WeaponData> _weaponData;
     Animator _anime;
 
-    [SerializeField]
-    protected int level = 1;
+
+    public int level = 1;
     void Awake()
     {
         _player = transform.parent.gameObject;

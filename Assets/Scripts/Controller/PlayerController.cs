@@ -26,6 +26,20 @@ public class PlayerController : BaseController
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            if (!Managers.gameStop)
+            {
+                Managers.GamePause();
+                Debug.Log($"Game Pause! - gameStop : {Managers.gameStop}");
+            }
+            else
+            {
+                Managers.GamePlay();
+                Debug.Log($"Game Play! - gameStop : {Managers.gameStop}");
+            }
+                
+        }
         _inputVec.x = Input.GetAxisRaw("Horizontal");
         _inputVec.y = Input.GetAxisRaw("Vertical");
     }
@@ -33,7 +47,7 @@ public class PlayerController : BaseController
     private void FixedUpdate()
     {
         Vector2 nextVec = _inputVec.normalized * (_stat.MoveSpeed * Time.fixedDeltaTime);
-        //��ġ �̵�
+        //Position change the player to last direction;
         _rigid.MovePosition(_rigid.position + nextVec);
 
         if (_inputVec.normalized.magnitude != 0)
@@ -51,7 +65,7 @@ public class PlayerController : BaseController
         }
     }
 
-    private void OnDamaged(Collision2D collision)
+    public void OnDamaged(Collision2D collision)
     {
         _isDamaged = true;
         Stat EnemyStat = collision.transform.GetComponent<EnemyStat>();
@@ -76,6 +90,12 @@ public class PlayerController : BaseController
         }
     }
 
+    public override void OnDamaged(int damage)
+    {
+        _stat.HP -= Mathf.Max(damage - _stat.Defense, 1);
+        OnDead();
+    }
+
     IEnumerator OnDamagedColor()
     {
         _sprite.color = Color.red;
@@ -91,4 +111,6 @@ public class PlayerController : BaseController
     {
         _stat.HP = 0;
     }
+
+
 }

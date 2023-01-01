@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerStat : Stat
 {
-
+    //1 : knife, 2 : firebal, 3: spin, 4: posion
+    private List<int> _weaponList = new List<int>();
 
     void Awake()
     {
@@ -15,4 +16,5 @@ public class PlayerStat : Stat
         Attack = 1;
         Defense = 0;
     }
+
 }

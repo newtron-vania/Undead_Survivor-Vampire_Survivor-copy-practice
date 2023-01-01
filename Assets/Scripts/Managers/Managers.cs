@@ -30,6 +30,7 @@ public class Managers : MonoBehaviour
     #endregion
 
     public static float GameTime { get; set; } = 0;
+    public static bool gameStop = false;
 
 
     void Awake()
@@ -63,6 +64,7 @@ public class Managers : MonoBehaviour
     {
         GameTime += Time.deltaTime;
     }
+
     public static void Clear()
     {
         Sound.Clear();
@@ -70,6 +72,15 @@ public class Managers : MonoBehaviour
         Pool.Clear();
     }
 
+    public static void GamePause()
+    {
+        Time.timeScale = 0;
+        gameStop = true;
+    }
 
-
+    public static void GamePlay()
+    {
+        Time.timeScale = 1;
+        gameStop = false;
+    }
 }

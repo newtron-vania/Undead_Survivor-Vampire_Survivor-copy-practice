@@ -12,8 +12,5 @@ public abstract class BaseController : MonoBehaviour
 
     public abstract void OnDead();
 
-    public virtual void OnDamaged()
-    {
-
-    }
+    public abstract void OnDamaged(int damage);
 }
