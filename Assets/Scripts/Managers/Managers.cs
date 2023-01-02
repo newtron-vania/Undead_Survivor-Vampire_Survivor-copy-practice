@@ -65,8 +65,7 @@ public class Managers : MonoBehaviour
     private void Update()
     {
         GameTime += Time.deltaTime;
-        float gameTime = GameTime;
-        GameTimeText.text = string.Format("{0:D2}:{0:D2}", Mathf.FloorToInt(gameTime / 60), Mathf.FloorToInt(gameTime % 60));
+        GameTimeText.text = string.Format("{0:D2}:{1:D2}", (int)Mathf.Floor(GameTime / 60), (int)Mathf.Floor(GameTime % 60));
     }
 
     public static void Clear()

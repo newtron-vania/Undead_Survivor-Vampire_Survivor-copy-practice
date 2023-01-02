@@ -9,7 +9,7 @@ public class LightningWeapon : MonoBehaviour
     int _damage = 100;
     float _range = 1;
     bool _isAttack = false;
-
+    Vector3 mouse_pos;
     Image _image_skill;
 
     void Start()
@@ -28,7 +28,7 @@ public class LightningWeapon : MonoBehaviour
             {
                 StartCoroutine(DamageCoolTime());
                 StartCoroutine(LightnigEffect());
-                Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), _range, LayerMask.GetMask("Enemy"));
+                Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(mouse_pos), _range, LayerMask.GetMask("Enemy"));
                 foreach (Collider2D coll in collider2Ds)
                 {
                     GameObject go = coll.gameObject;
@@ -40,7 +40,8 @@ public class LightningWeapon : MonoBehaviour
     }
     void UpdateSkillCoolTimeImage()
     {
-        _image_skill.transform.position = Input.mousePosition;
+        mouse_pos = Input.mousePosition;
+        _image_skill.transform.position = mouse_pos;
     }
 
     IEnumerator DamageCoolTime()
@@ -55,12 +56,11 @@ public class LightningWeapon : MonoBehaviour
 
         }
         _isAttack = false;
-        
     }
     IEnumerator LightnigEffect()
     {
         GameObject lightnigEffect = Managers.Game.Spawn(Define.WorldObject.Unknown, "Weapon/Lightning");
-        lightnigEffect.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        lightnigEffect.transform.position = Camera.main.ScreenToWorldPoint(mouse_pos) - new Vector3(0,0, mouse_pos.z);
         yield return new WaitForSeconds(0.5f);
         Managers.Resource.Destroy(lightnigEffect);
     }
