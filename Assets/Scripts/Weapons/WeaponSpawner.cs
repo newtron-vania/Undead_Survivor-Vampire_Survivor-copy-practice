@@ -13,17 +13,17 @@ public class WeaponSpawner : MonoBehaviour
 
     public int _weaponID = 0;
     public int _level = 1;
-    public int _damage;
-    public float _movSpeed;
-    public float _force;
-    public float _cooldown;
-    public float _size;
-    public int _penetrate;
-    public int _createPerCount;
+    public int _damage=1;
+    public float _movSpeed=1;
+    public float _force=1;
+    public float _cooldown=1;
+    public float _size=1;
+    public int _penetrate=1;
+    public int _createPerCount=1;
 
 
     
-    void Awake()
+    void Start()
     {
         _player = transform.parent.gameObject;
         _playerStat = _player.GetComponent<PlayerStat>();
@@ -38,7 +38,7 @@ public class WeaponSpawner : MonoBehaviour
 
     }
 
-    protected virtual void SetWeaponStat(GameObject weapon)
+    protected virtual void SetWeaponStat()
     {
         if(_level > 5)
             _level = 5;

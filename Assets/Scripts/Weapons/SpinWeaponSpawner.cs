@@ -4,34 +4,30 @@ using UnityEngine;
 
 public class SpinWeaponSpawner : WeaponSpawner
 {
-    Dictionary<int, WeaponLevelData> _spinWeaponStat;
-    private List<GameObject> _spinWeapons = new List<GameObject>();
-    [SerializeField] private int _objSize = 5;
+    List<GameObject> _spinWeapons = new List<GameObject>();
     private float _circleR = 4;
     private float _deg = 0;
-    [SerializeField] private float _objSpeed = 500;
 
 
-    void Start()
+    void Awake()
     {
-        _spinWeaponStat = MakeLevelDataDict(3);
-        SetSpinStat(_level);
+        _weaponID = 3;
     }
 
     void Update()
     {
         SetSpinStat(_level);
 
-        _deg += Time.deltaTime * _objSpeed;
+        _deg += Time.deltaTime * _movSpeed;
         if (_deg < 360)
         {
-            for (int i = 0; i < _objSize; i++)
+            for (int i = 0; i < _createPerCount; i++)
             {
-                var rad = Mathf.Deg2Rad * (_deg + (i * (360 / _objSize)));
+                var rad = Mathf.Deg2Rad * (_deg + (i * (360 / _createPerCount)));
                 var x = _circleR * Mathf.Sin(rad);
                 var y = _circleR * Mathf.Cos(rad);
                 _spinWeapons[i].transform.position = transform.position + new Vector3(x, y);
-                _spinWeapons[i].transform.rotation = Quaternion.Euler(0, 0, _deg * Mathf.Max(5f, _objSpeed/25));
+                _spinWeapons[i].transform.rotation = Quaternion.Euler(0, 0, _deg * Mathf.Max(5f, _movSpeed/25));
             }
         }
         else
@@ -41,26 +37,24 @@ public class SpinWeaponSpawner : WeaponSpawner
     }
 
     //Todo
-    protected override void SetWeaponStat(GameObject weapon)
+    protected void SetWeaponStat(GameObject weapon)
     {
         SpinWeapon spin = weapon.GetComponent<SpinWeapon>();
-        spin.damage = _spinWeaponStat[_level].damage;
+        spin.damage = _damage;
     }
 
     void SetSpinStat(int level)
     {
-        base.SetWeaponStat(gameObject);
-        _objSize = _spinWeaponStat[level].createPerCount;
-        _objSpeed = _spinWeaponStat[level].movSpeed;
+        base.SetWeaponStat();
 
-        while(_spinWeapons.Count > _objSize)
+        while(_spinWeapons.Count > _createPerCount)
         {
             GameObject spin = _spinWeapons[_spinWeapons.Count-1];
             Managers.Resource.Destroy(spin);
             _spinWeapons.RemoveAt(_spinWeapons.Count - 1);
         }
 
-        while(_spinWeapons.Count < _objSize)
+        while(_spinWeapons.Count < _createPerCount)
         {
             GameObject spinWeapon = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Spin");
             SetWeaponStat(spinWeapon);

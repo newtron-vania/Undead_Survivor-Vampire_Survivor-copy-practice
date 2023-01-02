@@ -221,6 +221,62 @@
           "createPerCount": "1"
         }
       ]
+    },
+    {
+      "weaponID": "5",
+      "weaponName": "Lightning",
+      "weaponLevelData": [
+        {
+          "level": "1",
+          "damage": "30",
+          "movSpeed": "0",
+          "force": "2",
+          "cooldown": "4",
+          "size": "1",
+          "penetrate": "0",
+          "createPerCount": "1"
+        },
+        {
+          "level": "2",
+          "damage": "40",
+          "movSpeed": "0",
+          "force": "2",
+          "cooldown": "3.5",
+          "size": "1.5",
+          "penetrate": "0",
+          "createPerCount": "1"
+        },
+        {
+          "level": "3",
+          "damage": "60",
+          "movSpeed": "0",
+          "force": "2",
+          "cooldown": "3",
+          "size": "2",
+          "penetrate": "0",
+          "createPerCount": "1"
+        },
+        {
+          "level": "4",
+          "damage": "80",
+          "movSpeed": "0",
+          "force": "2",
+          "cooldown": "2",
+          "size": "2.5",
+          "penetrate": "0",
+          "createPerCount": "1"
+        },
+        {
+          "level": "5",
+          "damage": "100",
+          "movSpeed": "0",
+          "force": "2",
+          "cooldown": "1",
+          "size": "3",
+          "penetrate": "0",
+          "createPerCount": "1"
+        }
+      ]
     }
   ]
 }

@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LightningWeapon : MonoBehaviour
+public class LightningWeapon : WeaponSpawner
 {
-    float _cooldown= 2f;
-    int _damage = 100;
-    float _range = 1;
+
     bool _isAttack = false;
     Vector3 mouse_pos;
     Image _image_skill;
 
-    void Start()
+    void Awake()
     {
         //Todo connect WeaponData
-
+        _weaponID = 5;
         _image_skill = GameObject.FindWithTag("coolTimeImg").GetComponent<Image>();
     }
 
@@ -26,9 +24,10 @@ public class LightningWeapon : MonoBehaviour
         {
             if (!_isAttack)
             {
+                SetWeaponStat();
                 StartCoroutine(DamageCoolTime());
                 StartCoroutine(LightnigEffect());
-                Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(mouse_pos), _range, LayerMask.GetMask("Enemy"));
+                Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(mouse_pos), _size, LayerMask.GetMask("Enemy"));
                 foreach (Collider2D coll in collider2Ds)
                 {
                     GameObject go = coll.gameObject;
@@ -38,6 +37,13 @@ public class LightningWeapon : MonoBehaviour
             }
         }
     }
+
+    void SetWeaponStat()
+    {
+        base.SetWeaponStat();
+
+    }
+
     void UpdateSkillCoolTimeImage()
     {
         mouse_pos = Input.mousePosition;

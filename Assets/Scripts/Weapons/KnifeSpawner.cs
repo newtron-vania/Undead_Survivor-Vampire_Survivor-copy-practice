@@ -5,18 +5,16 @@ using UnityEngine;
 
 public class KnifeSpawner : WeaponSpawner
 {
-    Dictionary<int, Data.WeaponLevelData> knifeStat;
 
-    float _cooldown = 2;
     float _termKnifeThrow = 0.1f;
     bool _isThrowing = false;
+    float _coolTime;
 
 
-    void Start()
+    void Awake()
     {
         _weaponID = 1;
-        knifeStat = MakeLevelDataDict(1);
-        _cooldown = knifeStat[_level].cooldown;
+        _coolTime = _cooldown;
     }
 
     void Update()
@@ -33,9 +31,9 @@ public class KnifeSpawner : WeaponSpawner
 
     }
 
-    protected override void SetWeaponStat(GameObject weapon)
+    protected void SetWeaponStat(GameObject weapon)
     {
-        base.SetWeaponStat(weapon);
+        base.SetWeaponStat();
         Knife knife = weapon.GetComponent<Knife>();
         //Create Knife to ranmdom range position
         knife.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
@@ -45,9 +43,8 @@ public class KnifeSpawner : WeaponSpawner
         knife.dir = new Vector3(dirOfPlayer.x, dirOfPlayer.y, 0);
 
         PlayerStat playerStat = _player.GetComponent<PlayerStat>();
-        knife.damage = knifeStat[_level].damage * playerStat.Attack;
-        knife.speed = knifeStat[_level].movSpeed;
-        _cooldown = knifeStat[_level].cooldown;
+        knife.damage = _damage * playerStat.Attack;
+        knife.speed = _movSpeed;
     }
 
     IEnumerator StartKnifeCoolTime()
@@ -60,11 +57,11 @@ public class KnifeSpawner : WeaponSpawner
     IEnumerator KnifeThrowingOneTime()
     {
         _isThrowing = true;
-        for (int i = 0; i < knifeStat[_level].createPerCount; i++)
+        for (int i = 0; i < _createPerCount; i++)
         {
             GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
             SetWeaponStat(go);
-            if (i == knifeStat[_level].createPerCount)
+            if (i == _createPerCount-1)
                 break;
             yield return new WaitForSeconds(_termKnifeThrow);
         }
