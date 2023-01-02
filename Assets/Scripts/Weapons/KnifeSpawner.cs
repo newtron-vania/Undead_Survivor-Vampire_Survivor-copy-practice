@@ -9,7 +9,7 @@ public class KnifeSpawner : WeaponSpawner
 
 
     float _cooldown = 2;
-    float _termKnifeThrow = 1f;
+    float _termKnifeThrow = 0.1f;
     bool _isThrowing = false;
 
 
@@ -47,6 +47,7 @@ public class KnifeSpawner : WeaponSpawner
         PlayerStat playerStat = _player.GetComponent<PlayerStat>();
         knife.damage = knifeStat[level].damage * playerStat.Attack;
         knife.speed = knifeStat[level].movSpeed;
+        _cooldown = knifeStat[level].cooldown;
     }
 
     IEnumerator StartKnifeCoolTime()

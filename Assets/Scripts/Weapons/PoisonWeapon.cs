@@ -16,7 +16,6 @@ public class PoisonWeapon : WeaponSpawner
     {
         _posionWeapon = MakeLevelDataDict(4);
         _damageEffectImage = transform.GetChild(0);
-        Debug.Log($"damageEffectImage connect : {_damageEffectImage.name}");
     }
 
     private void Update()

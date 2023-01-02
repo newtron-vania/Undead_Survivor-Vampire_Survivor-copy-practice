@@ -20,8 +20,7 @@ public class Knife : MonoBehaviour
         {
             Managers.Resource.Destroy(gameObject);
         }
-
-        transform.position += dir * (speed * Time.deltaTime);
+        OnMove();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -32,5 +31,13 @@ public class Knife : MonoBehaviour
             go.GetComponent<EnemyController>().OnDamaged(damage);
             Managers.Resource.Destroy(gameObject);
         }
+    }
+
+
+    void OnMove()
+    {
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0,0,angle-90);
+        transform.position += dir * (speed * Time.deltaTime);
     }
 }

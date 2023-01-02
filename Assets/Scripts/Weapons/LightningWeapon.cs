@@ -28,7 +28,7 @@ public class LightningWeapon : MonoBehaviour
             {
                 StartCoroutine(DamageCoolTime());
                 StartCoroutine(LightnigEffect());
-                Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(_image_skill.transform.position), _range, LayerMask.GetMask("Enemy"));
+                Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), _range, LayerMask.GetMask("Enemy"));
                 foreach (Collider2D coll in collider2Ds)
                 {
                     GameObject go = coll.gameObject;
