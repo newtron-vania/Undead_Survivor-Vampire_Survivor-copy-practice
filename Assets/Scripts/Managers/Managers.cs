@@ -39,6 +39,7 @@ public class Managers : MonoBehaviour
     {
         Init();
         _player = GameObject.FindGameObjectWithTag("Player");
+        Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(_player);
     }
 
     static void Init()

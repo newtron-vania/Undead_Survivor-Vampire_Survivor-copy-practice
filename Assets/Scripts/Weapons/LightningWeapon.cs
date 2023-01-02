@@ -60,7 +60,7 @@ public class LightningWeapon : MonoBehaviour
     IEnumerator LightnigEffect()
     {
         GameObject lightnigEffect = Managers.Game.Spawn(Define.WorldObject.Unknown, "Weapon/Lightning");
-        lightnigEffect.transform.position = Camera.main.ScreenToWorldPoint(mouse_pos) - new Vector3(0,0, mouse_pos.z);
+        lightnigEffect.transform.position = Camera.main.ScreenToWorldPoint(mouse_pos) - new Vector3(0,0, Camera.main.transform.position.z);
         yield return new WaitForSeconds(0.5f);
         Managers.Resource.Destroy(lightnigEffect);
     }
