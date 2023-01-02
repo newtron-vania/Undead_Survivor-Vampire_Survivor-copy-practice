@@ -14,6 +14,6 @@ public class CameraController : MonoBehaviour
         if (object.ReferenceEquals(_player, null))
             return;
 
-        transform.position = Vector3.Slerp(transform.position, _player.transform.position + _delta, 1.0f);
+        transform.position = Vector3.Slerp(transform.position, _player.transform.position + _delta, 0.1f);
     }
 }

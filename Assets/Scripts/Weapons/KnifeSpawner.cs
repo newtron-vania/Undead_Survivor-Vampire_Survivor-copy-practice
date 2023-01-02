@@ -64,12 +64,10 @@ public class KnifeSpawner : WeaponSpawner
         {
             GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
             SetWeaponStat(go);
-            Debug.Log($"knife Thrown {i + 1} per {_termKnifeThrow} second!");
             if (i == knifeStat[level].createPerCount)
                 break;
             yield return new WaitForSeconds(_termKnifeThrow);
         }
-        Debug.Log($"knife Throwing over! cooltime start : {_cooldown}");
 
         StartCoroutine(StartKnifeCoolTime());
     }
