@@ -7,7 +7,6 @@ public class KnifeSpawner : WeaponSpawner
 {
     Dictionary<int, Data.WeaponLevelData> knifeStat;
 
-
     float _cooldown = 2;
     float _termKnifeThrow = 0.1f;
     bool _isThrowing = false;
@@ -15,8 +14,9 @@ public class KnifeSpawner : WeaponSpawner
 
     void Start()
     {
+        _weaponID = 1;
         knifeStat = MakeLevelDataDict(1);
-        _cooldown = knifeStat[level].cooldown;
+        _cooldown = knifeStat[_level].cooldown;
     }
 
     void Update()
@@ -45,9 +45,9 @@ public class KnifeSpawner : WeaponSpawner
         knife.dir = new Vector3(dirOfPlayer.x, dirOfPlayer.y, 0);
 
         PlayerStat playerStat = _player.GetComponent<PlayerStat>();
-        knife.damage = knifeStat[level].damage * playerStat.Attack;
-        knife.speed = knifeStat[level].movSpeed;
-        _cooldown = knifeStat[level].cooldown;
+        knife.damage = knifeStat[_level].damage * playerStat.Attack;
+        knife.speed = knifeStat[_level].movSpeed;
+        _cooldown = knifeStat[_level].cooldown;
     }
 
     IEnumerator StartKnifeCoolTime()
@@ -60,11 +60,11 @@ public class KnifeSpawner : WeaponSpawner
     IEnumerator KnifeThrowingOneTime()
     {
         _isThrowing = true;
-        for (int i = 0; i < knifeStat[level].createPerCount; i++)
+        for (int i = 0; i < knifeStat[_level].createPerCount; i++)
         {
             GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
             SetWeaponStat(go);
-            if (i == knifeStat[level].createPerCount)
+            if (i == knifeStat[_level].createPerCount)
                 break;
             yield return new WaitForSeconds(_termKnifeThrow);
         }

@@ -37,9 +37,9 @@ public class PoisonWeapon : WeaponSpawner
     protected override void SetWeaponStat(GameObject weapon)
     {
         base.SetWeaponStat(weapon);
-        _damage = _posionWeapon[level].damage;
-        _range = _posionWeapon[level].size;
-        _cooldown = _posionWeapon[level].cooldown;
+        _damage = _posionWeapon[_level].damage;
+        _range = _posionWeapon[_level].size;
+        _cooldown = _posionWeapon[_level].cooldown;
         _damageEffectImage.localScale = Vector3.one * _range * 2;
     }
 

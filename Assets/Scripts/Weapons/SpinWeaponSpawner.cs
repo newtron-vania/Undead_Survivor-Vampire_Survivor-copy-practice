@@ -15,12 +15,12 @@ public class SpinWeaponSpawner : WeaponSpawner
     void Start()
     {
         _spinWeaponStat = MakeLevelDataDict(3);
-        SetSpinStat(level);
+        SetSpinStat(_level);
     }
 
     void Update()
     {
-        SetSpinStat(level);
+        SetSpinStat(_level);
 
         _deg += Time.deltaTime * _objSpeed;
         if (_deg < 360)
@@ -44,7 +44,7 @@ public class SpinWeaponSpawner : WeaponSpawner
     protected override void SetWeaponStat(GameObject weapon)
     {
         SpinWeapon spin = weapon.GetComponent<SpinWeapon>();
-        spin.damage = _spinWeaponStat[level].damage;
+        spin.damage = _spinWeaponStat[_level].damage;
     }
 
     void SetSpinStat(int level)
