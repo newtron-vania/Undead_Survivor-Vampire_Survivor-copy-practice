@@ -11,6 +11,8 @@ public class GameManagerEx
     HashSet<GameObject> _monster = new HashSet<GameObject>();
     public Action<int> OnSpawnEvent;
 
+    public Vector3 MousePos { get; set; }
+
     public GameObject getPlayer() { return _player; }
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
     {
@@ -69,7 +71,11 @@ public class GameManagerEx
         }
         Managers.Resource.Destroy(go, time);
     }
-    
 
+
+    public void SetMousePos()
+    {
+        MousePos = Input.mousePosition;
+    }
 
 }

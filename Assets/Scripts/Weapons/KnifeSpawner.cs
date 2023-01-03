@@ -23,7 +23,7 @@ public class KnifeSpawner : WeaponSpawner
     {
         if (!_isThrowing)
         {
-            StartCoroutine(KnifeThrowingOneTime());
+            StartCoroutine(SpawnWeapon());
         }
 
     }
@@ -52,7 +52,7 @@ public class KnifeSpawner : WeaponSpawner
     }
 
      
-    IEnumerator KnifeThrowingOneTime()
+    IEnumerator SpawnWeapon()
     {
         _isThrowing = true;
         for (int i = 0; i < _countPerCreate; i++)

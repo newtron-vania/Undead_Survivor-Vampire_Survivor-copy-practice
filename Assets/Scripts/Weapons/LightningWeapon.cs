@@ -7,14 +7,22 @@ public class LightningWeapon : WeaponSpawner
 {
 
     bool _isAttack = false;
-    Vector3 mouse_pos;
+    private GameObject _playerUI = null;
     Image _image_skill;
 
     void Awake()
     {
-        //Todo connect WeaponData
         _weaponID = 5;
-        _image_skill = GameObject.FindWithTag("coolTimeImg").GetComponent<Image>();
+        _playerUI = GameObject.FindWithTag("PlayerUI");
+        if (object.ReferenceEquals(_playerUI, null))
+        {
+            Managers.Resource.Destroy(gameObject);
+            return;
+        }
+
+        _image_skill = _playerUI.GetComponentInChildren<Image>();
+        _image_skill.gameObject.SetActive(true);
+
     }
 
     void Update()
@@ -27,7 +35,7 @@ public class LightningWeapon : WeaponSpawner
                 SetWeaponStat();
                 StartCoroutine(DamageCoolTime());
                 StartCoroutine(LightnigEffect());
-                Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(mouse_pos), _size, LayerMask.GetMask("Enemy"));
+                Collider2D[] collider2Ds = Physics2D.OverlapCircleAll(Camera.main.ScreenToWorldPoint(Managers.Game.MousePos), _size, LayerMask.GetMask("Enemy"));
                 foreach (Collider2D coll in collider2Ds)
                 {
                     GameObject go = coll.gameObject;
@@ -45,8 +53,7 @@ public class LightningWeapon : WeaponSpawner
 
     void UpdateSkillCoolTimeImage()
     {
-        mouse_pos = Input.mousePosition;
-        _image_skill.transform.position = mouse_pos;
+        _image_skill.transform.position = Managers.Game.MousePos;
     }
 
     IEnumerator DamageCoolTime()
@@ -65,7 +72,7 @@ public class LightningWeapon : WeaponSpawner
     IEnumerator LightnigEffect()
     {
         GameObject lightnigEffect = Managers.Game.Spawn(Define.WorldObject.Unknown, "Weapon/Lightning");
-        lightnigEffect.transform.position = Camera.main.ScreenToWorldPoint(mouse_pos) - new Vector3(0,0, Camera.main.transform.position.z);
+        lightnigEffect.transform.position = Camera.main.ScreenToWorldPoint(Managers.Game.MousePos) - new Vector3(0,0, Camera.main.transform.position.z);
         yield return new WaitForSeconds(0.5f);
         Managers.Resource.Destroy(lightnigEffect);
     }

@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - coolTimeImg
   - Item
+  - PlayerUI
+  - MainMenuUI
   layers:
   - Default
   - TransparentFX
@@ -26,8 +28,8 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - PlayerUI
+  - MainMenuUI
   - 
   - 
   - 
