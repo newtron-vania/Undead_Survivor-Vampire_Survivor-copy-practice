@@ -12,7 +12,7 @@
           "cooldown": "1",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "2",
@@ -22,7 +22,7 @@
           "cooldown": "1",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "2"
+          "countPerCreate": "2"
         },
         {
           "level": "3",
@@ -32,7 +32,7 @@
           "cooldown": "0.5",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "2"
+          "countPerCreate": "2"
         },
         {
           "level": "4",
@@ -42,7 +42,7 @@
           "cooldown": "0.3",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "3"
+          "countPerCreate": "3"
         },
         {
           "level": "5",
@@ -52,7 +52,7 @@
           "cooldown": "0.1",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "4"
+          "countPerCreate": "4"
         }
       ]
     },
@@ -68,7 +68,7 @@
           "cooldown": "8",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "2",
@@ -78,7 +78,7 @@
           "cooldown": "7",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "3",
@@ -86,7 +86,7 @@
           "movSpeed": "9",
           "force": "2",
           "cooldown": "7",
-          "createPerCount": "2"
+          "countPerCreate": "2"
         },
         {
           "level": "4",
@@ -96,7 +96,7 @@
           "cooldown": "6",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "3"
+          "countPerCreate": "3"
         },
         {
           "level": "5",
@@ -106,7 +106,7 @@
           "cooldown": "4",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "4"
+          "countPerCreate": "4"
         }
       ]
     },
@@ -122,7 +122,7 @@
           "cooldown": "0",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "2",
@@ -132,7 +132,7 @@
           "cooldown": "0",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "2"
+          "countPerCreate": "2"
         },
         {
           "level": "3",
@@ -142,7 +142,7 @@
           "cooldown": "0",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "3"
+          "countPerCreate": "3"
         },
         {
           "level": "4",
@@ -152,7 +152,7 @@
           "cooldown": "0",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "4"
+          "countPerCreate": "4"
         },
         {
           "level": "5",
@@ -162,7 +162,7 @@
           "cooldown": "0",
           "size": "1",
           "penetrate": "1",
-          "createPerCount": "5"
+          "countPerCreate": "5"
         }
       ]
     },
@@ -178,7 +178,7 @@
           "cooldown": "1",
           "size": "3",
           "penetrate": "1",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "2",
@@ -188,7 +188,7 @@
           "cooldown": "0.9",
           "size": "3.5",
           "penetrate": "1",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "3",
@@ -198,7 +198,7 @@
           "cooldown": "0.8",
           "size": "4",
           "penetrate": "1",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "4",
@@ -208,7 +208,7 @@
           "cooldown": "0.7",
           "size": "4.5",
           "penetrate": "1",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "5",
@@ -218,7 +218,7 @@
           "cooldown": "0.5",
           "size": "5",
           "penetrate": "1",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         }
       ]
     },
@@ -234,7 +234,7 @@
           "cooldown": "4",
           "size": "1",
           "penetrate": "0",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "2",
@@ -244,7 +244,7 @@
           "cooldown": "3.5",
           "size": "1.5",
           "penetrate": "0",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "3",
@@ -254,7 +254,7 @@
           "cooldown": "3",
           "size": "2",
           "penetrate": "0",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "4",
@@ -264,7 +264,7 @@
           "cooldown": "2",
           "size": "2.5",
           "penetrate": "0",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         },
         {
           "level": "5",
@@ -274,7 +274,7 @@
           "cooldown": "1",
           "size": "3",
           "penetrate": "0",
-          "createPerCount": "1"
+          "countPerCreate": "1"
         }
       ]
     }

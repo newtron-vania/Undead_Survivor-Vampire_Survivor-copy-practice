@@ -5,8 +5,6 @@ using UnityEngine;
 public class ResourceManager
 {
     
-
-    //Original을 찾아서 반환
     public T Load<T>(string path) where T:Object
     {
         if(typeof(T) == typeof(GameObject))
@@ -33,7 +31,7 @@ public class ResourceManager
             return null;
         }
 
-        //풀링 가능한 객체인지 확인
+
         if (original.GetComponent<Poolable>() != null)
             return Managers.Pool.Pop(original, parent).gameObject;
 
@@ -51,7 +49,7 @@ public class ResourceManager
             return;
         }
 
-        //만약 풀링된 오브젝트라면
+
         Poolable poolable = obj.GetComponent<Poolable>();
         if(poolable != null)
         {

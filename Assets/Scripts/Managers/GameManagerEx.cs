@@ -69,5 +69,7 @@ public class GameManagerEx
         }
         Managers.Resource.Destroy(go, time);
     }
+    
+
 
 }

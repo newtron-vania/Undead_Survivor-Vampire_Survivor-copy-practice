@@ -47,14 +47,12 @@ public class Managers : MonoBehaviour
         if (s_instance == null)
         {
 
-            //매니저 초기화
             GameObject go = GameObject.Find("@GameManager");
-            if (go == null)
+            if (go == null) 
             {
                 go = new GameObject { name = "@GameManager" };
                 go.AddComponent<Managers>();
             }
-            //삭제되지 않게끔 설정 -> Scene 이동을 하더라도 파괴되지 않음
             DontDestroyOnLoad(go);
             s_instance = go.GetComponent<Managers>();
             s_instance._sound.Init();
@@ -75,16 +73,18 @@ public class Managers : MonoBehaviour
         UI.Clear();
         Pool.Clear();
     }
-
+    
     public static void GamePause()
     {
         Time.timeScale = 0;
-        gameStop = true;
+        Managers.gameStop = true;
     }
 
     public static void GamePlay()
     {
         Time.timeScale = 1;
-        gameStop = false;
+        Managers.gameStop = false;
     }
+
+
 }

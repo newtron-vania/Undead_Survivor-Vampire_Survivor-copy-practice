@@ -53,7 +53,7 @@ namespace Data
 		public float cooldown;
 		public float size;
 		public int penetrate;
-		public int createPerCount;
+		public int countPerCreate;
 	}
 
 	[Serializable]

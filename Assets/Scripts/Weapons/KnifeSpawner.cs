@@ -8,13 +8,10 @@ public class KnifeSpawner : WeaponSpawner
 
     float _termKnifeThrow = 0.1f;
     bool _isThrowing = false;
-    float _coolTime;
-
 
     void Awake()
     {
         _weaponID = 1;
-        _coolTime = _cooldown;
     }
 
     void Update()
@@ -54,14 +51,15 @@ public class KnifeSpawner : WeaponSpawner
         _isThrowing = false;
     }
 
+     
     IEnumerator KnifeThrowingOneTime()
     {
         _isThrowing = true;
-        for (int i = 0; i < _createPerCount; i++)
+        for (int i = 0; i < _countPerCreate; i++)
         {
             GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
             SetWeaponStat(go);
-            if (i == _createPerCount-1)
+            if (i == _countPerCreate-1)
                 break;
             yield return new WaitForSeconds(_termKnifeThrow);
         }

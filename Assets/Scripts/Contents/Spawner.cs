@@ -6,13 +6,13 @@ public class Spawner : MonoBehaviour
 {
     public Transform[] spawnPoint;
     public SpawnData[] spawnData;
-    float timer;
+    private float _timer;
     int level;
     [SerializeField]
     GameObject[] _spawnUnit;
 
     [SerializeField]
-    int MaxSpawnUnit = 50;
+    int _maxSpawnUnit = 50;
 
 
     public int enemyCount = 0;
@@ -26,24 +26,29 @@ public class Spawner : MonoBehaviour
 
     private void Update()
     {
-        timer += Time.deltaTime;
-        level = Mathf.Min(Mathf.FloorToInt(Managers.GameTime / 10f), 1);
-
-        if (timer > (spawnData[level].spawnTime))
+        _timer += Time.deltaTime;
+        if (level * 10 < Managers.GameTime)
+            setLevel();
+        if (_timer > (spawnData[level].spawnTime))
         {
             SpawnMonster();
-            timer = 0f;
+            _timer = 0f;
         }
     }
 
     void SpawnMonster()
     {
-        if (enemyCount < MaxSpawnUnit)
+        if (enemyCount < _maxSpawnUnit)
         {
             GameObject enemy = Managers.Game.Spawn(spawnData[level].Type, "Monster/Enemy");
             enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
             enemy.transform.GetComponent<EnemyController>().Init(spawnData[level]);
         }
+    }
+
+    void setLevel()
+    {
+        level = Mathf.Min(Mathf.CeilToInt(Managers.GameTime / 10f), 1);
     }
 
 
@@ -58,5 +63,6 @@ public class SpawnData
     public int maxHp;
     public float speed;
     public int attack;
-    public int Defense;
+    public int defense;
+    public int exp;
 }

@@ -8,5 +8,6 @@ public class EnemyStat : Stat
         MoveSpeed = 2.0f;
         Attack = 1;
         Defense = 0;
+        Exp = 5;
     }
 }

@@ -21,9 +21,9 @@ public class SpinWeaponSpawner : WeaponSpawner
         _deg += Time.deltaTime * _movSpeed;
         if (_deg < 360)
         {
-            for (int i = 0; i < _createPerCount; i++)
+            for (int i = 0; i < _countPerCreate; i++)
             {
-                var rad = Mathf.Deg2Rad * (_deg + (i * (360 / _createPerCount)));
+                var rad = Mathf.Deg2Rad * (_deg + (i * (360 / _countPerCreate)));
                 var x = _circleR * Mathf.Sin(rad);
                 var y = _circleR * Mathf.Cos(rad);
                 _spinWeapons[i].transform.position = transform.position + new Vector3(x, y);
@@ -47,14 +47,14 @@ public class SpinWeaponSpawner : WeaponSpawner
     {
         base.SetWeaponStat();
 
-        while(_spinWeapons.Count > _createPerCount)
+        while(_spinWeapons.Count > _countPerCreate)
         {
             GameObject spin = _spinWeapons[_spinWeapons.Count-1];
             Managers.Resource.Destroy(spin);
             _spinWeapons.RemoveAt(_spinWeapons.Count - 1);
         }
 
-        while(_spinWeapons.Count < _createPerCount)
+        while(_spinWeapons.Count < _countPerCreate)
         {
             GameObject spinWeapon = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Spin");
             SetWeaponStat(spinWeapon);

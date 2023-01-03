@@ -19,7 +19,7 @@ public class WeaponSpawner : MonoBehaviour
     public float _cooldown=1;
     public float _size=1;
     public int _penetrate=1;
-    public int _createPerCount=1;
+    public int _countPerCreate=1;
 
 
     
@@ -49,7 +49,7 @@ public class WeaponSpawner : MonoBehaviour
         _cooldown = _weaponStat[_level].cooldown;
         _size = _weaponStat[_level].size;
         _penetrate = _weaponStat[_level].penetrate;
-        _createPerCount = _weaponStat[_level].createPerCount;
+        _countPerCreate = _weaponStat[_level].countPerCreate;
     }
 
     protected Dictionary<int, Data.WeaponLevelData> MakeLevelDataDict(int weaponID)
