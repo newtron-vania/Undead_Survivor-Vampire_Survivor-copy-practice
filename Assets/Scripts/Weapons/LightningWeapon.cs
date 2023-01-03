@@ -41,7 +41,6 @@ public class LightningWeapon : WeaponSpawner
     void SetWeaponStat()
     {
         base.SetWeaponStat();
-
     }
 
     void UpdateSkillCoolTimeImage()

@@ -8,6 +8,7 @@ TagManager:
   - Area
   - Enemy
   - coolTimeImg
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -20,8 +21,8 @@ TagManager:
   - Enemy
   - 
   - 
-  - 
-  - 
+  - ItemBox
+  - Exp
   - 
   - 
   - 

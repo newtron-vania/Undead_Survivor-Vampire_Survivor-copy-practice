@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 public class PoolManager : MonoBehaviour
 {
     #region Pool
-    //Á¤º¸ ÀúÀå¿ë Å¬·¡½º
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
     class Pool
     {
-        //¿øº»
+        //ï¿½ï¿½ï¿½ï¿½
         public GameObject Original { get; private set; }
-        //ºÎ¸ð Å¬·¡½º
+        //ï¿½Î¸ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½
         public Transform Root { get; set; }
 
-        //ÀÚ½ÄÅ¬·¡½º¸¦ ÀúÀåÇÏ´Â ½ºÅÃ
+        //ï¿½Ú½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
         Stack<Poolable> _poolStack = new Stack<Poolable>();
 
         public void Init(GameObject original, int count = 5)
@@ -59,7 +59,7 @@ public class PoolManager : MonoBehaviour
 
             poolable.gameObject.SetActive(true);
 
-            //DontDestroyOnLoad ÇØÁ¦
+            //DontDestroyOnLoad ï¿½ï¿½ï¿½ï¿½
             if (parent == null)
                 poolable.transform.parent = null;
 
@@ -74,7 +74,7 @@ public class PoolManager : MonoBehaviour
 
     Dictionary<string, Pool> _pool = new Dictionary<string, Pool>();
     Transform _root;
-    //¿ÀºêÁ§Æ® ´ë±â½Ç »ý¼º
+
     public void Init()
     {
         if(_root == null)

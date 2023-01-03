@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class EnemyController : BaseController
 {
+    protected EnemyStat _stat;
     public RuntimeAnimatorController[] animeCon;
     public Rigidbody2D _target;
     bool _isLive = true;
@@ -54,7 +55,7 @@ public class EnemyController : BaseController
         _stat.HP = _stat.MaxHP;
         _stat.Attack = SetRandomStat(data.attack);
         _stat.Defense = SetRandomStat(data.defense);
-        _stat.Exp = SetRandomStat(data.exp);
+        _stat.ExpPoint = SetRandomStat(data.exp);
     }
     
     int SetRandomStat(int value)
@@ -84,12 +85,12 @@ public class EnemyController : BaseController
     void SpawnExp()
     {
         GameObject expGo = Managers.Game.Spawn(Define.WorldObject.Unknown, "Content/Exp");
-        ExpPoint expPoint = expGo.GetComponent<ExpPoint>();
-        expPoint.Exp = _stat.Exp;
+        Exp_Item expPoint = expGo.GetComponent<Exp_Item>();
+        expPoint._exp = _stat.ExpPoint;
         expGo.transform.position = transform.position;
-        if (expPoint.Exp < 5)
+        if (expPoint._exp < 5)
             expGo.GetComponent<SpriteRenderer>().sprite = expPoint._sprite[0];
-        else if(expPoint.Exp<10)
+        else if(expPoint._exp<10)
             expGo.GetComponent<SpriteRenderer>().sprite = expPoint._sprite[1];
         else
             expGo.GetComponent<SpriteRenderer>().sprite = expPoint._sprite[2];

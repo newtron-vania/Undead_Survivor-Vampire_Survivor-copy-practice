@@ -4,7 +4,6 @@ using UnityEngine;
 
 public abstract class BaseController : MonoBehaviour
 {
-    protected Stat _stat;
     protected Rigidbody2D _rigid;
     protected SpriteRenderer _sprite;
     public Animator _anime;

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : BaseController
 {
+    protected PlayerStat _stat;
     [SerializeField] Vector2 _inputVec;
     [SerializeField] public Vector2 _lastDirVec = new Vector2(1, 0);
     bool _isDamaged = false;
@@ -111,6 +114,6 @@ public class PlayerController : BaseController
     {
         _stat.HP = 0;
     }
-
+    
 
 }
