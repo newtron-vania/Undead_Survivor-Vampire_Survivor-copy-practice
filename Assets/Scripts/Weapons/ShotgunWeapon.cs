@@ -1,16 +1,17 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.XR;
+using Random = UnityEngine.Random;
 
 public class ShotgunWeapon : WeaponSpawner
 {
-    [SerializeField] private Vector3 holeVec;
-    [SerializeField] private GameObject hand;
+    [SerializeField] private GameObject gunhole;
 
     private bool isShot = false;
-    private float _bulletRange = 80f;
+    private float _bulletTargetRange = 60f;
     
     void Awake()
     {
@@ -19,7 +20,8 @@ public class ShotgunWeapon : WeaponSpawner
 
     void Update()
     {
-        hand.transform.LookAt(Managers.Game.MousePos);
+        transform.rotation = Quaternion.Slerp(transform.rotation,
+            Quaternion.AngleAxis(SetAngleFromHandToCursor(), Vector3.forward), 5f * Time.deltaTime);
         if (!isShot)
         {
             StartCoroutine(ShotCoolTime());
@@ -29,31 +31,37 @@ public class ShotgunWeapon : WeaponSpawner
     protected void SetWeaponStat()
     {
         base.SetWeaponStat();
-        float bulletAngle = (_bulletRange/2) / Mathf.CeilToInt((_countPerCreate+1)/2);
+        float bulletAngle = _bulletTargetRange / (_countPerCreate+1);
         float angle = SetAngleFromHandToCursor();
-        
-        for (int i = 0; i < _countPerCreate; i++)
+        float startBulletAngle = angle - (_bulletTargetRange/2);
+        for (int i = 1; i <= _countPerCreate; i++)
         {
             GameObject bullet = Managers.Game.Spawn(Define.WorldObject.Unknown, "Weapon/Bullet");
-            bullet.transform.position = holeVec;
+            bullet.transform.position = gunhole.transform.position;
             //set damage, dir 
+            Bullet bulletStat =bullet.GetComponent<Bullet>();
+            float _ang = startBulletAngle + bulletAngle * i + Random.Range(-5f,5f);
+            Vector3 bulletDir = new Vector3(Mathf.Cos(_ang*Mathf.Deg2Rad), Mathf.Sin(_ang * Mathf.Deg2Rad), 0);
+            bulletStat.SetBulletDir(bulletDir);
+            bulletStat._damage = _damage;
+            bulletStat._movSpeed = _movSpeed;
+            bulletStat._penetrate = _penetrate;
         }
         
     }
 
     float SetAngleFromHandToCursor()
     {
-        Vector3 dirVec = (Managers.Game.MousePos - holeVec).normalized;
+        Vector3 dirVec = (Managers.Game.WorldMousePos - transform.position).normalized;
         return Mathf.Atan2(dirVec.y, dirVec.x) * Mathf.Rad2Deg;
+        
     }
 
 
     IEnumerator ShotCoolTime()
     {
         isShot = true;
-        
-
-
+        SetWeaponStat();
         yield return new WaitForSeconds(_cooldown);
 
         isShot = false;

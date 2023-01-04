@@ -7,6 +7,7 @@ using UnityEngine;
 public class ItemGetter : MonoBehaviour
 {
     public float _size;
+    private float _movSpeed = 10f;
     private Transform _player;
 
     private void Awake()
@@ -21,12 +22,21 @@ public class ItemGetter : MonoBehaviour
         {
             if (other.gameObject.layer == LayerMask.NameToLayer("ItemBox"))
                 return;
-            GetItemInField(other.gameObject);
+            StartCoroutine(GetItemInField(other.gameObject));
         }  
     }
 
-    void GetItemInField(GameObject item)
+    IEnumerator GetItemInField(GameObject item)
     {
-        item.GetComponent<Base_Item>().SetTarget(_player);
+        if (item.GetComponent<Base_Item>().target != _player)
+        {
+            item.GetComponent<Base_Item>().target = _player;
+            while (item.activeSelf)
+            {
+                item.transform.position =
+                    Vector3.MoveTowards(item.transform.position, _player.transform.position, _movSpeed * Time.fixedDeltaTime);
+                yield return new WaitForSeconds(Time.fixedDeltaTime);
+            }
+        }
     }
 }

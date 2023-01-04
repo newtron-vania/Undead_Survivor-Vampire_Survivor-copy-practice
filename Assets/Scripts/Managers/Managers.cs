@@ -65,6 +65,7 @@ public class Managers : MonoBehaviour
     {
         GameTime += Time.deltaTime;
         Game.SetMousePos();
+        Game.setWorldMousePos();
         GameTimeText.text = string.Format("{0:D2}:{1:D2}", (int)Mathf.Floor(GameTime / 60), (int)Mathf.Floor(GameTime % 60));
     }
 

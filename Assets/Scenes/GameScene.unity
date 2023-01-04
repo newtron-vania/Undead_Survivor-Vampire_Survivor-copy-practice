@@ -134,6 +134,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpinWeaponSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 7532487481905183525, guid: 934b54d875cb38a448ad118a308e8768, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7532487481905183526, guid: 934b54d875cb38a448ad118a308e8768, type: 3}
       propertyPath: m_RootOrder
       value: 7
@@ -32320,6 +32324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1982446601}
   - component: {fileID: 1982446602}
+  - component: {fileID: 1982446603}
   m_Layer: 7
   m_Name: Hand
   m_TagString: Untagged
@@ -32395,6 +32400,29 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1982446603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982446600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33aab18c934708446ac04a569ee7734b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weaponID: 0
+  _level: 1
+  _damage: 1
+  _movSpeed: 1
+  _force: 1
+  _cooldown: 1
+  _size: 1
+  _penetrate: 1
+  _countPerCreate: 1
+  gunhole: {fileID: 0}
+  hand: {fileID: 0}
 --- !u!1 &2006171112
 GameObject:
   m_ObjectHideFlags: 0
@@ -32634,6 +32662,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: KnifeSpawner
       objectReference: {fileID: 0}
+    - target: {fileID: 1953673022690903779, guid: c9e33256162e5fd4aafd8eb36104e759, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c9e33256162e5fd4aafd8eb36104e759, type: 3}
 --- !u!1 &2116250372
@@ -32801,6 +32833,10 @@ PrefabInstance:
     - target: {fileID: 3679578682976737615, guid: f8792bd98111d1440a09a7b4f4922425, type: 3}
       propertyPath: m_Name
       value: PoisonWeapon
+      objectReference: {fileID: 0}
+    - target: {fileID: 3679578682976737615, guid: f8792bd98111d1440a09a7b4f4922425, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8792bd98111d1440a09a7b4f4922425, type: 3}
@@ -33015,6 +33051,10 @@ PrefabInstance:
     - target: {fileID: 6331201097994226117, guid: 25bef4d1620970c4f8b51fe401b29ffb, type: 3}
       propertyPath: m_Name
       value: LightningSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 6331201097994226117, guid: 25bef4d1620970c4f8b51fe401b29ffb, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 25bef4d1620970c4f8b51fe401b29ffb, type: 3}

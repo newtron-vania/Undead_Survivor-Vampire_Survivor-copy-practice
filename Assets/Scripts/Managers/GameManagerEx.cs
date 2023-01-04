@@ -12,6 +12,7 @@ public class GameManagerEx
     public Action<int> OnSpawnEvent;
 
     public Vector3 MousePos { get; set; }
+    public Vector3 WorldMousePos { get; set; }
 
     public GameObject getPlayer() { return _player; }
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
@@ -76,6 +77,11 @@ public class GameManagerEx
     public void SetMousePos()
     {
         MousePos = Input.mousePosition;
+    }
+
+    public void setWorldMousePos()
+    {
+        WorldMousePos = Camera.main.ScreenToWorldPoint(MousePos) + new Vector3(0,0,10);
     }
 
 }
