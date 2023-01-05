@@ -70,11 +70,17 @@ public class EnemyController : BaseController
     public override void OnDamaged(int damage)
     {
         _stat.HP -= Mathf.Max(damage - _stat.Defense, 1);
+        FloatDamageText(damage);
+        OnDead();
+    }
+
+    void FloatDamageText(int damage)
+    {
         GameObject hudText = Instantiate(hudDamageText); // 생성할 텍스트 오브젝트
         hudText.transform.position = transform.position + Vector3.up*1.5f; // 표시될 위치
         hudText.GetComponent<UI_DamageText>().damage = damage; // 데미지 전달
-        OnDead();
     }
+    
     public override void OnDead()
     {
         if(_stat.HP <= 0)

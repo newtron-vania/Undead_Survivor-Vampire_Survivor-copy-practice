@@ -21,11 +21,9 @@ public class PlayerController : BaseController
         _sprite = GetComponent<SpriteRenderer>();
         _anime = GetComponent<Animator>();
         _type = Define.WorldObject.Player;
+        _slider = Managers.UI.SetWorldSpaceUI<Slider>(transform, "HPBar");
     }
-
-    void Start()
-    {
-    }
+    
 
     void Update()
     {
@@ -33,12 +31,12 @@ public class PlayerController : BaseController
         {
             if (!Managers.gameStop)
             {
-                Managers.GamePause();
+                Managers.UI.ShowPopupUI("MenuUI");
                 Debug.Log($"Game Pause! - gameStop : {Managers.gameStop}");
             }
             else
             {
-                Managers.GamePlay();
+                Managers.UI.CloseCurUI();
                 Debug.Log($"Game Play! - gameStop : {Managers.gameStop}");
             }
                 

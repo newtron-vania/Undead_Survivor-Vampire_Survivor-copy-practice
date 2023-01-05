@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerStat : Stat
 {
-    //1 : knife, 2 : firebal, 3: spin, 4: posion
-    private List<int> _weaponList = new List<int>();
+    //1 : knife, 2 : firebal, 3: spin, 4: posion 5: lightning 6: shotgun
+    private List<int> _autoWeaponList = new List<int>();
+    private List<int> _cursorWeaponList = new List<int>();
     private int _exp;
 
     private bool isLevelUp = false;

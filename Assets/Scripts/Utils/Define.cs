@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class Define
 {
-    enum MonsterType
-    {
-        Zombie1,
-        Zombie2,
-    }
     public enum WorldObject
     {
         Unknown,
@@ -17,6 +12,10 @@ public class Define
         Weapon
     }
 
+    public enum Weapons
+    {
+        
+    }
     public enum Sound
     {
         Bgm,
