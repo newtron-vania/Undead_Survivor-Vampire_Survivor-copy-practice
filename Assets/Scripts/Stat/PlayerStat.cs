@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class PlayerStat : Stat
 {
+    enum Weapons
+    {
+        Knife,
+        fireball,
+        spin,
+        poison,
+        lightning,
+        shotgun
+    }
     //1 : knife, 2 : firebal, 3: spin, 4: posion 5: lightning 6: shotgun
     private List<int> _autoWeaponList = new List<int>();
     private List<int> _cursorWeaponList = new List<int>();
