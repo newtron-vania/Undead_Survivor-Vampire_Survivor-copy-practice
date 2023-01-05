@@ -28,23 +28,11 @@ public class Define
         Drag,
 
     }
-    public enum MouseEvent
-    {
-        Press,
-        PointerDown,
-        PointerUp,
-        Click,
-    }
-
     public enum SceneType
     {
         Unknown,
         GameScene,
         MainMenuScene
-    }
-    public enum CameraMode
-    {
-        QuarterView,
     }
 
 }

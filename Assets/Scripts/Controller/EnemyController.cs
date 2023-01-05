@@ -67,9 +67,10 @@ public class EnemyController : BaseController
     }
     
     
-    public override void OnDamaged(int damage)
+    public override void OnDamaged(int damage, float force = 0)
     {
         _stat.HP -= Mathf.Max(damage - _stat.Defense, 1);
+        _rigid.AddForce((_rigid.position - _target.position).normalized * force, ForceMode2D.Impulse);
         FloatDamageText(damage);
         OnDead();
     }

@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
     public int _damage;
     public float _movSpeed;
     public int _penetrate;
+    public float _force;
     private int piercing = 0;
     private float _lifeTime = 0.3f;
     private float _createTime = 0f;
@@ -34,7 +35,7 @@ public class Bullet : MonoBehaviour
         GameObject go = col.gameObject;
         if (go.CompareTag("Enemy"))
         {
-            go.GetComponent<EnemyController>().OnDamaged(_damage);
+            go.GetComponent<EnemyController>().OnDamaged(_damage, _force);
             piercing += 1;
             if(piercing == _penetrate)
                 Managers.Resource.Destroy(gameObject);

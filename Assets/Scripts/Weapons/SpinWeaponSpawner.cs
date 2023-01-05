@@ -41,6 +41,7 @@ public class SpinWeaponSpawner : WeaponSpawner
     {
         SpinWeapon spin = weapon.GetComponent<SpinWeapon>();
         spin.damage = _damage;
+        spin.force = _force;
     }
 
     void SetSpinStat(int level)

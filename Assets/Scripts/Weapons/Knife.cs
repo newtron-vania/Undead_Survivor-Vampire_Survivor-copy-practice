@@ -5,6 +5,7 @@ public class Knife : MonoBehaviour
     public Vector3 dir = new Vector3(1, 0, 0);
     public int damage = 10;
     public float speed = 10f;
+    public float force = 0f;
     [SerializeField] private float lifeTime = 3f;
     [SerializeField] private float createTime = 0f;
 
@@ -28,7 +29,7 @@ public class Knife : MonoBehaviour
         GameObject go = other.gameObject;
         if (go.CompareTag("Enemy"))
         {
-            go.GetComponent<EnemyController>().OnDamaged(damage);
+            go.GetComponent<EnemyController>().OnDamaged(damage, force);
             Managers.Resource.Destroy(gameObject);
         }
     }

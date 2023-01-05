@@ -27,20 +27,6 @@ public class PlayerController : BaseController
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            if (!Managers.gameStop)
-            {
-                Managers.UI.ShowPopupUI("MenuUI");
-                Debug.Log($"Game Pause! - gameStop : {Managers.gameStop}");
-            }
-            else
-            {
-                Managers.UI.CloseCurUI();
-                Debug.Log($"Game Play! - gameStop : {Managers.gameStop}");
-            }
-                
-        }
         _inputVec.x = Input.GetAxisRaw("Horizontal");
         _inputVec.y = Input.GetAxisRaw("Vertical");
     }
@@ -91,7 +77,7 @@ public class PlayerController : BaseController
         }
     }
 
-    public override void OnDamaged(int damage)
+    public override void OnDamaged(int damage, float force = 0)
     {
         _stat.HP -= Mathf.Max(damage - _stat.Defense, 1);
         OnDead();

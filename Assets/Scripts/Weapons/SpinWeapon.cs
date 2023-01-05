@@ -5,6 +5,7 @@ public class SpinWeapon : MonoBehaviour
 {
 
     public int damage = 10;
+    public float force = 0f;
     private float createTime = 0f;
 
 
@@ -20,7 +21,7 @@ public class SpinWeapon : MonoBehaviour
         GameObject go = other.gameObject;
         if (go.CompareTag("Enemy"))
         {
-            go.GetComponent<EnemyController>().OnDamaged(damage);
+            go.GetComponent<EnemyController>().OnDamaged(damage, force);
             EnemyStat stat = go.GetComponent<EnemyStat>();
             stat.HP -= Mathf.Max(damage - stat.Defense, 1);
 

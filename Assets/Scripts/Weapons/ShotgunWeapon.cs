@@ -46,6 +46,7 @@ public class ShotgunWeapon : WeaponSpawner
             bulletStat._damage = _damage;
             bulletStat._movSpeed = _movSpeed;
             bulletStat._penetrate = _penetrate;
+            bulletStat._force = _force;
         }
         
     }

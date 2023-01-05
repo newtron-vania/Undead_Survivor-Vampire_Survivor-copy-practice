@@ -38,29 +38,31 @@ public class UIManager
     }
     
     
-    public void ShowPopupUI(string name)
+    public GameObject ShowPopupUI(string name)
     {
-        if (_currentUI.Count == 0)
+        if (_popUp.Count == 0)
             Managers.GamePause();
         GameObject go =  _canvas.transform.Find(name).gameObject;
         _currentUI.Add("0");
         _popUp.Push(go);
         go.SetActive(true);
+        return go;
     }
     
-    public void ShowFullUI(string name)
+    public GameObject ShowFullUI(string name)
     {
         GameObject go =  _canvas.transform.Find(name).gameObject;
         _currentUI.Add(go.name);
         _fullUI.Add(go);
         go.SetActive(true);
+        return go;
     }
 
     public void CloseCurUI()
     {
         if (_currentUI.Count == 0)
             return;
-        string value = _currentUI[_currentUI.Count];
+        string value = _currentUI[_currentUI.Count-1];
         _currentUI.RemoveAt(_currentUI.Count-1);
         if (value == "0")
         {
@@ -74,7 +76,7 @@ public class UIManager
             go.SetActive(false);
         }
 
-        if (_currentUI.Count == 0)
+        if (_popUp.Count == 0)
             Managers.GamePlay();
     }
     

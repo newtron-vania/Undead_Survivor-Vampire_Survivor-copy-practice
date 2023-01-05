@@ -42,6 +42,7 @@ public class KnifeSpawner : WeaponSpawner
         PlayerStat playerStat = _player.GetComponent<PlayerStat>();
         knife.damage = _damage * playerStat.Attack;
         knife.speed = _movSpeed;
+        knife.force = _force;
     }
 
     IEnumerator StartKnifeCoolTime()
