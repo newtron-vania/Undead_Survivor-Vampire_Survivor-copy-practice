@@ -8,6 +8,8 @@ using Random = UnityEngine.Random;
 
 public class EnemyController : BaseController
 {
+    public GameObject hudDamageText;
+    
     protected EnemyStat _stat;
     public RuntimeAnimatorController[] animeCon;
     public Rigidbody2D _target;
@@ -68,6 +70,9 @@ public class EnemyController : BaseController
     public override void OnDamaged(int damage)
     {
         _stat.HP -= Mathf.Max(damage - _stat.Defense, 1);
+        GameObject hudText = Instantiate(hudDamageText); // 생성할 텍스트 오브젝트
+        hudText.transform.position = transform.position + Vector3.up*1.5f; // 표시될 위치
+        hudText.GetComponent<UI_DamageText>().damage = damage; // 데미지 전달
         OnDead();
     }
     public override void OnDead()

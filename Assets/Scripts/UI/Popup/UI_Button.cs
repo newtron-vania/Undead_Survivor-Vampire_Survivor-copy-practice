@@ -14,12 +14,14 @@ public class UI_Button : UI_Popup
 
     enum Buttons
     {
-        PointButton
+        PointButton,
+        BackToGameButton,
+        BackToMainButton,
     }
     enum Texts
     {
-        PointText,
-        ScoreText
+        GameTime,
+        MenuText,
     }
 
     enum GameObjects
@@ -29,7 +31,18 @@ public class UI_Button : UI_Popup
     
     enum Images
     {
-        ItemIcon,
+        WeaponListImage,
+        CursorCoolTimeImg
+    }
+
+    enum slide
+    {
+        VolumeSlider,
+    }
+
+    enum Dropdown
+    {
+        Dropdown,
     }
 
 

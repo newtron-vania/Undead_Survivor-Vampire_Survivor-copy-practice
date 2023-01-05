@@ -12,7 +12,6 @@ public class Exp_Item : Base_Item
     {
         
         player.Exp += _exp;
-        Debug.Log($"Player got Exp point! exp : {_exp} current exp : {player.Exp}");
         Managers.Resource.Destroy(gameObject);
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,9 +21,8 @@ public class LightningWeapon : WeaponSpawner
             return;
         }
 
-        _image_skill = _playerUI.GetComponentInChildren<Image>();
+        _image_skill = Util.FindChild<Image>(_playerUI, "CursorCoolTimeImg");
         _image_skill.gameObject.SetActive(true);
-
     }
 
     void Update()

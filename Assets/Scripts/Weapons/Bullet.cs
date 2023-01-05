@@ -13,14 +13,14 @@ public class Bullet : MonoBehaviour
     public float _movSpeed;
     public int _penetrate;
     private int piercing = 0;
-    private float _lifeTime = 0.15f;
+    private float _lifeTime = 0.3f;
     private float _createTime = 0f;
     private void OnEnable()
     {
         _createTime = Managers.GameTime;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Managers.GameTime - _createTime > _lifeTime)
         {
@@ -45,6 +45,6 @@ public class Bullet : MonoBehaviour
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0,0,angle-90);
-        transform.position += dir * (_movSpeed * Time.deltaTime);
+        transform.position += dir * (_movSpeed * Time.fixedDeltaTime);
     }
 }
