@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Stat : MonoBehaviour
 {
@@ -12,8 +13,8 @@ public class Stat : MonoBehaviour
     protected int _maxHp;
     [SerializeField]
     protected float _Movespeed;
-    [SerializeField]
-    protected int _attack;
+    [FormerlySerializedAs("_attack")] [SerializeField]
+    protected int _damage;
     [SerializeField]
     protected int _defense;
     
@@ -22,7 +23,7 @@ public class Stat : MonoBehaviour
     public int HP { get { return _hp; } set { _hp = value; } }
     public int MaxHP { get { return _maxHp; } set { _maxHp = value; } }
     public float MoveSpeed { get { return _Movespeed; } set { _Movespeed = value; } }
-    public int Attack { get { return _attack; } set { _attack = value; } }
+    public int Damage { get { return _damage; } set { _damage = value; } }
     public int Defense { get { return _defense; } set { _defense = value; } }
 
 

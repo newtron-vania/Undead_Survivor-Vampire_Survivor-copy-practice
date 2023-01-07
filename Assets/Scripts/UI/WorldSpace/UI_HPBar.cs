@@ -3,12 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class UI_HPBar : MonoBehaviour
+public class UI_HPBar : UI_Base
 {
     Stat _stat;
-
-    private void Start()
+    enum GameObjects
     {
+        HPBar,
+    }
+
+
+    public override void Init()
+    {
+        Bind<GameObject>(typeof(GameObjects));
         _stat = transform.parent.GetComponent<Stat>();
     }
 
@@ -16,7 +22,6 @@ public class UI_HPBar : MonoBehaviour
     {
         Transform parent = transform.parent;
         transform.position = parent.position + Vector3.up * transform.localScale.y;
-        transform.rotation = Camera.main.transform.rotation;
 
         float ratio = _stat.HP / (float)_stat.MaxHP;
         setHpRatio(ratio);
@@ -28,6 +33,6 @@ public class UI_HPBar : MonoBehaviour
             ratio = 0;
         if (ratio > 1)
             ratio = 1;
-        Util.FindChild<Slider>(gameObject, "Slider").value = ratio;
+        GetObject((int)GameObjects.HPBar).GetComponent<Slider>().value = ratio;
     }
 }

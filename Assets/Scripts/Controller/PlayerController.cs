@@ -21,7 +21,8 @@ public class PlayerController : BaseController
         _sprite = GetComponent<SpriteRenderer>();
         _anime = GetComponent<Animator>();
         _type = Define.WorldObject.Player;
-        _slider = Managers.UI.SetWorldSpaceUI<Slider>(transform, "HPBar");
+        if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
+            Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
     }
     
 
@@ -58,7 +59,7 @@ public class PlayerController : BaseController
         Stat EnemyStat = collision.transform.GetComponent<EnemyStat>();
 
 
-        _stat.HP -= Mathf.Max(EnemyStat.Attack - _stat.Defense, 1);
+        _stat.HP -= Mathf.Max(EnemyStat.Damage - _stat.Defense, 1);
         
         if (_stat.HP <= 0)
             OnDead();

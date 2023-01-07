@@ -30,7 +30,7 @@ public class ShotgunWeapon : WeaponSpawner
 
     protected void SetWeaponStat()
     {
-        base.SetWeaponStat();
+        //base.SetWeaponStat();
         float bulletAngle = _bulletTargetRange / (_countPerCreate+1);
         float angle = SetAngleFromHandToCursor();
         float startBulletAngle = angle - (_bulletTargetRange/2);

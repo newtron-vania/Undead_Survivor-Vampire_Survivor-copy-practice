@@ -8,7 +8,7 @@ public class GameScene : MonoBehaviour
     private GameObject playerUI;
     private void Awake()
     {
-        playerUI = Managers.UI.ShowFullUI("PlayerUI");
+        //playerUI = Managers.UI.ShowFullUI("PlayerUI");
     }
 
     private void Update()
@@ -17,13 +17,13 @@ public class GameScene : MonoBehaviour
         {
             if (!Managers.gameStop)
             {
-                Managers.UI.ShowPopupUI("MenuUI");
+                Managers.UI.ShowPopupUI<UI_GameMenu>("MenuUI");
                 playerUI.transform.Find("CursorCoolTimeImg").gameObject.SetActive(false);
                 Debug.Log($"Game Pause! - gameStop : {Managers.gameStop}");
             }
             else
             {
-                Managers.UI.CloseCurUI();
+                //Managers.UI.CloseCurUI();
                 playerUI.transform.Find("CursorCoolTimeImg").gameObject.SetActive(true);
                 Debug.Log($"Game Play! - gameStop : {Managers.gameStop}");
             }

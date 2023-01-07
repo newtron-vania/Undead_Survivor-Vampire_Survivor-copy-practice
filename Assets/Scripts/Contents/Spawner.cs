@@ -14,7 +14,6 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     int _maxSpawnUnit = 50;
 
-
     public int enemyCount = 0;
     public void AddEnemyCount(int value) { enemyCount += value; }
     private void Start()

@@ -22,6 +22,7 @@ public class Managers : MonoBehaviour
     ResourceManager _resource = new ResourceManager();
     UIManager _ui = new UIManager();
     SoundManager _sound = new SoundManager();
+    private EventManager _event = new EventManager();
     private SceneManagerEx _scene = new SceneManagerEx();
 
     public static DataManager Data { get { return Instance._data; } }
@@ -29,6 +30,7 @@ public class Managers : MonoBehaviour
     public static ResourceManager Resource { get { return Instance._resource; } }
     public static UIManager UI { get { return Instance._ui; } }
     public static SoundManager Sound { get { return Instance._sound; } }
+    public static EventManager Event { get { return Instance._event; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
 
     #endregion
@@ -60,7 +62,6 @@ public class Managers : MonoBehaviour
             s_instance._sound.Init();
             s_instance._pool.Init();
             s_instance._data.Init();
-            s_instance._ui.Init();
         }
     }
 

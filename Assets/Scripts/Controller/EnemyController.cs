@@ -1,10 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class EnemyController : BaseController
 {
@@ -55,7 +50,7 @@ public class EnemyController : BaseController
         _stat.MoveSpeed = data.speed;
         _stat.MaxHP = SetRandomStat(data.maxHp);
         _stat.HP = _stat.MaxHP;
-        _stat.Attack = SetRandomStat(data.attack);
+        _stat.Damage = SetRandomStat(data.attack);
         _stat.Defense = SetRandomStat(data.defense);
         _stat.ExpPoint = SetRandomStat(data.exp);
     }
@@ -70,10 +65,12 @@ public class EnemyController : BaseController
     public override void OnDamaged(int damage, float force = 0)
     {
         _stat.HP -= Mathf.Max(damage - _stat.Defense, 1);
-        _rigid.AddForce((_rigid.position - _target.position).normalized * force, ForceMode2D.Impulse);
+        //StartCoroutine(GiveForce(force));
+        _rigid.AddForce((_rigid.position - _target.position).normalized * force * 500f, ForceMode2D.Impulse);
         FloatDamageText(damage);
         OnDead();
     }
+
 
     void FloatDamageText(int damage)
     {

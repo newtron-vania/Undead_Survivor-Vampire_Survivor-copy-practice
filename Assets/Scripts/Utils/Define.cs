@@ -12,10 +12,22 @@ public class Define
         Weapon
     }
 
-    public enum Weapons
+    public enum PopupUIGroup
     {
-        
+        Unknown,
+        GameMenuUI,
+        PlayerStatUI,
     }
+
+    public enum SceneUI
+    {
+        Unknown,
+        PlayerUI,
+        MainMenuUI,
+        ItemBoxUI,
+        LevelUpUI
+    }
+
     public enum Sound
     {
         Bgm,

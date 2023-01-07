@@ -4,99 +4,157 @@ using UnityEngine;
 
 public class UIManager
 {
-    public Canvas _canvas = null;
-    //0 : popup else : full
-    List<string> _currentUI = new List<string>();
-    private Stack<GameObject> _popUp = new Stack<GameObject>();
-    private List<GameObject> _fullUI = new List<GameObject>();
+    private int _order = 10;
 
-    public void Init()
+    private Dictionary<int, Stack<UI_Popup>> _popupStackDict = new Dictionary<int, Stack<UI_Popup>>();
+    private UI_Scene _sceneUI = null;
+
+    public GameObject Root()
     {
-        _canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        if (_canvas == null)
-        {
-            _canvas = null;
-        }
+        GameObject root = GameObject.Find("@UI_Root");
+        if (root == null)
+            root = new GameObject { name = "@UI_Root" };
+
+        return root;
     }
 
-    public T SetWorldSpaceUI<T>(Transform parent, string name = null) where T : UnityEngine.Component
+    public void SetCanvas(GameObject go, bool sorting = false)
+    {
+        Canvas canvas = go.GetOrAddComponent<Canvas>();
+        canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+        canvas.overrideSorting = true;
+
+        if (sorting)
+            canvas.sortingOrder = _order++;
+        else
+            canvas.sortingOrder = 0;
+    }
+    
+    public T MakeWorldSpaceUI<T>(Transform parent, string name = null) where T : UI_Base
     {
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
         GameObject go = Managers.Resource.Instantiate($"UI/WorldSpace/{name}");
-        
-        if(parent != null)
+
+        if (parent != null)
             go.transform.SetParent(parent);
 
         Canvas canvas = go.GetComponent<Canvas>();
         canvas.renderMode = RenderMode.WorldSpace;
         canvas.worldCamera = Camera.main;
 
+        //return go.GetOrAddComponent<T>();
         return Util.GetOrAddComponent<T>(go);
+    }
+    
+    public T MakeSubItem<T>(Transform parent, string name = null) where T : UI_Base
+    {
+        if (string.IsNullOrEmpty(name))
+            name = typeof(T).Name;
 
+        GameObject go = Managers.Resource.Instantiate($"UI/SubItem/{name}");
+
+        if(parent != null)
+            go.transform.SetParent(parent);
+
+        return go.GetOrAddComponent<T>();
     }
     
-    
-    public GameObject ShowPopupUI(string name)
+    public T ShowSceneUI<T>(string name = null) where T : UI_Scene
     {
-        if (_popUp.Count == 0)
-            Managers.GamePause();
-        GameObject go =  _canvas.transform.Find(name).gameObject;
-        _currentUI.Add("0");
-        _popUp.Push(go);
-        go.SetActive(true);
-        return go;
+        if (string.IsNullOrEmpty(name))
+            name = typeof(T).Name;
+
+        GameObject go = Managers.Resource.Instantiate($"UI/Scene/{name}");
+
+        T sceneUI = Util.GetOrAddComponent<T>(go);
+        _sceneUI = sceneUI;
+
+
+        go.transform.SetParent(Root().transform);
+        return sceneUI;
     }
     
-    public GameObject ShowFullUI(string name)
+    public T ShowPopupUI<T>(string name = null) where T : UI_Popup
     {
-        GameObject go =  _canvas.transform.Find(name).gameObject;
-        _currentUI.Add(go.name);
-        _fullUI.Add(go);
-        go.SetActive(true);
-        return go;
+        if (string.IsNullOrEmpty(name))
+            name = typeof(T).Name;
+
+        GameObject go = Managers.Resource.Instantiate($"UI/Popup/{name}");
+        
+        go.transform.SetParent(Root().transform);
+        
+        T popup =  go.GetOrAddComponent<T>();
+        Define.PopupUIGroup popupType = popup._popupID;
+        
+        if(_popupStackDict.ContainsKey((int)popupType) == false);
+            _popupStackDict.Add((int)popupType, new Stack<UI_Popup>());
+            
+        _popupStackDict[(int)popupType].Push(popup);
+        
+        
+        return popup as T;
     }
 
-    public void CloseCurUI()
+    public void ClosePopupUI(Define.PopupUIGroup popupType)
     {
-        if (_currentUI.Count == 0)
+        if (_popupStackDict.TryGetValue((int)popupType, out Stack<UI_Popup> popupStack) == false
+            || _popupStackDict[(int)popupType].Count == 0)
             return;
-        string value = _currentUI[_currentUI.Count-1];
-        _currentUI.RemoveAt(_currentUI.Count-1);
-        if (value == "0")
+
+        UI_Popup popup = _popupStackDict[(int)popupType].Pop();
+        Managers.Resource.Destroy(popup.gameObject);
+        popup = null;
+    }
+
+    public void ClosePopupUI(UI_Popup popup)
+    {
+        Define.PopupUIGroup popupType = popup._popupID;
+        if (_popupStackDict.TryGetValue((int)popupType, out Stack<UI_Popup> popupStack) == false
+            || _popupStackDict[(int)popupType].Count == 0)
+            return;
+
+        if (popup != popupStack.Peek())
         {
-            GameObject go = _popUp.Pop();
-            go.SetActive(false);
-        }
-        else
-        {
-            GameObject go = _fullUI.Find(x => x.name == value);
-            _fullUI.Remove(go);
-            go.SetActive(false);
+            Debug.Log("Close Popup Failed");
+            return;
         }
 
-        if (_popUp.Count == 0)
-            Managers.GamePlay();
+        ClosePopupUI(popupType);
+    }
+    public void CloseAllPopupUI()
+    {
+        foreach (KeyValuePair<int,Stack<UI_Popup>> kv in _popupStackDict)
+        {
+            int popupType = kv.Key;
+            Stack<UI_Popup> popupStack = kv.Value;
+            while(popupStack.Count != 0)
+            {
+                UI_Popup popup = popupStack.Pop();
+                Managers.Resource.Destroy(popup.gameObject);
+                popup = null;
+            }
+        }
+    }
+
+    public void CloseAllGroupPopupUI(Define.PopupUIGroup popupType)
+    {
+        if (_popupStackDict.TryGetValue((int)popupType, out Stack<UI_Popup> popupStack) == false
+            || _popupStackDict[(int)popupType].Count == 0)
+            return;
+
+        while (popupStack.Count != 0)
+        {
+            UI_Popup popup = popupStack.Pop();
+            Managers.Resource.Destroy(popup.gameObject);
+            popup = null;
+        }
     }
     
-    public void CloseUI(string name)
-    {
-        GameObject go =  _fullUI.Find(x => x.name == name);
-        _currentUI.Remove(name);
-        go.SetActive(false);
-    }
-
-    public void CloseAllUI()
-    {
-        while (_currentUI.Count > 0)
-        {
-            CloseCurUI();
-        }
-    }
-
     public void Clear()
     {
-        CloseAllUI();
+        CloseAllPopupUI();
+        _sceneUI = null;
     }
 }

@@ -40,7 +40,7 @@ public class KnifeSpawner : WeaponSpawner
         knife.dir = new Vector3(dirOfPlayer.x, dirOfPlayer.y, 0);
 
         PlayerStat playerStat = _player.GetComponent<PlayerStat>();
-        knife.damage = _damage * playerStat.Attack;
+        knife.damage = _damage * playerStat.Damage;
         knife.speed = _movSpeed;
         knife.force = _force;
     }

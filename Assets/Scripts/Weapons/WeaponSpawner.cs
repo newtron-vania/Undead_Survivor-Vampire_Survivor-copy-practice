@@ -43,7 +43,7 @@ public class WeaponSpawner : MonoBehaviour
         if(_level > 5)
             _level = 5;
 
-        _damage = _weaponStat[_level].damage * _playerStat.Attack;
+        _damage = _weaponStat[_level].damage * _playerStat.Damage;
         _movSpeed = _weaponStat[_level].movSpeed;
         _force = _weaponStat[_level].force;
         _cooldown = _weaponStat[_level].cooldown;
