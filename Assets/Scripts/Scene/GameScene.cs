@@ -17,6 +17,7 @@ public class GameScene : MonoBehaviour
         playerUI = Managers.UI.ShowSceneUI<UI_Player>("UI_Player");
         Managers.Game.Spawn(Define.WorldObject.Player, "Player/Player0");
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(Managers.Game.getPlayer());
+        Managers.Resource.Instantiate("Content/Grid");
     }
     private void Update()
     {

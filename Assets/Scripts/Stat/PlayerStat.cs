@@ -19,7 +19,7 @@ public class PlayerStat : Stat
             _exp = value;
             while (_exp >= MaxExp)
             {
-               
+               OnLevelUp();
             }
         }
     }

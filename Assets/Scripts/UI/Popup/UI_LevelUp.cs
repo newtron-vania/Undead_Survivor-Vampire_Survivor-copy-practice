@@ -27,8 +27,8 @@ public class UI_LevelUp : UI_Popup
 
 
         //here we choose stat or weapon random number.
-        string title = "ÆĞ³Î Å×½ºÆ®";
-        string desc = "ÆĞ³Î ¼³¸í Å×½ºÆ®";
+        string title = "íŒ¨ë„ í…ŒìŠ¤íŠ¸";
+        string desc = "íŒ¨ë„ ì„¤ëª… í…ŒìŠ¤íŠ¸";
         for(int i = 0; i< MaxUpgradeNum; i++)
         {
             GameObject upgradePanel = Managers.UI.MakeSubItem<UpgdPanel>(parent:gridPanel.transform).gameObject;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class EventManager
@@ -70,17 +71,26 @@ public class EventManager
     }
 
     bool eventOver = false;
-    public void LevelUpEvent(ref bool isLevelUp)
+    public void LevelUpEvent(ref bool isLevelUping)
     {
-        if (!isLevelUp)
+        if (!isLevelUping)
         {
-            isLevelUp = true;
+            isLevelUping = true;
             //EventController's Event(if player level up, create Random Stat Selector UI)
             //when select is done, despawn UI, and check level up is over.
             Managers.UI.ShowPopupUI<UI_LevelUp>();
             Managers.GamePause();
-            if (eventOver)
-                isLevelUp = false;
+            
+            while (isLevelUping)
+            {
+                Thread.Sleep(1000);
+
+                if (eventOver)
+                {
+                    isLevelUping = false;
+                    eventOver = false;
+                }
+            }
         }
     }
 
