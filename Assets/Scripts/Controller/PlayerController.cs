@@ -22,7 +22,7 @@ public class PlayerController : BaseController
         _anime = GetComponent<Animator>();
         _type = Define.WorldObject.Player;
         if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
-            Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform);
+            Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform, "UI_HPBar");
     }
     
 

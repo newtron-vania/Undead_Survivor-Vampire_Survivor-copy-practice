@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 8729902764902607867}
   - component: {fileID: 2983450266300519541}
   m_Layer: 5
-  m_Name: HPBar
+  m_Name: UI_HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,7 +237,7 @@ GameObject:
   - component: {fileID: 7969468965824263255}
   - component: {fileID: 146533618399877261}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: HPBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

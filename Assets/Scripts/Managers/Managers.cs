@@ -37,7 +37,6 @@ public class Managers : MonoBehaviour
 
     public static float GameTime { get; set; } = 0;
     public static bool gameStop = false;
-    public TextMeshProUGUI GameTimeText;
 
     void Awake()
     {
@@ -70,7 +69,6 @@ public class Managers : MonoBehaviour
         GameTime += Time.deltaTime;
         Game.SetMousePos();
         Game.setWorldMousePos();
-        GameTimeText.text = string.Format("{0:D2}:{1:D2}", (int)Mathf.Floor(GameTime / 60), (int)Mathf.Floor(GameTime % 60));
     }
 
     public static void Clear()

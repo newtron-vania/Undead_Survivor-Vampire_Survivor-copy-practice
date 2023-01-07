@@ -21,7 +21,7 @@ public class UI_HPBar : UI_Base
     private void Update()
     {
         Transform parent = transform.parent;
-        transform.position = parent.position + Vector3.up * transform.localScale.y;
+        transform.position = parent.position;
 
         float ratio = _stat.HP / (float)_stat.MaxHP;
         setHpRatio(ratio);

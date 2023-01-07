@@ -15,17 +15,16 @@ public class Define
     public enum PopupUIGroup
     {
         Unknown,
-        GameMenuUI,
-        PlayerStatUI,
+        UI_GameMenu,
+        UI_ItemBox,
+        UI_LevelUp
     }
 
     public enum SceneUI
     {
         Unknown,
-        PlayerUI,
-        MainMenuUI,
-        ItemBoxUI,
-        LevelUpUI
+        UI_Player,
+        UI_MainMenu,
     }
 
     public enum Sound

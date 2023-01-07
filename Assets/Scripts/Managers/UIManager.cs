@@ -87,8 +87,8 @@ public class UIManager
         
         T popup =  go.GetOrAddComponent<T>();
         Define.PopupUIGroup popupType = popup._popupID;
-        
-        if(_popupStackDict.ContainsKey((int)popupType) == false);
+
+        if (!_popupStackDict.ContainsKey((int)popupType))
             _popupStackDict.Add((int)popupType, new Stack<UI_Popup>());
             
         _popupStackDict[(int)popupType].Push(popup);

@@ -40,7 +40,7 @@ public class Util
         }
         else
         {
-            foreach(T component in go.GetComponentsInChildren<T>())
+            foreach(T component in go.GetComponentsInChildren<T>(true))
             {
                 if (string.IsNullOrEmpty(name) ||  component.name == name)
                     return component;

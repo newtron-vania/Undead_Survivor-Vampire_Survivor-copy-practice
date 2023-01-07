@@ -2594,8 +2594,9 @@ GameObject:
   - component: {fileID: 7108182771553588509}
   - component: {fileID: 7108182771553588508}
   - component: {fileID: 7108182771553588515}
+  - component: {fileID: 5978096651885838158}
   m_Layer: 5
-  m_Name: GameMenuUI
+  m_Name: UI_GameMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2684,6 +2685,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &5978096651885838158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7108182771553588514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37fd6b6c9406662488ade734dee458ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _popupID: 1
 --- !u!1 &7108182771899266246
 GameObject:
   m_ObjectHideFlags: 0
