@@ -21,6 +21,7 @@ public class WorldScrolling : MonoBehaviour
 
     private void Awake()
     {
+        playerTransform = Managers.Game.getPlayer().transform;
         terrainTiles = new GameObject[terrainTileHorizontalCount, terrainTileVerticalCount];
     }
 

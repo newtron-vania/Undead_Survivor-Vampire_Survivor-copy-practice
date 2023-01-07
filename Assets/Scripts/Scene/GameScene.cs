@@ -15,6 +15,8 @@ public class GameScene : MonoBehaviour
     void Init()
     {
         playerUI = Managers.UI.ShowSceneUI<UI_Player>("UI_Player");
+        Managers.Game.Spawn(Define.WorldObject.Player, "Player/Player0");
+        Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(Managers.Game.getPlayer());
     }
     private void Update()
     {
@@ -33,7 +35,6 @@ public class GameScene : MonoBehaviour
                 Managers.GamePlay();
                 Debug.Log($"Game Play! - gameStop : {Managers.gameStop}");
             }
-                
         }
     }
 }

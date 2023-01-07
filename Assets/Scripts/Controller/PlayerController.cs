@@ -14,7 +14,7 @@ public class PlayerController : BaseController
 
     Slider _slider;
 
-    private void Awake()
+    protected override void Init()
     {
         _stat = GetComponent<PlayerStat>();
         _rigid = GetComponent<Rigidbody2D>();

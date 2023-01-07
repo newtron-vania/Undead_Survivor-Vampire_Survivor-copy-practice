@@ -14,7 +14,7 @@ public class SpinWeaponSpawner : WeaponSpawner
         _weaponID = 3;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         SetSpinStat(_level);
 

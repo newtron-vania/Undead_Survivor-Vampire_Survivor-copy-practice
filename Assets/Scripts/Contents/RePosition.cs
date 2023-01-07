@@ -19,7 +19,7 @@ public class RePosition : MonoBehaviour
 
         float areaSize = collision.transform.GetComponent<BoxCollider2D>().size.x;
 
-        Vector3 playerPos = Managers.Instance._player.transform.position;
+        Vector3 playerPos = Managers.Game.getPlayer().transform.position;
         Vector3 myPos = transform.position;
 
 

@@ -69,30 +69,26 @@ public class EventManager
 
     }
 
-    void LevelUpEvent(bool isLevelUp)
+    bool eventOver = false;
+    public void LevelUpEvent(ref bool isLevelUp)
     {
         if (!isLevelUp)
         {
+            isLevelUp = true;
             //EventController's Event(if player level up, create Random Stat Selector UI)
             //when select is done, despawn UI, and check level up is over.
-            List<int> randItemValue = Managers.Event.SetRandomItem(3);
-            foreach (int itemValue in randItemValue)
-            {
-                switch (itemValue)
-                {
-                    case 1:
-                        //Managers.Event.SetRandomStat();
-                        break;
-                    case 2:
-                        //Managers.Event.SetRandomWeapon();
-                        break;
-                }
-            }
-            //LevelUp
-            //_level += 1;
-            //_exp -= _maxExp;
-            //_maxExp *= 2;
+            Managers.UI.ShowPopupUI<UI_LevelUp>();
+            Managers.GamePause();
+            if (eventOver)
+                isLevelUp = false;
         }
+    }
+
+    public void LevelUpOverEvent()
+    {
+        Managers.Game.getPlayer().GetComponent<PlayerStat>();
+        Managers.GamePlay();
+        eventOver = true;
     }
 
 

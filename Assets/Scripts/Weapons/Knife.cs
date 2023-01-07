@@ -15,7 +15,7 @@ public class Knife : MonoBehaviour
         createTime = Managers.GameTime;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (Managers.GameTime - createTime > lifeTime)
         {
@@ -39,6 +39,6 @@ public class Knife : MonoBehaviour
     {
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0,0,angle-90);
-        transform.position += dir * (speed * Time.deltaTime);
+        transform.position += dir * (speed * Time.fixedDeltaTime);
     }
 }

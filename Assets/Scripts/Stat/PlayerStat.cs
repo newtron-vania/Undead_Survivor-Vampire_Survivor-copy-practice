@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerStat : Stat
 {
     //1 : knife, 2 : firebal, 3: spin, 4: posion 5: lightning 6: shotgun
+    //WeaponDict - WeaponID : WeaponLevel
     public Dictionary<int, int> WeaponDict { get; set; } = new Dictionary<int, int>();
     private int _exp;
 
@@ -18,7 +19,7 @@ public class PlayerStat : Stat
             _exp = value;
             while (_exp >= MaxExp)
             {
-                //Managers.Event.LevelUpEvent();
+               
             }
         }
     }
@@ -45,5 +46,17 @@ public class PlayerStat : Stat
         Defense = 0;
         Exp = 0;
         MaxExp = 10;
+    }
+
+    void OnLevelUp()
+    {
+        if (!isLevelUp)
+        {
+            Managers.Event.LevelUpEvent(ref isLevelUp);
+        }
+
+        Level += 1;
+        Exp -= MaxExp;
+        MaxExp *= 2;
     }
 }

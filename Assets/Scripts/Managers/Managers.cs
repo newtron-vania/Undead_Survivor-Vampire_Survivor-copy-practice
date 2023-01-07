@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Managers : MonoBehaviour
 {
     static Managers s_instance;
-    public GameObject _player;
     public static Managers Instance { get { Init(); return s_instance; } }
 
     #region Contents
@@ -41,8 +40,6 @@ public class Managers : MonoBehaviour
     void Awake()
     {
         Init();
-        _player = GameObject.FindGameObjectWithTag("Player");
-        Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(_player);
     }
 
     static void Init()

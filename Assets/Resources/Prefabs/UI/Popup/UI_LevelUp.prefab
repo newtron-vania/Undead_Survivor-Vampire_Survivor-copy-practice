@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2265393379982614333}
   - component: {fileID: 1845933157165773903}
   - component: {fileID: 6570360991974640564}
+  - component: {fileID: 2704096296064972317}
   m_Layer: 5
   m_Name: UI_LevelUp
   m_TagString: Untagged
@@ -102,6 +103,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &2704096296064972317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649040255815713189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77552ae2d05853a4cb012d97cb5e070d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _popupID: 0
 --- !u!1 &2025278729575502091
 GameObject:
   m_ObjectHideFlags: 0

@@ -44,4 +44,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d917e8562d05c48a6b69936771b8df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  _weaponID: 0
+  _level: 1
+  _damage: 1
+  _movSpeed: 1
+  _force: 1
+  _cooldown: 1
+  _size: 1
+  _penetrate: 1
+  _countPerCreate: 1

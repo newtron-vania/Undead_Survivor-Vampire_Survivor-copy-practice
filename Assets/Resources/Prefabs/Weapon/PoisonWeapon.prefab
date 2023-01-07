@@ -45,7 +45,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cea5a2b196a3514daa941d10eb0c197, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 1
+  _weaponID: 0
+  _level: 1
+  _damage: 1
+  _movSpeed: 1
+  _force: 1
+  _cooldown: 1
+  _size: 1
+  _penetrate: 1
+  _countPerCreate: 1
 --- !u!1 &3679578683286595522
 GameObject:
   m_ObjectHideFlags: 0

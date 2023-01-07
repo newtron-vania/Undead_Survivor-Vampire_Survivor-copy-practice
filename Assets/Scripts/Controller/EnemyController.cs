@@ -11,13 +11,14 @@ public class EnemyController : BaseController
     bool _isLive = true;
 
 
-    private void Awake()
+    protected override void Init()
     {
         _stat = GetComponent<EnemyStat>();
         _rigid = GetComponent<Rigidbody2D>();
         _sprite = GetComponent<SpriteRenderer>();
         _anime = GetComponent<Animator>();
         _type = Define.WorldObject.Enemy;
+        _target = Managers.Game.getPlayer().GetComponent<Rigidbody2D>();
     }
 
     private void FixedUpdate()
@@ -39,7 +40,7 @@ public class EnemyController : BaseController
 
     private void OnEnable()
     {
-        _target = Managers.Instance._player.GetComponent<Rigidbody2D>();
+        _target = Managers.Game.getPlayer().GetComponent<Rigidbody2D>();
         _isLive = true;
         _stat.HP = _stat.MaxHP;
     }
@@ -65,8 +66,8 @@ public class EnemyController : BaseController
     public override void OnDamaged(int damage, float force = 0)
     {
         _stat.HP -= Mathf.Max(damage - _stat.Defense, 1);
-        //StartCoroutine(GiveForce(force));
-        _rigid.AddForce((_rigid.position - _target.position).normalized * force * 500f, ForceMode2D.Impulse);
+        Debug.Log($"knockBack : {force * 500f}");
+        _rigid.AddForce((_rigid.position - _target.position).normalized * (force * 500f));
         FloatDamageText(damage);
         OnDead();
     }
