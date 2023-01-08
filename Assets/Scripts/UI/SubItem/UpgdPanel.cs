@@ -23,12 +23,12 @@ public class UpgdPanel : UI_Base
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Image>(typeof(Images));
 
-        Get<Image>((int)Images.UpgdDescPanel).gameObject.AddUIEvent(OnStatOrWeaponUp);
+        Get<Image>((int)Images.UpgdDescPanel, typeof(Images)).gameObject.AddUIEvent(OnStatOrWeaponUp);
     }
 
     void OnStatOrWeaponUp(PointerEventData data)
     {
-        TextMeshProUGUI title =  Get<TextMeshProUGUI>((int)Texts.UpgdTitleText);
+        TextMeshProUGUI title =  Get<TextMeshProUGUI>((int)Texts.UpgdTitleText, typeof(Texts));
         Debug.Log($"{title} select!");
         Managers.Event.LevelUpOverEvent();
         Managers.UI.ClosePopupUI(Define.PopupUIGroup.UI_LevelUp);
@@ -36,7 +36,8 @@ public class UpgdPanel : UI_Base
 
     public void SetInfo(string title, string desc)
     {
-        Get<TextMeshProUGUI>((int)Texts.UpgdTitleText).text = title;
-        Get<TextMeshProUGUI>((int)Texts.UpgdDescText).text = desc;
+        Init();
+        Get<TextMeshProUGUI>((int)Texts.UpgdTitleText, typeof(Texts)).text = title;
+        Get<TextMeshProUGUI>((int)Texts.UpgdDescText, typeof(Texts)).text = desc;
     }
 }

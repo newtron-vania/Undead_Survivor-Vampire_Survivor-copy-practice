@@ -22,16 +22,18 @@ public class EventManager
         lightning,
         shotgun
     }
+
     public List<int> SetRandomItem(int Maxcount)
     {
         List<int> randomItem = new List<int>();
         int i = 0;
-        while(i < Maxcount)
+        while (i < Maxcount)
         {
             int rd = Random.Range(1, 2);
             randomItem.Add(rd);
             i++;
         }
+
         return randomItem;
     }
 
@@ -66,42 +68,22 @@ public class EventManager
             player.WeaponDict[(int)playerWeapon] += 1;
             return;
         }
-        player.WeaponDict.Add((int)playerWeapon, 1);
 
+        player.WeaponDict.Add((int)playerWeapon, 1);
     }
 
-    bool eventOver = false;
-    public void LevelUpEvent(ref bool isLevelUping)
+    public void LevelUpEvent()
     {
-        if (!isLevelUping)
-        {
-            isLevelUping = true;
-            //EventController's Event(if player level up, create Random Stat Selector UI)
-            //when select is done, despawn UI, and check level up is over.
-            Managers.UI.ShowPopupUI<UI_LevelUp>();
-            Managers.GamePause();
-            
-            while (isLevelUping)
-            {
-                Thread.Sleep(1000);
-
-                if (eventOver)
-                {
-                    isLevelUping = false;
-                    eventOver = false;
-                }
-            }
-        }
+        //EventController's Event(if player level up, create Random Stat Selector UI)
+        //when select is done, despawn UI, and check level up is over.
+        Managers.UI.ShowPopupUI<UI_LevelUp>();
+        Managers.GamePause();
     }
 
     public void LevelUpOverEvent()
     {
         Managers.Game.getPlayer().GetComponent<PlayerStat>();
         Managers.GamePlay();
-        eventOver = true;
+        Managers.UI.ClosePopupUI(Define.PopupUIGroup.UI_LevelUp);
     }
-
-
-
-
 }

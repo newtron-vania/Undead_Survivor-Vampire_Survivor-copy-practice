@@ -26,13 +26,13 @@ public class UI_Player : UI_Scene
 
     public void SetGameTime()
     {
-        Get<TextMeshProUGUI>((int)Texts.GameTime).text = string.Format("{0:D2}:{1:D2}", (int)Mathf.Floor(Managers.GameTime / 60),
+        Get<TextMeshProUGUI>((int)Texts.GameTime, typeof(Texts)).text = string.Format("{0:D2}:{1:D2}", (int)Mathf.Floor(Managers.GameTime / 60),
             (int)Mathf.Floor(Managers.GameTime % 60));
     }
 
     public void ActiveCheckCursorImage()
     {
-        GameObject cursorCoolTimeImgGo = Get<Image>((int)Images.CursorCoolTimeImg).gameObject;
+        GameObject cursorCoolTimeImgGo = Get<Image>((int)Images.CursorCoolTimeImg, typeof(Images)).gameObject;
 
         cursorCoolTimeImgGo.SetActive(true);
     }

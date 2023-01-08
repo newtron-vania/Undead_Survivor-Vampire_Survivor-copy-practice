@@ -23,7 +23,6 @@ public class UI_GameMenu : UI_Popup
         MenuText,
         SoundText,
         SoundSelectText
-
     }
 
     enum Sliders
@@ -36,19 +35,23 @@ public class UI_GameMenu : UI_Popup
         BGMSelectorDD
     }
 
+    public override Define.PopupUIGroup _popupID
+    {
+        get { return Define.PopupUIGroup.UI_GameMenu; }
+    }
+
     public override void Init()
     {
         base.Init();
-        _popupID = Define.PopupUIGroup.UI_GameMenu;
         Bind<Button>(typeof(Buttons));
         Bind<Image>(typeof(Images));
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Slider>(typeof(Sliders));
         Bind<TMP_Dropdown>(typeof(Dropdowns));
 
-        GetImage((int)Images.BackgroundImage).gameObject.AddUIEvent(OnBackToGame);
-        GetButton((int)Buttons.BackToGameButton).gameObject.AddUIEvent(OnBackToGame);
-        GetButton((int)Buttons.BackToMainButton).gameObject.AddUIEvent(OnBackToMain);
+        GetImage((int)Images.BackgroundImage, typeof(Images)).gameObject.AddUIEvent(OnBackToGame);
+        GetButton((int)Buttons.BackToGameButton, typeof(Buttons)).gameObject.AddUIEvent(OnBackToGame);
+        GetButton((int)Buttons.BackToMainButton, typeof(Buttons)).gameObject.AddUIEvent(OnBackToMain);
     }
 
 
@@ -57,6 +60,7 @@ public class UI_GameMenu : UI_Popup
         Managers.UI.CloseAllGroupPopupUI(Define.PopupUIGroup.UI_GameMenu);
         Managers.GamePlay();
     }
+
     public void OnBackToMain(PointerEventData data)
     {
         Managers.Scene.LoadScene(Define.SceneType.MainMenuScene);

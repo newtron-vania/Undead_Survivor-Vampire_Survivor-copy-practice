@@ -1,7 +1,4 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class PlayerStat : Stat
 {
@@ -10,19 +7,19 @@ public class PlayerStat : Stat
     public Dictionary<int, int> WeaponDict { get; set; } = new Dictionary<int, int>();
     private int _exp;
 
-    private bool isLevelUp = false;
     public int Exp
     {
-        get { return _exp;}
+        get { return _exp; }
         set
         {
             _exp = value;
             while (_exp >= MaxExp)
             {
-               OnLevelUp();
+                OnLevelUp();
             }
         }
     }
+
     private int _maxExp = 1;
 
     public int MaxExp
@@ -50,13 +47,9 @@ public class PlayerStat : Stat
 
     void OnLevelUp()
     {
-        if (!isLevelUp)
-        {
-            Managers.Event.LevelUpEvent(ref isLevelUp);
-        }
-
+        Managers.Event.LevelUpEvent();
         Level += 1;
-        Exp -= MaxExp;
+        Exp = 0;
         MaxExp *= 2;
     }
 }

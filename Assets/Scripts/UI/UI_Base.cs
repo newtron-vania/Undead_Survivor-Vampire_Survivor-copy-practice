@@ -15,17 +15,23 @@ public abstract class UI_Base : MonoBehaviour
     }
 
     Dictionary<Type, UnityEngine.Object[]> _objects = new Dictionary<Type, UnityEngine.Object[]>();
+
     protected void Bind<T>(Type type) where T : UnityEngine.Object
     {
+        Debug.Log($"for binding. type: {type}, uiType: {typeof(T)}. bind UI.");
         string[] name = Enum.GetNames(type);
-
 
         UnityEngine.Object[] objects = new UnityEngine.Object[name.Length];
 
-        _objects.Add(typeof(T), objects);
+        // when objects already was bound, don't anything
+        if (_objects.ContainsKey(type))
+        {
+            return;
+        }
 
+        _objects.Add(type, objects);
 
-        for(int i = 0; i<name.Length; i++)
+        for (int i = 0; i < name.Length; i++)
         {
             if (typeof(T) == typeof(GameObject))
                 objects[i] = Util.FindChild(gameObject, name[i], true);
@@ -35,23 +41,47 @@ public abstract class UI_Base : MonoBehaviour
             if (objects[i] == null)
                 Debug.Log($"Fail to Bind {name[i]}!");
         }
+
+        foreach (var obj in objects)
+        {
+            Debug.Log($"for binding. type: {type}, uiType: {typeof(T)}. UI bounded. obj: {obj}");
+        }
     }
 
-    protected T Get<T>(int idx)where T : UnityEngine.Object
+    protected T Get<T>(int idx, Type type) where T : UnityEngine.Object
     {
-        UnityEngine.Object[] objects = null;
-        _objects.TryGetValue(typeof(T), out objects);
-        return objects[idx] as T;
+        Debug.Log($"for getting UI. type: {type}, uiType: {typeof(T)} index: {idx}. get UI.");
+
+        UnityEngine.Object[] objects = _objects.GetValueOrDefault(type);
+
+        var obj = objects[idx] as T;
+        Debug.Log($"for getting UI. type: {type}, uiType: {typeof(T)} index: {idx}. got UI. obj: {obj}");
+
+        return obj;
     }
 
-    protected GameObject GetObject(int idx) { return Get<GameObject>(idx); }
-    protected Text GetText(int idx) { return Get<Text>(idx); }
+    protected GameObject GetGameObject(int idx, Type type)
+    {
+        return Get<GameObject>(idx, type);
+    }
 
-    protected Button GetButton(int idx) { return Get<Button>(idx); }
+    protected Text GetText(int idx, Type type)
+    {
+        return Get<Text>(idx, type);
+    }
 
-    protected Image GetImage(int idx) { return Get<Image>(idx); }
+    protected Button GetButton(int idx, Type type)
+    {
+        return Get<Button>(idx, type);
+    }
 
-    public static void BindUIEvent(GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
+    protected Image GetImage(int idx, Type type)
+    {
+        return Get<Image>(idx, type);
+    }
+
+    public static void BindUIEvent(GameObject go, Action<PointerEventData> action,
+        Define.UIEvent type = Define.UIEvent.Click)
     {
         UI_EventHandler evt = Util.GetOrAddComponent<UI_EventHandler>(go);
 
@@ -67,5 +97,4 @@ public abstract class UI_Base : MonoBehaviour
                 break;
         }
     }
-
 }

@@ -33,6 +33,6 @@ public class UI_HPBar : UI_Base
             ratio = 0;
         if (ratio > 1)
             ratio = 1;
-        GetObject((int)GameObjects.HPBar).GetComponent<Slider>().value = ratio;
+        GetGameObject((int)GameObjects.HPBar, typeof(GameObjects)).GetComponent<Slider>().value = ratio;
     }
 }
