@@ -71,34 +71,18 @@ public class EventManager
     }
 
     bool eventOver = false;
-    public void LevelUpEvent(ref bool isLevelUping)
+    public void LevelUpEvent()
     {
-        if (!isLevelUping)
-        {
-            isLevelUping = true;
-            //EventController's Event(if player level up, create Random Stat Selector UI)
-            //when select is done, despawn UI, and check level up is over.
-            Managers.UI.ShowPopupUI<UI_LevelUp>();
-            Managers.GamePause();
-            
-            while (isLevelUping)
-            {
-                Thread.Sleep(1000);
-
-                if (eventOver)
-                {
-                    isLevelUping = false;
-                    eventOver = false;
-                }
-            }
-        }
+        Managers.UI.ShowPopupUI<UI_LevelUp>();
+        Managers.GamePause();
     }
 
     public void LevelUpOverEvent()
     {
         Managers.Game.getPlayer().GetComponent<PlayerStat>();
+        Managers.UI.ClosePopupUI(Define.PopupUIGroup.UI_LevelUp);
         Managers.GamePlay();
-        eventOver = true;
+
     }
 
 

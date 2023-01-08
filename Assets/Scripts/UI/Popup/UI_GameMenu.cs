@@ -35,11 +35,13 @@ public class UI_GameMenu : UI_Popup
     {
         BGMSelectorDD
     }
-
+    public override Define.PopupUIGroup _popupID
+    {
+        get { return Define.PopupUIGroup.UI_GameMenu; }
+    }
     public override void Init()
     {
         base.Init();
-        _popupID = Define.PopupUIGroup.UI_GameMenu;
         Bind<Button>(typeof(Buttons));
         Bind<Image>(typeof(Images));
         Bind<TextMeshProUGUI>(typeof(Texts));

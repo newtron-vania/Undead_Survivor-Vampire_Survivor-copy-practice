@@ -50,10 +50,7 @@ public class PlayerStat : Stat
 
     void OnLevelUp()
     {
-        if (!isLevelUp)
-        {
-            Managers.Event.LevelUpEvent(ref isLevelUp);
-        }
+        Managers.Event.LevelUpEvent();
 
         Level += 1;
         Exp -= MaxExp;

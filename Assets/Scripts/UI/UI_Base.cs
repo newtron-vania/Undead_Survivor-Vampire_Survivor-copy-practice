@@ -9,7 +9,7 @@ public abstract class UI_Base : MonoBehaviour
 {
     public abstract void Init();
 
-    private void Start()
+    private void Awake()
     {
         Init();
     }
@@ -19,6 +19,8 @@ public abstract class UI_Base : MonoBehaviour
     {
         string[] name = Enum.GetNames(type);
 
+        if (_objects.ContainsKey(typeof(T)))
+            return;
 
         UnityEngine.Object[] objects = new UnityEngine.Object[name.Length];
 

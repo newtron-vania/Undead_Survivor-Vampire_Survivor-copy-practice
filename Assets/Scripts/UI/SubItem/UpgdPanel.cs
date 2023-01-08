@@ -31,7 +31,6 @@ public class UpgdPanel : UI_Base
         TextMeshProUGUI title =  Get<TextMeshProUGUI>((int)Texts.UpgdTitleText);
         Debug.Log($"{title} select!");
         Managers.Event.LevelUpOverEvent();
-        Managers.UI.ClosePopupUI(Define.PopupUIGroup.UI_LevelUp);
     }
 
     public void SetInfo(string title, string desc)

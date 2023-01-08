@@ -12,11 +12,14 @@ public class UI_LevelUp : UI_Popup
         GridPanel
     }
 
+    public override Define.PopupUIGroup _popupID
+    {
+        get { return Define.PopupUIGroup.UI_LevelUp; }
+    }
     public override void Init()
     {
         base.Init();
-        _popupID = Define.PopupUIGroup.UI_LevelUp;
-        Bind<Image>(typeof(Panels));
+        Bind<GameObject>(typeof(Panels));
 
         GameObject gridPanel = Get<GameObject>((int)Panels.GridPanel);
 

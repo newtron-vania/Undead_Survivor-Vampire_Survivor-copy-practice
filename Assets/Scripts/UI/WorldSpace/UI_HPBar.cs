@@ -15,6 +15,10 @@ public class UI_HPBar : UI_Base
     public override void Init()
     {
         Bind<GameObject>(typeof(GameObjects));
+    }
+
+    private void Start()
+    {
         _stat = transform.parent.GetComponent<Stat>();
     }
 
