@@ -13,7 +13,7 @@ public class ShotgunController : WeaponController
     private bool isShot = false;
     private float _bulletTargetRange = 60f;
 
-    public override int _weaponType { get { return (int)Define.Weapons.shotgun; } }
+    public override int _weaponType { get { return (int)Define.Weapons.Shotgun; } }
 
     void Update()
     {

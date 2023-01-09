@@ -14,12 +14,12 @@ public class Define
 
     public enum Weapons
     {
-        knife = 1,
-        fireball = 2,
-        spin = 3,
-        poison = 4,
-        lightning = 5,
-        shotgun = 6
+        Knife = 1,
+        Fireball = 2,
+        Spin = 3,
+        Poison = 4,
+        Lightning = 5,
+        Shotgun = 6
     }
 
     public enum PopupUIGroup

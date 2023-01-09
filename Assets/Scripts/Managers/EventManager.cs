@@ -90,7 +90,7 @@ public class EventManager
                     Debug.Log($"Defense up! {player.Defense}");
                     break;
             }
-            player.AddOrSetWeaponDict(Define.Weapons.shotgun, 0);
+            player.AddOrSetWeaponDict(Define.Weapons.Shotgun, 0);
         }
             
         else

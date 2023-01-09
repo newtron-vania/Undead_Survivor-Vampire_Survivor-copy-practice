@@ -8,10 +8,11 @@ public class PoisonController : WeaponController
     bool _isAttack = false;
     Transform _damageEffectImage;
 
-    public override int _weaponType { get { return (int)Define.Weapons.poison; } }
-    private void Awake()
+    public override int _weaponType { get { return (int)Define.Weapons.Poison; } }
+    private void Start()
     {
         _damageEffectImage = transform.GetChild(0);
+        Debug.Log(_damageEffectImage);
     }
 
     private void Update()

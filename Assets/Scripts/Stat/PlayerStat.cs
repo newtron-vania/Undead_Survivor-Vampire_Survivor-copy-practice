@@ -78,8 +78,9 @@ public class PlayerStat : Stat
         Managers.Event.LevelUpEvent();
 
         Level += 1;
-        Exp -= MaxExp;
-        MaxExp *= 2;
+        Exp = 0;
+        //Exp -= MaxExp;
+        //MaxExp *= 2;
     }
 
     public void SetWeaponLevel()
@@ -90,7 +91,8 @@ public class PlayerStat : Stat
             string weaponName = weapon.Key.ToString();
             string weaponSpawningPool = weapon.Key + "SpawningPool";
 
-            GameObject weaponPool = Util.FindChild(gameObject, weaponSpawningPool);
+            GameObject weaponPool = Util.FindChild(gameObject, weaponSpawningPool, true);
+            Debug.Log($"{weaponName} is {weaponPool} {weaponPool is null}");
             if (weaponPool == null)
             {
                 weaponPool = Managers.Resource.Instantiate($"Weapon/SpawningPool/{weaponSpawningPool}", transform);
@@ -100,13 +102,10 @@ public class PlayerStat : Stat
                 Managers.Resource.Destroy(weaponPool);
             }
 
-            Debug.Log($"Weapon Name : {weaponName}");
-            Debug.Log($"currentLevel = {weaponPool.GetComponent<WeaponController>().Level}");
-            Debug.Log($"ChangeLevel : {weapon.Value}");
-            weaponPool.GetComponent<WeaponController>().Level = weapon.Value;
-            Debug.Log($"Weapon Name : {weaponName}");
-            Debug.Log($"currentLevel = {weaponPool.GetComponent<WeaponController>().Level}");
-            Debug.Log($"ChangeLevel : {weapon.Value}");
+            Debug.Log($"weapon - : {weaponName}, currentLevel : {weaponPool.GetComponentInChildren<WeaponController>().Level}, nextLevel : {weapon.Value}");
+            weaponPool.GetComponentInChildren<WeaponController>().Level = weapon.Value;
+            Debug.Log($"weapon - : {weaponName}, currentLevel : {weaponPool.GetComponentInChildren<WeaponController>().Level}, nextLevel : {weapon.Value}");
+
         }
     }
 }

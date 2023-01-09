@@ -11,10 +11,11 @@ public class LightningController : WeaponController
     bool _isAttack = false;
     private GameObject _playerUI = null;
     Image _image_skill;
-    public override int _weaponType { get { return (int)Define.Weapons.lightning; } }
+    public override int _weaponType { get { return (int)Define.Weapons.Lightning; } }
 
-    void Awake()
+    protected override void SetWeaponStat()
     {
+        base.SetWeaponStat();
         _playerUI = GameObject.FindWithTag("PlayerUI");
         if (object.ReferenceEquals(_playerUI, null))
         {
@@ -23,7 +24,6 @@ public class LightningController : WeaponController
         }
 
         _image_skill = Util.FindChild<Image>(_playerUI, "CursorCoolTimeImg");
-        
     }
 
     private void OnEnable()

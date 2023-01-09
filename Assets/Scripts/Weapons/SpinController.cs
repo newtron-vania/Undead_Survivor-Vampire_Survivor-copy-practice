@@ -8,7 +8,7 @@ public class SpinController : WeaponController
     private float _circleR = 4;
     private float _deg = 0;
 
-    public override int _weaponType { get { return (int)Define.Weapons.spin; } }
+    public override int _weaponType { get { return (int)Define.Weapons.Spin; } }
     void FixedUpdate()
     {
         _deg += Time.deltaTime * _movSpeed;
@@ -37,7 +37,7 @@ public class SpinController : WeaponController
         spin.force = _force;
     }
 
-    protected virtual void SetWeaponStat()
+    protected override void SetWeaponStat()
     {
         base.SetWeaponStat();
         while(_spinWeapons.Count > _countPerCreate)

@@ -9,7 +9,7 @@ public class KnifeController : WeaponController
     float _termKnifeThrow = 0.1f;
     bool _isThrowing = false;
 
-    public override int _weaponType { get { return (int)Define.Weapons.knife; } }
+    public override int _weaponType { get { return (int)Define.Weapons.Knife; } }
 
     void Update()
     {

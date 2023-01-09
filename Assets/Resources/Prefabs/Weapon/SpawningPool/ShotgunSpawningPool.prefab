@@ -130,9 +130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 3
-  _damage: 1
+  _damage: 30
   _movSpeed: 15
-  _force: 1000
+  _force: 3
   _cooldown: 1
   _size: 1
   _penetrate: 1

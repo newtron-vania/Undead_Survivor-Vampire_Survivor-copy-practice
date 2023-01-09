@@ -16,9 +16,14 @@ public abstract class WeaponController : MonoBehaviour
     int _level = 1;
     public int Level 
     { 
-        get { return _level; } 
+        get 
+        {
+            Debug.Log($"Get level : {_level}");
+            return _level; 
+        } 
         set 
         {
+            Debug.Log($"Set level : {_level}");
             _level = value;
             SetWeaponStat();
         } 
@@ -40,9 +45,10 @@ public abstract class WeaponController : MonoBehaviour
         _playerStat = _player.GetComponent<PlayerStat>();
         Debug.Log($"playerStat - {_playerStat}");
         _weaponData = Managers.Data.WeaponData;
-        Debug.Log($"WeaponData loaded!");
+        Debug.Log($"{gameObject.name} WeaponData loaded!");
         _anime = transform.GetComponent<Animator>();
         _weaponStat = MakeLevelDataDict(_weaponType);
+        Debug.Log($"{gameObject.name} WeaponLevelData");
 
     }
 
@@ -53,7 +59,8 @@ public abstract class WeaponController : MonoBehaviour
 
     protected virtual void SetWeaponStat()
     {
-        if(_level > 5)
+        Debug.Log($"{gameObject.name} stat Setting Start");
+        if (_level > 5)
             _level = 5;
 
         _damage = _weaponStat[_level].damage * _playerStat.Damage;
@@ -63,6 +70,7 @@ public abstract class WeaponController : MonoBehaviour
         _size = _weaponStat[_level].size;
         _penetrate = _weaponStat[_level].penetrate;
         _countPerCreate = _weaponStat[_level].countPerCreate;
+        Debug.Log($"{gameObject.name} stat Setting over!");
     }
 
     protected Dictionary<int, Data.WeaponLevelData> MakeLevelDataDict(int weaponID)
