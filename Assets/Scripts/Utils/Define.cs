@@ -12,6 +12,16 @@ public class Define
         Weapon
     }
 
+    public enum Weapons
+    {
+        knife = 1,
+        fireball = 2,
+        spin = 3,
+        poison = 4,
+        lightning = 5,
+        shotgun = 6
+    }
+
     public enum PopupUIGroup
     {
         Unknown,

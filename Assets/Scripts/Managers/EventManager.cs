@@ -13,60 +13,47 @@ public class EventManager
         Defense,
     }
 
-    enum PlayerWeapons
+
+    public List<string[]> SetRandomItem(PlayerStat player, int Maxcount)
     {
-        Knife,
-        fireball,
-        spin,
-        poison,
-        lightning,
-        shotgun
-    }
-    public List<int> SetRandomItem(int Maxcount)
-    {
-        List<int> randomItem = new List<int>();
         int i = 0;
+        List<string[]> PoolList = new List<string[]>();
         while(i < Maxcount)
         {
-            int rd = Random.Range(1, 2);
-            randomItem.Add(rd);
+            string[] selected = new string[2];
+            int rd = Random.Range(1, 3);
+            if (rd == 1)
+            {
+                selected[0] = "1";
+                selected[1] = SetRandomStat(player);
+            }
+
+            else
+            {
+                selected[0] = "2";
+                selected[1] = SetRandomWeapon(player);
+            }
+
+            if (PoolList.Contains(selected))
+                continue;
+            PoolList.Add(selected);
             i++;
         }
-        return randomItem;
+        return PoolList;
     }
 
-    public void SetRandomStat(PlayerStat player)
+    public string SetRandomStat(PlayerStat player)
     {
-        int _statNum = Random.Range(0, 3);
+        int _statNum = Random.Range(0, System.Enum.GetValues(typeof(PlayerStats)).Length);
         PlayerStats playerStats = (PlayerStats)_statNum;
-        switch (playerStats)
-        {
-            case PlayerStats.Damage:
-                player.Damage += 1;
-                break;
-            case PlayerStats.Defense:
-                player.Defense += 1;
-                break;
-            case PlayerStats.MaxHP:
-                player.MaxHP += 10;
-                break;
-            case PlayerStats.MoveSpeed:
-                player.MoveSpeed += 1;
-                break;
-        }
+        return playerStats.ToString();
     }
 
-    public void SetRandomWeapon(PlayerStat player)
+    public string SetRandomWeapon(PlayerStat player)
     {
-        int _weaponNum = Random.Range(0, 5);
-        PlayerWeapons playerWeapon = (PlayerWeapons)_weaponNum;
-        int value = 0;
-        if (player.WeaponDict.TryGetValue((int)playerWeapon, out value))
-        {
-            player.WeaponDict[(int)playerWeapon] += 1;
-            return;
-        }
-        player.WeaponDict.Add((int)playerWeapon, 1);
+        int weaponNum = Random.Range(1, System.Enum.GetValues(typeof(Define.Weapons)).Length+1);
+        Define.Weapons playerWeapon = (Define.Weapons)weaponNum;
+        return playerWeapon.ToString();
 
     }
 
@@ -77,9 +64,43 @@ public class EventManager
         Managers.GamePause();
     }
 
-    public void LevelUpOverEvent()
+    public void LevelUpOverEvent(int itemType, string itemName)
     {
-        Managers.Game.getPlayer().GetComponent<PlayerStat>();
+        //PlayerStatorWeaponUp
+        PlayerStat player = Managers.Game.getPlayer().GetComponent<PlayerStat>();
+        if (itemType == 1)
+        {
+            switch (itemName)
+            {
+                case "MaxHP":
+                    player.MaxHP += 10;
+                    player.HP = player.MaxHP;
+                    Debug.Log($"HP up! {player.MaxHP}");
+                    break;
+                case "MoveSpeed":
+                    player.MoveSpeed += 1;
+                    Debug.Log($"MoveSpeed up! {player.MoveSpeed}");
+                    break;
+                case "Damage":
+                    player.Damage += 1;
+                    Debug.Log($"Damage up! {player.Damage}");
+                    break;
+                case "Defense":
+                    player.Defense += 1;
+                    Debug.Log($"Defense up! {player.Defense}");
+                    break;
+            }
+            player.AddOrSetWeaponDict(Define.Weapons.shotgun, 0);
+        }
+            
+        else
+        {
+            Define.Weapons weaponType = (Define.Weapons)System.Enum.Parse(typeof(Define.Weapons), itemName);
+            player.AddOrSetWeaponDict(weaponType, 1);
+            Debug.Log($"weapon up! {player.GetWeaponDict()[weaponType]}");
+        }
+            
+
         Managers.UI.ClosePopupUI(Define.PopupUIGroup.UI_LevelUp);
         Managers.GamePlay();
 

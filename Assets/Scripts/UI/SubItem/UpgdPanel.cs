@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
+using System;
 
 public class UpgdPanel : UI_Base
 {
+    int itemType;
+    string itemName;
     enum Texts
     {
         UpgdTitleText,
@@ -16,26 +19,32 @@ public class UpgdPanel : UI_Base
     enum Images
     {
         UpgdImg,
-        UpgdDescPanel
+        UpgdDescPanel,
     }
     public override void Init()
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Image>(typeof(Images));
 
-        Get<Image>((int)Images.UpgdDescPanel).gameObject.AddUIEvent(OnStatOrWeaponUp);
+        gameObject.AddUIEvent(OnStatOrWeaponUp);
     }
 
     void OnStatOrWeaponUp(PointerEventData data)
     {
-        TextMeshProUGUI title =  Get<TextMeshProUGUI>((int)Texts.UpgdTitleText);
+        string title =  Get<TextMeshProUGUI>((int)Texts.UpgdTitleText).text;
         Debug.Log($"{title} select!");
-        Managers.Event.LevelUpOverEvent();
+        Managers.Event.LevelUpOverEvent(itemType, itemName);
     }
 
     public void SetInfo(string title, string desc)
     {
         Get<TextMeshProUGUI>((int)Texts.UpgdTitleText).text = title;
         Get<TextMeshProUGUI>((int)Texts.UpgdDescText).text = desc;
+    }
+
+    internal void SetData(string[] data)
+    {
+        itemType = Int32.Parse(data[0]);
+        itemName = data[1];
     }
 }
