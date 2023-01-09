@@ -25,16 +25,24 @@ public class EventManager
             if (rd == 1)
             {
                 selected[0] = "1";
-                selected[1] = SetRandomStat(player);
+                selected[1] = SetRandomStat();
             }
 
             else
             {
                 selected[0] = "2";
-                selected[1] = SetRandomWeapon(player);
+                selected[1] = SetRandomWeapon();
             }
-
-            if (PoolList.Contains(selected))
+            bool isContains = false;
+            foreach (string[] type in PoolList)
+            {
+                if(selected[1] == type[1])
+                {
+                    isContains = true;
+                    break;
+                }
+            }
+            if (isContains)
                 continue;
             PoolList.Add(selected);
             i++;
@@ -42,22 +50,27 @@ public class EventManager
         return PoolList;
     }
 
-    public string SetRandomStat(PlayerStat player)
+    public string SetRandomStat()
     {
         int _statNum = Random.Range(0, System.Enum.GetValues(typeof(PlayerStats)).Length);
         PlayerStats playerStats = (PlayerStats)_statNum;
         return playerStats.ToString();
     }
 
-    public string SetRandomWeapon(PlayerStat player)
+    public string SetRandomWeapon()
     {
         int weaponNum = Random.Range(1, System.Enum.GetValues(typeof(Define.Weapons)).Length+1);
         Define.Weapons playerWeapon = (Define.Weapons)weaponNum;
         return playerWeapon.ToString();
-
     }
 
-    bool eventOver = false;
+    public Define.Weapons SetRandomWeaponInItem()
+    {
+        int weaponNum = Random.Range(1, System.Enum.GetValues(typeof(Define.Weapons)).Length + 1);
+        Define.Weapons playerWeapon = (Define.Weapons)weaponNum;
+        return playerWeapon;
+    }
+
     public void LevelUpEvent()
     {
         Managers.UI.ShowPopupUI<UI_LevelUp>();
@@ -104,6 +117,23 @@ public class EventManager
         Managers.UI.ClosePopupUI(Define.PopupUIGroup.UI_LevelUp);
         Managers.GamePlay();
 
+    }
+
+    public List<Define.Weapons> SetRandomWeaponfromItemBox()
+    {
+        int maxCount = 3;
+        int rd = Random.Range(1, maxCount+1);
+        int i = 0;
+        List<Define.Weapons> weaponList = new List<Define.Weapons>();
+        while(i < rd)
+        {
+            Define.Weapons wp = SetRandomWeaponInItem();
+            if (weaponList.Contains(wp))
+                continue;
+            i++;
+        }
+
+        return weaponList;
     }
 
 

@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: -4351291833357002602}
   - component: {fileID: 156914533638325169}
   - component: {fileID: 3235724652027352453}
-  - component: {fileID: 8679039293209295518}
   m_Layer: 0
   m_Name: Knife
   m_TagString: Untagged
@@ -29,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707537152603859442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.8466969, y: 4.686926, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -77,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 154122315, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3220626026c7f3044b87ff9017057190, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,6 +102,7 @@ MonoBehaviour:
   dir: {x: 0, y: 0, z: 0}
   damage: 10
   speed: 5
+  force: 0
   lifeTime: 3
   createTime: 0
 --- !u!61 &156914533638325169
@@ -118,18 +118,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 7, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.33333334, y: 0.33333334}
+    oldSize: {x: 57.13695, y: 38.38889}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.5}
+  m_Size: {x: 22, y: 10}
   m_EdgeRadius: 0
 --- !u!114 &3235724652027352453
 MonoBehaviour:
@@ -144,23 +144,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isUsing: 0
---- !u!95 &8679039293209295518
-Animator:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 707537152603859442}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2c18c250f92acf3449bdf66fcae6c629, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0

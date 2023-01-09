@@ -26,7 +26,7 @@ public class Define
     {
         Unknown,
         UI_GameMenu,
-        UI_ItemBox,
+        UI_ItemBoxOpen,
         UI_LevelUp
     }
 

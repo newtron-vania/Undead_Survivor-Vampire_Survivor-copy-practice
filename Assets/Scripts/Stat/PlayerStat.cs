@@ -78,9 +78,8 @@ public class PlayerStat : Stat
         Managers.Event.LevelUpEvent();
 
         Level += 1;
-        Exp = 0;
-        //Exp -= MaxExp;
-        //MaxExp *= 2;
+        Exp -= MaxExp;
+        MaxExp *= 2;
     }
 
     public void SetWeaponLevel()
