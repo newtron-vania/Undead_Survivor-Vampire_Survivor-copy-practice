@@ -25,8 +25,9 @@ public class ShotgunController : WeaponController
         }
     }
 
-    protected void SetWeaponStat()
+    protected override void SetWeaponStat()
     {
+        base.SetWeaponStat();
         float bulletAngle = _bulletTargetRange / (_countPerCreate+1);
         float angle = SetAngleFromHandToCursor();
         float startBulletAngle = angle - (_bulletTargetRange/2);

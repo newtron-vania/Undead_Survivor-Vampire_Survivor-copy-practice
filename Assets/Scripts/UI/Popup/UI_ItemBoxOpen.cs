@@ -3,17 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-[System.Serializable]
-public class WeaponSprite : SerializableDictionary<Define.Weapons, Sprite> { }
+using UnityEngine.EventSystems;
+
+
 public class UI_ItemBoxOpen : UI_Popup
 {
     [SerializeField]
-    WeaponSprite _weaponUIImage;
-    [SerializeField]
-    List<GameObject> weaponUILocation;  
+    List<Transform> weaponUILocation;
+    List<Define.Weapons> weaponList;
 
     public override Define.PopupUIGroup _popupID { get { return Define.PopupUIGroup.UI_ItemBoxOpen; } }
 
+    enum Buttons
+    {
+        ItemBoxButton
+    }
     enum Texts
     {
         ItemBoxText
@@ -21,22 +25,39 @@ public class UI_ItemBoxOpen : UI_Popup
     enum Images
     {
         ItemBoxPanel,
-        ItemBoxImage
+        ItemBoxImage,
+        BackgroundImg
     }
 
     public override void Init()
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Image>(typeof(Images));
+        Bind<Button>(typeof(Buttons));
 
-        //Todo
-        //random count and Event.ChooseRandomWeapon
-        List<Define.Weapons> weaponList = Managers.Event.SetRandomWeaponfromItemBox();
-
+        GetImage((int)Images.BackgroundImg).gameObject.AddUIEvent(OnOpenChest);
     }
 
-    void Update()
+    void OnOpenChest(PointerEventData data)
     {
-        
+        weaponList = Managers.Event.SetRandomWeaponfromItemBox();
+
+        for (int i = 0; i < weaponList.Count; i++)
+        {
+            GameObject go = Managers.Resource.Instantiate("UI/SubItem/WeaponInven", parent: weaponUILocation[i].transform);
+            Util.FindChild<Image>(go, "WeaponImg", true).sprite = Managers.Resource.Load<Sprite>($"Prefabs/SpriteIcon/{weaponList[i].ToString()}");
+        }
+        Get<Image>((int)Images.ItemBoxImage).GetComponent<Animator>().Play("Open");
+
+        Button btn = GetButton((int)Buttons.ItemBoxButton);
+        btn.gameObject.SetActive(true);
+        btn.gameObject.AddUIEvent(Close);
+    }
+
+    void Close(PointerEventData data)
+    {
+        Managers.Event.SetLevelUpWeaponfromItemBox(weaponList);
+        Managers.GamePlay();
+        Managers.UI.CloseAllGroupPopupUI(_popupID);
     }
 }

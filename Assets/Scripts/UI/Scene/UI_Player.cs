@@ -13,7 +13,7 @@ public class UI_Player : UI_Scene
 
     enum Images
     {
-        WeaponListImage,
+        WeaponImgList,
         CursorCoolTimeImg
     }
 
@@ -30,6 +30,24 @@ public class UI_Player : UI_Scene
             (int)Mathf.Floor(Managers.GameTime % 60));
     }
 
+    public void SetWeaponImage(PlayerStat player)
+    {
+        GameObject weaponImgList = GetImage((int)Images.WeaponImgList).gameObject;
+
+        foreach(Transform child in weaponImgList.transform)
+        {
+            Managers.Resource.Destroy(child.gameObject);
+        }
+
+        foreach(KeyValuePair<Define.Weapons, int> weapon in player.GetWeaponDict())
+        {
+            Image weaponImg =  Managers.Resource.Instantiate("UI/SubItem/WeaponInven", weaponImgList.transform).GetOrAddComponent<Image>();
+            Debug.Log($"WeaponImg get! {weaponImg.sprite.name} WeaponImg {weapon.Key.ToString()} is setting!");
+            weaponImg.gameObject.GetOrAddComponent<WeaponListImage>().SetInfo(weapon.Key.ToString());
+            
+        }
+
+    }
     public void ActiveCheckCursorImage()
     {
         GameObject cursorCoolTimeImgGo = Get<Image>((int)Images.CursorCoolTimeImg).gameObject;

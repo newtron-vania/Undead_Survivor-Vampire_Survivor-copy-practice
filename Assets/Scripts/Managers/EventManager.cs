@@ -116,9 +116,13 @@ public class EventManager
 
         Managers.UI.ClosePopupUI(Define.PopupUIGroup.UI_LevelUp);
         Managers.GamePlay();
-
     }
 
+    public void ShowItemBoxUI()
+    {
+        Managers.UI.ShowPopupUI<UI_ItemBoxOpen>();
+        Managers.GamePause();
+    }
     public List<Define.Weapons> SetRandomWeaponfromItemBox()
     {
         int maxCount = 3;
@@ -130,13 +134,23 @@ public class EventManager
             Define.Weapons wp = SetRandomWeaponInItem();
             if (weaponList.Contains(wp))
                 continue;
+            weaponList.Add(wp);
             i++;
         }
 
         return weaponList;
     }
 
-
+    public void SetLevelUpWeaponfromItemBox(List<Define.Weapons> weaponList)
+    {
+        PlayerStat player = Managers.Game.getPlayer().GetComponent<PlayerStat>();
+        foreach(Define.Weapons weaponType in weaponList)
+        {
+            player.AddOrSetWeaponDict(weaponType, 1);
+            Debug.Log($"weapon up! {player.GetWeaponDict()[weaponType]}");
+        }
+        
+    }
 
 
 }

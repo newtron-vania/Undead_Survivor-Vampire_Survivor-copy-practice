@@ -18,6 +18,7 @@ public class UpgdPanel : UI_Base
 
     enum Images
     {
+        UpgdInven,
         UpgdImg,
         UpgdDescPanel,
     }
@@ -38,6 +39,7 @@ public class UpgdPanel : UI_Base
 
     public void SetInfo(string title, string desc)
     {
+        GetImage((int)Images.UpgdImg).sprite = Managers.Resource.Load<Sprite>($"Prefabs/SpriteIcon/{title}");
         Get<TextMeshProUGUI>((int)Texts.UpgdTitleText).text = title;
         Get<TextMeshProUGUI>((int)Texts.UpgdDescText).text = desc;
     }

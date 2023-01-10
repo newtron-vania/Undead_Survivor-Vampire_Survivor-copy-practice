@@ -78,7 +78,7 @@ public class PlayerStat : Stat
         Managers.Event.LevelUpEvent();
 
         Level += 1;
-        Exp -= MaxExp;
+        Exp = 0;
         MaxExp *= 2;
     }
 
@@ -98,12 +98,13 @@ public class PlayerStat : Stat
             }
             if (weapon.Value == 0)
             {
+                GetWeaponDict().Remove(weapon.Key);
                 Managers.Resource.Destroy(weaponPool);
             }
 
-            Debug.Log($"weapon - : {weaponName}, currentLevel : {weaponPool.GetComponentInChildren<WeaponController>().Level}, nextLevel : {weapon.Value}");
             weaponPool.GetComponentInChildren<WeaponController>().Level = weapon.Value;
-            Debug.Log($"weapon - : {weaponName}, currentLevel : {weaponPool.GetComponentInChildren<WeaponController>().Level}, nextLevel : {weapon.Value}");
+            Managers.UI.getSceneUI().GetComponent<UI_Player>().SetWeaponImage(Managers.Game.getPlayer().GetComponent<PlayerStat>());
+            Debug.Log("WeaponList Updated!");
 
         }
     }

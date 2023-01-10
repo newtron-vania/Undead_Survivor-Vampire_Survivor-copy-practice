@@ -210,6 +210,7 @@ MonoBehaviour:
   _damage: 0
   _movSpeed: 0
   _penetrate: 0
+  _force: 0
 --- !u!70 &9049104256659918081
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

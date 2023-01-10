@@ -75,7 +75,12 @@ public class UIManager
         go.transform.SetParent(Root().transform);
         return sceneUI;
     }
-    
+    public UI_Scene getSceneUI()
+    {
+        Debug.Log($"sceneUI - {_sceneUI.name}");
+        return _sceneUI;
+    }
+
     public T ShowPopupUI<T>(string name = null) where T : UI_Popup
     {
         if (string.IsNullOrEmpty(name))
