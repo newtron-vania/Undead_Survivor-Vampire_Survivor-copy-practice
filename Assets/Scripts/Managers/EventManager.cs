@@ -132,7 +132,7 @@ public class EventManager
         while(i < rd)
         {
             Define.Weapons wp = SetRandomWeaponInItem();
-            if (weaponList.Contains(wp))
+            if (weaponList.Contains(wp) || wp == Define.Weapons.Fireball)
                 continue;
             weaponList.Add(wp);
             i++;

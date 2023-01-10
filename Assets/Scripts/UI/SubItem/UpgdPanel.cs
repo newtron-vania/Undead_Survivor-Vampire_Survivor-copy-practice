@@ -20,6 +20,7 @@ public class UpgdPanel : UI_Base
     {
         UpgdInven,
         UpgdImg,
+        UpgdPanel,
         UpgdDescPanel,
     }
     public override void Init()
@@ -27,7 +28,7 @@ public class UpgdPanel : UI_Base
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Image>(typeof(Images));
 
-        gameObject.AddUIEvent(OnStatOrWeaponUp);
+        GetImage((int)Images.UpgdPanel).gameObject.AddUIEvent(OnStatOrWeaponUp);
     }
 
     void OnStatOrWeaponUp(PointerEventData data)
