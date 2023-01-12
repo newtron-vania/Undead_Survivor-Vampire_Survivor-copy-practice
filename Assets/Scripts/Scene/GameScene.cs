@@ -34,8 +34,14 @@ public class GameScene : MonoBehaviour
             else
             {
                 Managers.UI.ClosePopupUI(Define.PopupUIGroup.UI_GameMenu);
-                Managers.GamePlay();
-                Debug.Log($"Game Play! - gameStop : {Managers.gameStop}");
+                if (Managers.gameStop)
+                {
+                    Debug.Log($"Game Pause! - gameStop : {Managers.gameStop}");
+                }
+                else
+                {
+                    Debug.Log($"Game Play! - gameStop : {Managers.gameStop}");
+                }
             }
         }
     }

@@ -18,8 +18,13 @@ public class Define
         Fireball = 2,
         Spin = 3,
         Poison = 4,
-        Lightning = 5,
-        Shotgun = 6
+        Lightning = 101,
+        Shotgun = 102
+    }
+    public enum PlayerStartWeapon
+    {
+        Lightning = 1,
+        Shotgun = 2
     }
 
     public enum PopupUIGroup

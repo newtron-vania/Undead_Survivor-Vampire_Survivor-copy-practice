@@ -5,12 +5,14 @@ using UnityEngine;
 
 public class EventManager
 {
-    enum PlayerStats
+    public enum PlayerStats
     {
         MaxHP,
         MoveSpeed,
         Damage,
         Defense,
+        Cooldown,
+        Amount
     }
 
 
@@ -21,17 +23,36 @@ public class EventManager
         while(i < Maxcount)
         {
             string[] selected = new string[2];
-            int rd = Random.Range(1, 3);
+            float random = Random.Range(0, 100);
+            int rd = 0;
+
+            if (random < 10)
+                rd = 0;
+            else if (random < 40)
+                rd = 1;
+            else
+                rd = 2;
+            if (rd== 0)
+            {
+                if (player.GetWeaponDict()[player.playertStartWeapon] >= 5)
+                    continue;
+                selected[0] = "0";
+                selected[1] = player.playertStartWeapon.ToString();
+            }
             if (rd == 1)
             {
                 selected[0] = "1";
-                selected[1] = SetRandomStat();
+                PlayerStats stat = SetRandomStat();
+                selected[1] = stat.ToString();
             }
 
             else
             {
                 selected[0] = "2";
-                selected[1] = SetRandomWeapon();
+                Define.Weapons weapon = SetRandomWeapon();
+                if (player.GetWeaponDict().GetValueOrDefault<Define.Weapons, int>(weapon) >= 5)
+                    continue;
+                selected[1] = weapon.ToString();
             }
             bool isContains = false;
             foreach (string[] type in PoolList)
@@ -50,23 +71,24 @@ public class EventManager
         return PoolList;
     }
 
-    public string SetRandomStat()
+    public PlayerStats SetRandomStat()
     {
         int _statNum = Random.Range(0, System.Enum.GetValues(typeof(PlayerStats)).Length);
         PlayerStats playerStats = (PlayerStats)_statNum;
-        return playerStats.ToString();
+        return playerStats;
     }
 
-    public string SetRandomWeapon()
+    public Define.Weapons SetRandomWeapon()
     {
-        int weaponNum = Random.Range(1, System.Enum.GetValues(typeof(Define.Weapons)).Length+1);
+        int weaponNum = Random.Range(1, System.Enum.GetValues(typeof(Define.Weapons)).Length+1 - System.Enum.GetValues(typeof(Define.PlayerStartWeapon)).Length);
         Define.Weapons playerWeapon = (Define.Weapons)weaponNum;
-        return playerWeapon.ToString();
+
+        return playerWeapon;
     }
 
     public Define.Weapons SetRandomWeaponInItem()
     {
-        int weaponNum = Random.Range(1, System.Enum.GetValues(typeof(Define.Weapons)).Length + 1);
+        int weaponNum = Random.Range(1, System.Enum.GetValues(typeof(Define.Weapons)).Length - System.Enum.GetValues(typeof(Define.PlayerStartWeapon)).Length);
         Define.Weapons playerWeapon = (Define.Weapons)weaponNum;
         return playerWeapon;
     }
@@ -115,7 +137,6 @@ public class EventManager
             
 
         Managers.UI.ClosePopupUI(Define.PopupUIGroup.UI_LevelUp);
-        Managers.GamePlay();
     }
 
     public void ShowItemBoxUI()

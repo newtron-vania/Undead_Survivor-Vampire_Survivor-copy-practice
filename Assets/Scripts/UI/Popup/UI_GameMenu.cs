@@ -9,6 +9,7 @@ public class UI_GameMenu : UI_Popup
 {
     enum Buttons
     {
+        PlayerStatButton,
         BackToGameButton,
         BackToMainButton
     }
@@ -51,17 +52,22 @@ public class UI_GameMenu : UI_Popup
         GetImage((int)Images.BackgroundImage).gameObject.AddUIEvent(OnBackToGame);
         GetButton((int)Buttons.BackToGameButton).gameObject.AddUIEvent(OnBackToGame);
         GetButton((int)Buttons.BackToMainButton).gameObject.AddUIEvent(OnBackToMain);
+        GetButton((int)Buttons.PlayerStatButton).gameObject.AddUIEvent(OnShowPlayerStatUI);
     }
 
 
     public void OnBackToGame(PointerEventData data)
     {
         Managers.UI.CloseAllGroupPopupUI(Define.PopupUIGroup.UI_GameMenu);
-        Managers.GamePlay();
     }
     public void OnBackToMain(PointerEventData data)
     {
         Managers.Scene.LoadScene(Define.SceneType.MainMenuScene);
         Managers.GamePlay();
+    }
+
+    void OnShowPlayerStatUI(PointerEventData data)
+    {
+        Managers.UI.ShowPopupUI<UI_PlayerStat>();
     }
 }

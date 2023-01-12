@@ -65,10 +65,11 @@ public class EnemyController : BaseController
     
     public override void OnDamaged(int damage, float force = 0)
     {
-        _stat.HP -= Mathf.Max(damage - _stat.Defense, 1);
+        int calculateDamage = Mathf.Max(damage - _stat.Defense, 1);
+        _stat.HP -= calculateDamage;
         Debug.Log($"knockBack : {force * 500f}");
         _rigid.AddForce((_rigid.position - _target.position).normalized * (force * 500f));
-        FloatDamageText(damage);
+        FloatDamageText(calculateDamage);
         OnDead();
     }
 

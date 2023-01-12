@@ -223,7 +223,7 @@
       ]
     },
     {
-      "weaponID": "5",
+      "weaponID": "101",
       "weaponName": "Lightning",
       "weaponLevelData": [
         {
@@ -279,7 +279,7 @@
       ]
     },
     {
-      "weaponID": "6",
+      "weaponID": "102",
       "weaponName": "Shotgun",
       "weaponLevelData": [
         {

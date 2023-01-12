@@ -6,7 +6,7 @@ public class UIManager
 {
     private int _order = 10;
 
-    private Dictionary<int, Stack<UI_Popup>> _popupStackDict = new Dictionary<int, Stack<UI_Popup>>();
+    private Dictionary<Define.PopupUIGroup, Stack<UI_Popup>> _popupStackDict = new Dictionary<Define.PopupUIGroup, Stack<UI_Popup>>();
     private UI_Scene _sceneUI = null;
 
     public GameObject Root()
@@ -93,10 +93,10 @@ public class UIManager
         T popup =  go.GetOrAddComponent<T>();
         Define.PopupUIGroup popupType = popup._popupID;
 
-        if (!_popupStackDict.ContainsKey((int)popupType))
-            _popupStackDict.Add((int)popupType, new Stack<UI_Popup>());
+        if (!_popupStackDict.ContainsKey(popupType))
+            _popupStackDict.Add(popupType, new Stack<UI_Popup>());
             
-        _popupStackDict[(int)popupType].Push(popup);
+        _popupStackDict[popupType].Push(popup);
         
         
         return popup as T;
@@ -104,20 +104,22 @@ public class UIManager
 
     public void ClosePopupUI(Define.PopupUIGroup popupType)
     {
-        if (_popupStackDict.TryGetValue((int)popupType, out Stack<UI_Popup> popupStack) == false
-            || _popupStackDict[(int)popupType].Count == 0)
+        if (_popupStackDict.TryGetValue(popupType, out Stack<UI_Popup> popupStack) == false
+            || _popupStackDict[popupType].Count == 0)
             return;
 
-        UI_Popup popup = _popupStackDict[(int)popupType].Pop();
+        UI_Popup popup = _popupStackDict[popupType].Pop();
         Managers.Resource.Destroy(popup.gameObject);
         popup = null;
+
+        CheckPopupUICountAndRemove(popupType);
     }
 
     public void ClosePopupUI(UI_Popup popup)
     {
         Define.PopupUIGroup popupType = popup._popupID;
-        if (_popupStackDict.TryGetValue((int)popupType, out Stack<UI_Popup> popupStack) == false
-            || _popupStackDict[(int)popupType].Count == 0)
+        if (_popupStackDict.TryGetValue(popupType, out Stack<UI_Popup> popupStack) == false
+            || _popupStackDict[popupType].Count == 0)
             return;
 
         if (popup != popupStack.Peek())
@@ -130,9 +132,9 @@ public class UIManager
     }
     public void CloseAllPopupUI()
     {
-        foreach (KeyValuePair<int,Stack<UI_Popup>> kv in _popupStackDict)
+        foreach (KeyValuePair<Define.PopupUIGroup, Stack<UI_Popup>> kv in _popupStackDict)
         {
-            int popupType = kv.Key;
+            Define.PopupUIGroup popupType = kv.Key;
             Stack<UI_Popup> popupStack = kv.Value;
             while(popupStack.Count != 0)
             {
@@ -140,13 +142,14 @@ public class UIManager
                 Managers.Resource.Destroy(popup.gameObject);
                 popup = null;
             }
+            CheckPopupUICountAndRemove(popupType);
         }
     }
 
     public void CloseAllGroupPopupUI(Define.PopupUIGroup popupType)
     {
-        if (_popupStackDict.TryGetValue((int)popupType, out Stack<UI_Popup> popupStack) == false
-            || _popupStackDict[(int)popupType].Count == 0)
+        if (_popupStackDict.TryGetValue(popupType, out Stack<UI_Popup> popupStack) == false
+            || _popupStackDict[popupType].Count == 0)
             return;
 
         while (popupStack.Count != 0)
@@ -155,8 +158,27 @@ public class UIManager
             Managers.Resource.Destroy(popup.gameObject);
             popup = null;
         }
+        CheckPopupUICountAndRemove(popupType);
+    }
+
+
+    void CheckPopupUICountAndRemove(Define.PopupUIGroup popupType)
+    {
+        if (_popupStackDict.GetValueOrDefault<Define.PopupUIGroup, Stack<UI_Popup>>(popupType).Count == 0)
+            _popupStackDict.Remove(popupType);
+        CheckPopupUICountInScene();
     }
     
+    void CheckPopupUICountInScene()
+    {
+
+        Debug.Log($"popupCount : {_popupStackDict.Count}");
+        Debug.Log($"popupList : {_popupStackDict.Keys}");
+        if (_popupStackDict.Count == 0)
+        {
+            Managers.GamePlay();
+        }
+    }
     public void Clear()
     {
         CloseAllPopupUI();

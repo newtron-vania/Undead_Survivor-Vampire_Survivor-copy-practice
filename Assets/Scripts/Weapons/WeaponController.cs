@@ -66,10 +66,10 @@ public abstract class WeaponController : MonoBehaviour
         _damage = _weaponStat[_level].damage * _playerStat.Damage;
         _movSpeed = _weaponStat[_level].movSpeed;
         _force = _weaponStat[_level].force;
-        _cooldown = _weaponStat[_level].cooldown;
+        _cooldown = _weaponStat[_level].cooldown * (100f/(100f +_playerStat.Cooldown));
         _size = _weaponStat[_level].size;
         _penetrate = _weaponStat[_level].penetrate;
-        _countPerCreate = _weaponStat[_level].countPerCreate;
+        _countPerCreate = _weaponStat[_level].countPerCreate + _playerStat.Amount;
         Debug.Log($"{gameObject.name} stat Setting over!");
     }
 

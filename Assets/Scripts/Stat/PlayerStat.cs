@@ -5,19 +5,24 @@ using UnityEngine;
 
 public class PlayerStat : Stat
 {
+
+
     //1 : knife, 2 : firebal, 3: spin, 4: posion 5: lightning 6: shotgun
     //WeaponDict - WeaponID : WeaponLevel
     [SerializeField]
     Dictionary<Define.Weapons, int> _weaponDict = new Dictionary<Define.Weapons, int>();
-
-
+    public Define.Weapons playertStartWeapon;
     public Dictionary<Define.Weapons, int> GetWeaponDict()
     {
         return _weaponDict;
     }
     public void AddOrSetWeaponDict(Define.Weapons key, int value, bool addOrSet = false)
     {
-        if (!_weaponDict.ContainsKey(key))
+        if (_weaponDict.Count == 0)
+        {
+            playertStartWeapon = key;
+        }
+            if (!_weaponDict.ContainsKey(key))
         {
             //key spawn
             _weaponDict.Add(key, 0);
@@ -32,8 +37,9 @@ public class PlayerStat : Stat
     }
 
 
-    private int _exp;
 
+
+    private int _exp;
     public int Exp
     {
         get { return _exp;}
@@ -54,6 +60,13 @@ public class PlayerStat : Stat
         set => _maxExp = value;
     }
 
+    private float _cooldown;
+    private int _amount;
+
+
+    public float Cooldown { get { return _cooldown; } set { _cooldown = value; } }
+    public int Amount { get { return _amount; } set { _amount = value; } } 
+
     void Awake()
     {
         Init();
@@ -67,6 +80,8 @@ public class PlayerStat : Stat
         MoveSpeed = 5.0f;
         Damage = 1;
         Defense = 0;
+        Cooldown = 0f;
+        Amount = 0;
         Exp = 0;
         MaxExp = 10;
         SetWeaponLevel();
@@ -84,7 +99,7 @@ public class PlayerStat : Stat
 
     public void SetWeaponLevel()
     {
-        //Set WeaponSpawingPool 
+        //Set CommonWeaponSpawingPool 
         foreach (KeyValuePair<Define.Weapons, int> weapon in GetWeaponDict())
         {
             string weaponName = weapon.Key.ToString();
@@ -105,7 +120,6 @@ public class PlayerStat : Stat
             weaponPool.GetComponentInChildren<WeaponController>().Level = weapon.Value;
             Managers.UI.getSceneUI().GetComponent<UI_Player>().SetWeaponImage(Managers.Game.getPlayer().GetComponent<PlayerStat>());
             Debug.Log("WeaponList Updated!");
-
         }
     }
 }

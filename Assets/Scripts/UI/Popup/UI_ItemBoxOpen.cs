@@ -57,7 +57,6 @@ public class UI_ItemBoxOpen : UI_Popup
     void Close(PointerEventData data)
     {
         Managers.Event.SetLevelUpWeaponfromItemBox(weaponList);
-        Managers.GamePlay();
         Managers.UI.CloseAllGroupPopupUI(_popupID);
     }
 }

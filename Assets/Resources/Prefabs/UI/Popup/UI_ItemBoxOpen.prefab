@@ -688,7 +688,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 10
   m_TargetDisplay: 0
 --- !u!114 &6709194949972360972
 MonoBehaviour:
@@ -742,15 +742,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9367f804cb2dd9449bc6762a20d33948, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponUIImage:
-    m_keys: 010000000200000003000000040000000500000006000000
-    m_values:
-    - {fileID: 21300000, guid: 3220626026c7f3044b87ff9017057190, type: 3}
-    - {fileID: 154122315, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-    - {fileID: 1349035616, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
-    - {fileID: 1328899968, guid: d71a3dc7aa20fad4f9a99fc76a9254ba, type: 3}
-    - {fileID: -1142063617, guid: 47b98e6008aa75e4d938f7c5ca673195, type: 3}
-    - {fileID: 1772703093, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   weaponUILocation:
   - {fileID: 1021565056}
   - {fileID: 583933123}
