@@ -32,7 +32,8 @@ public class Define
         Unknown,
         UI_GameMenu,
         UI_ItemBoxOpen,
-        UI_LevelUp
+        UI_LevelUp,
+        UI_CharacterSelect
     }
 
     public enum SceneUI

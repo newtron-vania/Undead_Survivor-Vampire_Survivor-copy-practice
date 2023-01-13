@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager
 {
@@ -66,6 +67,9 @@ public class UIManager
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
+        if (_sceneUI.name == name)
+            return _sceneUI as T;
+
         GameObject go = Managers.Resource.Instantiate($"UI/Scene/{name}");
 
         T sceneUI = Util.GetOrAddComponent<T>(go);
@@ -97,7 +101,7 @@ public class UIManager
             _popupStackDict.Add(popupType, new Stack<UI_Popup>());
             
         _popupStackDict[popupType].Push(popup);
-        
+
         
         return popup as T;
     }
@@ -178,6 +182,11 @@ public class UIManager
         {
             Managers.GamePlay();
         }
+    }
+
+    public int GetPopupUICount()
+    {
+        return _popupStackDict.Count;
     }
     public void Clear()
     {

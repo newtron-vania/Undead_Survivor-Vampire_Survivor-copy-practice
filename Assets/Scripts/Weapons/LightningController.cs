@@ -16,24 +16,19 @@ public class LightningController : WeaponController
     protected override void SetWeaponStat()
     {
         base.SetWeaponStat();
-        _playerUI = GameObject.FindWithTag("PlayerUI");
-        if (object.ReferenceEquals(_playerUI, null))
-        {
-            Managers.Resource.Destroy(gameObject);
-            return;
-        }
-
-        _image_skill = Util.FindChild<Image>(_playerUI, "CursorCoolTimeImg");
     }
 
     private void OnEnable()
     {
-        _image_skill.gameObject.SetActive(true);
-    }
+        _playerUI = GameObject.FindWithTag("PlayerUI");
+        if (object.ReferenceEquals(_playerUI, null))
+        {
+            Managers.UI.ShowSceneUI<UI_Player>();
+            return;
+        }
 
-    private void OnDisable()
-    {
-        _image_skill.gameObject.SetActive(false);
+        _image_skill = _playerUI.FindChild<Image>("CursorCoolTimeImg");
+        _image_skill.gameObject.SetActive(true);
     }
 
     void Update()
@@ -60,6 +55,7 @@ public class LightningController : WeaponController
     {
         _image_skill.transform.position = Managers.Game.MousePos;
     }
+
 
     IEnumerator DamageCoolTime()
     {

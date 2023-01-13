@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 public class GameScene : MonoBehaviour
 {
@@ -29,20 +30,22 @@ public class GameScene : MonoBehaviour
             {
                 Managers.UI.ShowPopupUI<UI_GameMenu>("UI_GameMenu");
                 Managers.GamePause();
-                Debug.Log($"Game Pause! - gameStop : {Managers.gameStop}");
             }
             else
             {
                 Managers.UI.ClosePopupUI(Define.PopupUIGroup.UI_GameMenu);
-                if (Managers.gameStop)
-                {
-                    Debug.Log($"Game Pause! - gameStop : {Managers.gameStop}");
-                }
-                else
-                {
-                    Debug.Log($"Game Play! - gameStop : {Managers.gameStop}");
-                }
             }
         }
+    }
+
+    void SetActiveSkillCursorImg()
+    {
+        if (!Managers.Game.getPlayer().GetOrAddComponent<PlayerStat>().GetWeaponDict().TryGetValue(Define.Weapons.Lightning, out int weapon))
+            return;
+        Image cursorCoolTimeImg = playerUI.gameObject.FindChild<Image>("CursorCoolTimeImg");
+        if(Managers.UI.GetPopupUICount() == 0)
+            cursorCoolTimeImg.gameObject.SetActive(true);
+        else
+            cursorCoolTimeImg.gameObject.SetActive(false);
     }
 }
