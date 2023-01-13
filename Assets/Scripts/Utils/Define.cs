@@ -21,6 +21,14 @@ public class Define
         Lightning = 101,
         Shotgun = 102
     }
+    public enum MonsterType
+    {
+        zombie = 1,
+        zombieElite = 2,
+        skeleton = 3,
+        skeletonElite = 4,
+        tombStone = 5
+    }
     public enum PlayerStartWeapon
     {
         Lightning = 1,

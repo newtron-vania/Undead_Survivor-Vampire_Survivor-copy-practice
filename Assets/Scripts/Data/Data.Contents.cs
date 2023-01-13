@@ -34,11 +34,39 @@ namespace Data
 		}
 	}
 
-	#endregion
+    #endregion
 
-	#region Weapon
+    #region Monster
 
 	[Serializable]
+	public class Monster
+    {
+		public int id;
+		public string name;
+		public int maxHp;
+		public int damage;
+		public int defense;
+		public float moveSpeed;
+		public int expMul;
+	}
+
+    public class MonsterData : ILoader<int, Monster>
+    {
+		public List<Monster> monsters = new List<Monster>();
+        public Dictionary<int, Monster> MakeDict()
+        {
+			Dictionary<int, Monster> dict = new Dictionary<int, Monster>();
+			foreach (Monster monster in monsters)
+				dict.Add(monster.id, monster);
+			return dict;
+		}
+    }
+
+
+    #endregion
+    #region Weapon
+
+    [Serializable]
 	public class WeaponData
     {
         public int weaponID;

@@ -6,8 +6,7 @@
       "maxHp": "30",
       "damage": "1",
       "defense": "0",
-      "moveSpeed": "2.0",
-      "expMul": "1"
+      "moveSpeed": "2.0"
     },
     {
       "id": "2",
@@ -15,8 +14,7 @@
       "maxHp": "60",
       "damage": "6",
       "defense": "1",
-      "moveSpeed": "3.0",
-      "expMul": "2"
+      "moveSpeed": "3.0"
     },
     {
       "id": "3",
@@ -24,8 +22,7 @@
       "maxHp": "20",
       "damage": "2",
       "defense": "0",
-      "moveSpeed": "4.0",
-      "expMul": "1"
+      "moveSpeed": "4.0"
     },
     {
       "id": "4",
@@ -33,8 +30,7 @@
       "maxHp": "45",
       "damage": "4",
       "defense": "0",
-      "moveSpeed": "6.0",
-      "expMul": "2"
+      "moveSpeed": "6.0"
     },
     {
       "id": "5",
@@ -42,8 +38,7 @@
       "maxHp": "80",
       "damage": "1",
       "defense": "0",
-      "moveSpeed": "0.5",
-      "expMul": "3"
+      "moveSpeed": "0.5"
     }
   ]
 }

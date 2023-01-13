@@ -8,7 +8,8 @@ public class UI_Player : UI_Scene
 {
     enum Texts
     {
-        GameTime
+        GameTime,
+        LevelText
     }
 
     enum Images
@@ -16,18 +17,35 @@ public class UI_Player : UI_Scene
         WeaponImgList,
         CursorCoolTimeImg
     }
+    enum Sliders
+    {
+        ExpSlider
+    }
 
     public override void Init()
     {
         base.Init();
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Image>(typeof(Images));
+        Bind<Slider>(typeof(Sliders));
     }
 
     public void SetGameTime()
     {
         Get<TextMeshProUGUI>((int)Texts.GameTime).text = string.Format("{0:D2}:{1:D2}", (int)Mathf.Floor(Managers.GameTime / 60),
             (int)Mathf.Floor(Managers.GameTime % 60));
+    }
+
+    void SetExpAndLevel()
+    {
+        PlayerStat player = Managers.Game.getPlayer().GetOrAddComponent<PlayerStat>();
+        double ratio = player.Exp / (double)player.MaxExp;
+        if (ratio < 0)
+            ratio = 0;
+        else if (ratio > 1)
+            ratio = 1;
+        Get<Slider>((int)Sliders.ExpSlider).value = (float)ratio;
+        GetText((int)Texts.LevelText).text = player.Level.ToString();
     }
 
     public void SetWeaponImage(PlayerStat player)

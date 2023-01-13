@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
+    Dictionary<int, Data.Monster> monsterStat = new Dictionary<int, Data.Monster>();
     public Transform[] spawnPoint;
-    public SpawnData[] spawnData;
     private float _timer;
-    int level;
+    float _spawnTime= 0.5f;
     [SerializeField]
     GameObject[] _spawnUnit;
 
@@ -15,9 +15,11 @@ public class Spawner : MonoBehaviour
     int _maxSpawnUnit = 50;
 
     public int enemyCount = 0;
+    int timeLevel = 0;
     public void AddEnemyCount(int value) { enemyCount += value; }
     private void Start()
     {
+        monsterStat = Managers.Data.MonsterData;
         spawnPoint = GetComponentsInChildren<Transform>();
         Managers.Game.OnSpawnEvent -= AddEnemyCount;
         Managers.Game.OnSpawnEvent += AddEnemyCount;
@@ -26,9 +28,9 @@ public class Spawner : MonoBehaviour
     private void Update()
     {
         _timer += Time.deltaTime;
-        if (level * 10 < Managers.GameTime)
-            setLevel();
-        if (_timer > (spawnData[level].spawnTime))
+        if ((timeLevel + 1) * 60 < Managers.GameTime)
+            timeLevel += 1;
+        if (_timer > _spawnTime)
         {
             SpawnMonster();
             _timer = 0f;
@@ -39,29 +41,38 @@ public class Spawner : MonoBehaviour
     {
         if (enemyCount < _maxSpawnUnit)
         {
-            GameObject enemy = Managers.Game.Spawn(spawnData[level].Type, "Monster/Enemy");
+            int monsterType = SetRandomMonster(timeLevel);
+            int level = Managers.Game.getPlayer().GetComponent<PlayerStat>().Level;
+            GameObject enemy = Managers.Game.Spawn(Define.WorldObject.Enemy, "Monster/Enemy");
             enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
-            enemy.transform.GetComponent<EnemyController>().Init(spawnData[level]);
+            enemy.transform.GetComponent<EnemyController>().Init(monsterStat[monsterType], level);
         }
     }
 
-    void setLevel()
+
+    int SetRandomMonster(int timeLevel)
     {
-        level = Mathf.Min(Mathf.CeilToInt(Managers.GameTime / 10f), 1);
+        float rand1 = Random.Range(0, 100);
+        float rand2 = Random.Range(0, 100);
+        int rd = 1;
+        if (rand1 < 50)
+        {
+            if (rand2 < 90- (20* timeLevel))
+                rd = 1;
+            else
+                rd = 2;
+        }
+        else if (rand1 < 90)
+        {
+            if (rand2 < 90 - (20 * timeLevel))
+                rd = 4;
+            else
+                rd = 3;
+        }
+        else
+            rd = 5;
+
+        return rd;
     }
 
-
-}
-
-[System.Serializable]
-public class SpawnData
-{
-    public Define.WorldObject Type;
-    public float spawnTime;
-    public int spriteType;
-    public int maxHp;
-    public float speed;
-    public int attack;
-    public int defense;
-    public int exp;
 }

@@ -45,22 +45,24 @@ public class EnemyController : BaseController
         _stat.HP = _stat.MaxHP;
     }
 
-    public void Init(SpawnData data)
+    public void Init(Data.Monster monsterStat, int level)
     {
-        _anime.runtimeAnimatorController = animeCon[data.spriteType];
-        _stat.MoveSpeed = data.speed;
-        _stat.MaxHP = SetRandomStat(data.maxHp);
+        _anime.runtimeAnimatorController = animeCon[monsterStat.id-1];
+        _stat.MoveSpeed = monsterStat.moveSpeed *((float)(100f+ level)/100f);
+        _stat.MaxHP = SetRandomStat((int)(monsterStat.maxHp * ((100f + 10f*level)/ 100f)));
         _stat.HP = _stat.MaxHP;
-        _stat.Damage = SetRandomStat(data.attack);
-        _stat.Defense = SetRandomStat(data.defense);
-        _stat.ExpPoint = SetRandomStat(data.exp);
+        _stat.Damage = SetRandomStat((int)(monsterStat.damage * ((100f + level) / 100f)));
+        _stat.Defense = SetRandomStat((int)(monsterStat.defense * ((100f + level) / 100f)));
+        _stat.ExpPoint = 5*level;
+        _stat.ExpMul = monsterStat.expMul;
     }
     
     int SetRandomStat(int value)
     {
-        value = (int)(value * Random.Range(0.8f, 1.2f));
+        value = (int)(value * Random.Range(0.9f, 1.1f));
         return value;
     }
+
     
     
     public override void OnDamaged(int damage, float force = 0)
@@ -98,10 +100,11 @@ public class EnemyController : BaseController
         GameObject expGo = Managers.Game.Spawn(Define.WorldObject.Unknown, "Content/Exp");
         Exp_Item expPoint = expGo.GetComponent<Exp_Item>();
         expPoint._exp = _stat.ExpPoint;
+        expPoint._expMul = _stat.ExpMul;
         expGo.transform.position = transform.position;
-        if (expPoint._exp < 5)
+        if (expPoint._expMul == 1)
             expGo.GetComponent<SpriteRenderer>().sprite = expPoint._sprite[0];
-        else if(expPoint._exp<10)
+        else if(expPoint._expMul == 2)
             expGo.GetComponent<SpriteRenderer>().sprite = expPoint._sprite[1];
         else
             expGo.GetComponent<SpriteRenderer>().sprite = expPoint._sprite[2];

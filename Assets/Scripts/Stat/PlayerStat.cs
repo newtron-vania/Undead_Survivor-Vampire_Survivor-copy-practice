@@ -39,8 +39,8 @@ public class PlayerStat : Stat
 
 
 
-    private int _exp;
-    public int Exp
+    private long _exp;
+    public long Exp
     {
         get { return _exp;}
         set
@@ -52,9 +52,9 @@ public class PlayerStat : Stat
             }
         }
     }
-    private int _maxExp = 1;
+    private long _maxExp = 1;
 
-    public int MaxExp
+    public long MaxExp
     {
         get => _maxExp;
         set => _maxExp = value;
@@ -94,7 +94,7 @@ public class PlayerStat : Stat
 
         Level += 1;
         Exp = 0;
-        MaxExp *= 2;
+        MaxExp += Math.Max(100, (long)(_maxExp*1.1));
     }
 
     public void SetWeaponLevel()
