@@ -117,7 +117,7 @@ public class EventManager
                     Debug.Log($"MoveSpeed up! {player.MoveSpeed}");
                     break;
                 case "Damage":
-                    player.Damage += 1;
+                    player.Damage += 10;
                     Debug.Log($"Damage up! {player.Damage}");
                     break;
                 case "Defense":

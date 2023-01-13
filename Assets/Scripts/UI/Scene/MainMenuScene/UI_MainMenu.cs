@@ -70,6 +70,7 @@ public class UI_MainMenu : UI_Scene
     }
     void ShowCharacterSelectUI(PointerEventData data)
     {
+        Debug.Log("Show!");
         Managers.UI.ShowPopupUI<UI_CharacterSelect>();
     }
 

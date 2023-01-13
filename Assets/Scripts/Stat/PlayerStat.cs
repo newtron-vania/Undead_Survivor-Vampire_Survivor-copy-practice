@@ -60,11 +60,11 @@ public class PlayerStat : Stat
         set => _maxExp = value;
     }
 
-    private float _cooldown;
+    private int _cooldown;
     private int _amount;
 
 
-    public float Cooldown { get { return _cooldown; } set { _cooldown = value; } }
+    public int Cooldown { get { return _cooldown; } set { _cooldown = value; } }
     public int Amount { get { return _amount; } set { _amount = value; } } 
 
     void Awake()
@@ -80,7 +80,7 @@ public class PlayerStat : Stat
         MoveSpeed = 5.0f;
         Damage = 1;
         Defense = 0;
-        Cooldown = 0f;
+        Cooldown = 0;
         Amount = 0;
         Exp = 0;
         MaxExp = 10;

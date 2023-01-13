@@ -22,6 +22,20 @@ public class ResourceManager
         return Resources.Load<T>(path);
     }
 
+    public Sprite LoadSprite(string name)
+    {
+        string path = $"Prefabs/SpriteIcon/{name}";
+
+        Sprite original = Resources.Load<Sprite>(path);
+        if (original == null)
+        {
+            Debug.Log($"Faild to sprite : {path}");
+            return null;
+        }
+        return original;
+
+
+    }
     public GameObject Instantiate(string path, Transform parent = null)
     {
         GameObject original = Load<GameObject>($"Prefabs/{path}");

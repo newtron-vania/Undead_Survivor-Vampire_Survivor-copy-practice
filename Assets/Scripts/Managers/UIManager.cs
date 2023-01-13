@@ -67,8 +67,6 @@ public class UIManager
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
-        if (_sceneUI.name == name)
-            return _sceneUI as T;
 
         GameObject go = Managers.Resource.Instantiate($"UI/Scene/{name}");
 

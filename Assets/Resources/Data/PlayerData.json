@@ -1,0 +1,44 @@
+{
+  "players": [
+    {
+      "id": "1",
+      "name": "player0",
+      "maxHp": "50",
+      "damage": "0",
+      "defense": "0",
+      "moveSpeed": "5.0",
+      "coolDown": "0",
+      "amount": "0"
+    },
+    {
+      "id": "2",
+      "name": "player1",
+      "maxHp": "40",
+      "damage": "-10",
+      "defense": "0",
+      "moveSpeed": "5",
+      "coolDown": "20",
+      "amount": "0"
+    },
+    {
+      "id": "3",
+      "name": "player2",
+      "maxHp": "50",
+      "damage": "20",
+      "defense": "1",
+      "moveSpeed": "5.0",
+      "coolDown": "-50",
+      "amount": "1"
+    },
+    {
+      "id": "4",
+      "name": "player3",
+      "maxHp": "50",
+      "damage": "-50",
+      "defense": "-1",
+      "moveSpeed": "6",
+      "coolDown": "100",
+      "amount": "0"
+    }
+  ]
+} 

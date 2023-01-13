@@ -5,16 +5,14 @@ using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
-public class GameScene : MonoBehaviour
+public class GameScene : BaseScene
 {
     private UI_Player playerUI;
-    private void Awake()
-    {
-        Init();
-    }
 
-    void Init()
+    public override Define.SceneType _sceneType { get { return Define.SceneType.GameScene; } }
+    protected override void Init()
     {
+        base.Init();
         playerUI = Managers.UI.ShowSceneUI<UI_Player>("UI_Player");
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "Player/Player0");
         player.GetComponent<PlayerStat>().AddOrSetWeaponDict(Define.Weapons.Shotgun, 1, true);
@@ -47,5 +45,9 @@ public class GameScene : MonoBehaviour
             cursorCoolTimeImg.gameObject.SetActive(true);
         else
             cursorCoolTimeImg.gameObject.SetActive(false);
+    }
+    public override void Clear()
+    {
+        
     }
 }

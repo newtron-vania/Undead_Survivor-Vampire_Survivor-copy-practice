@@ -74,6 +74,10 @@ public class GameManagerEx
         Managers.Resource.Destroy(go, time);
     }
 
+    public void Clear()
+    {
+        Despawn(_player);
+    }
 
     public void SetMousePos()
     {

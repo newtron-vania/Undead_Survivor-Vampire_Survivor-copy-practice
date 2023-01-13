@@ -63,7 +63,7 @@ public abstract class WeaponController : MonoBehaviour
         if (_level > 5)
             _level = 5;
 
-        _damage = _weaponStat[_level].damage * _playerStat.Damage;
+        _damage = (int)(_weaponStat[_level].damage * ((float)(100+ _playerStat.Damage)/100f));
         _movSpeed = _weaponStat[_level].movSpeed;
         _force = _weaponStat[_level].force;
         _cooldown = _weaponStat[_level].cooldown * (100f/(100f +_playerStat.Cooldown));

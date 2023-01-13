@@ -5,27 +5,31 @@ using UnityEngine;
 
 namespace Data
 {
-	#region Stat
+	#region Character
 
 	[Serializable]
-	public class Stat
+	public class Player
 	{
-		public int level;
+		public int id;
+		public string name;
 		public int maxHp;
-		public int attack;
-		public int totalExp;
+		public int damage;
+		public int defense;
+		public float moveSpeed;
+		public int coolDown;
+		public int amount;
 	}
 
 	[Serializable]
-	public class StatData : ILoader<int, Stat>
+	public class PlayerData : ILoader<int, Player>
 	{
-		public List<Stat> stats = new List<Stat>();
+		public List<Player> players = new List<Player>();
 
-		public Dictionary<int, Stat> MakeDict()
+		public Dictionary<int, Player> MakeDict()
 		{
-			Dictionary<int, Stat> dict = new Dictionary<int, Stat>();
-			foreach (Stat stat in stats)
-				dict.Add(stat.level, stat);
+			Dictionary<int, Player> dict = new Dictionary<int, Player>();
+			foreach (Player player in players)
+				dict.Add(player.id, player);
 			return dict;
 		}
 	}

@@ -73,6 +73,7 @@ public class Managers : MonoBehaviour
         UI.Clear();
         Pool.Clear();
         Scene.Clear();
+        Game.Clear();
     }
     
     public static void GamePause()
