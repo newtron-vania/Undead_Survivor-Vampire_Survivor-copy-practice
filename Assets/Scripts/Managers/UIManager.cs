@@ -114,7 +114,7 @@ public class UIManager
         Managers.Resource.Destroy(popup.gameObject);
         popup = null;
 
-        CheckPopupUICountAndRemove(popupType);
+        CheckPopupUICountAndRemove();
     }
 
     public void ClosePopupUI(UI_Popup popup)
@@ -144,8 +144,8 @@ public class UIManager
                 Managers.Resource.Destroy(popup.gameObject);
                 popup = null;
             }
-            CheckPopupUICountAndRemove(popupType);
         }
+        CheckPopupUICountAndRemove();
     }
 
     public void CloseAllGroupPopupUI(Define.PopupUIGroup popupType)
@@ -160,14 +160,22 @@ public class UIManager
             Managers.Resource.Destroy(popup.gameObject);
             popup = null;
         }
-        CheckPopupUICountAndRemove(popupType);
+        CheckPopupUICountAndRemove();
     }
 
 
-    void CheckPopupUICountAndRemove(Define.PopupUIGroup popupType)
+    void CheckPopupUICountAndRemove()
     {
-        if (_popupStackDict.GetValueOrDefault<Define.PopupUIGroup, Stack<UI_Popup>>(popupType).Count == 0)
-            _popupStackDict.Remove(popupType);
+        List<Define.PopupUIGroup> popupType = new List<Define.PopupUIGroup>();
+        foreach(Define.PopupUIGroup popupUI in _popupStackDict.Keys)
+        {
+            popupType.Add(popupUI);
+        }
+        for(int i = 0; i<_popupStackDict.Count; i++)
+        {
+            if (_popupStackDict.GetValueOrDefault<Define.PopupUIGroup, Stack<UI_Popup>>(popupType[i]).Count == 0)
+                _popupStackDict.Remove(popupType[i]);
+        }
         CheckPopupUICountInScene();
     }
     
@@ -175,7 +183,11 @@ public class UIManager
     {
 
         Debug.Log($"popupCount : {_popupStackDict.Count}");
-        Debug.Log($"popupList : {_popupStackDict.Keys}");
+        foreach(Define.PopupUIGroup popupKey in _popupStackDict.Keys)
+        {
+            Debug.Log($"popupList : {popupKey}");
+        }
+            
         if (_popupStackDict.Count == 0)
         {
             Managers.GamePlay();

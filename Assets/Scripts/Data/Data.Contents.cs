@@ -12,6 +12,7 @@ namespace Data
 	{
 		public int id;
 		public string name;
+		public int weaponID;
 		public int maxHp;
 		public int damage;
 		public int defense;

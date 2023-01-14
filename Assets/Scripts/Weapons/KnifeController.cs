@@ -60,7 +60,7 @@ public class KnifeController : WeaponController
         knife.dir = new Vector3(dirOfPlayer.x, dirOfPlayer.y, 0);
 
         PlayerStat playerStat = _player.GetComponent<PlayerStat>();
-        knife.damage = _damage * playerStat.Damage;
+        knife.damage = _damage;
         knife.speed = _movSpeed;
         knife.force = _force;
     }

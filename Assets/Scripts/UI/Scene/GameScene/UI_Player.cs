@@ -30,7 +30,12 @@ public class UI_Player : UI_Scene
         Bind<Slider>(typeof(Sliders));
     }
 
-    public void SetGameTime()
+    public void SetPlayerUI()
+    {
+        SetGameTime();
+        SetExpAndLevel();
+    }
+    void SetGameTime()
     {
         Get<TextMeshProUGUI>((int)Texts.GameTime).text = string.Format("{0:D2}:{1:D2}", (int)Mathf.Floor(Managers.GameTime / 60),
             (int)Mathf.Floor(Managers.GameTime % 60));

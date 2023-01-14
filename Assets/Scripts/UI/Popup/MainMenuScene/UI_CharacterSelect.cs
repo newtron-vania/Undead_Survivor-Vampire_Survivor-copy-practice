@@ -41,8 +41,6 @@ public class UI_CharacterSelect : UI_Popup
     public override void Init()
     {
         playerData = Managers.Data.PlayerData;
-        
-        currentPlayer = playerData[1];
 
         Bind<Image>(typeof(Images));
         Bind<GameObject>(typeof(Panels));
@@ -104,9 +102,9 @@ public class UI_CharacterSelect : UI_Popup
     {
         //Todo
         //Setting PlayerStat
-
+        Managers.Game.StartPlayer = currentPlayer;
         //Move to GameScene
-        
+        Debug.Log($"StartPlayer : {Managers.Game.StartPlayer.id}");
         Managers.Scene.LoadScene(Define.SceneType.GameScene);
     }
 }

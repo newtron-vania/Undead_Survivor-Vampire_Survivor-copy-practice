@@ -32,6 +32,7 @@ public class EventManager
                 rd = 1;
             else
                 rd = 2;
+
             if (rd== 0)
             {
                 if (player.GetWeaponDict()[player.playertStartWeapon] >= 5)
@@ -45,15 +46,17 @@ public class EventManager
                 PlayerStats stat = SetRandomStat();
                 selected[1] = stat.ToString();
             }
-
             else
             {
                 selected[0] = "2";
                 Define.Weapons weapon = SetRandomWeapon();
                 if (player.GetWeaponDict().GetValueOrDefault<Define.Weapons, int>(weapon) >= 5)
                     continue;
+                if (player.GetWeaponDict().Count >= 4 && !player.GetWeaponDict().ContainsKey(weapon))
+                    continue;
                 selected[1] = weapon.ToString();
             }
+
             bool isContains = false;
             foreach (string[] type in PoolList)
             {
@@ -172,6 +175,7 @@ public class EventManager
         }
         
     }
+
 
 
 }

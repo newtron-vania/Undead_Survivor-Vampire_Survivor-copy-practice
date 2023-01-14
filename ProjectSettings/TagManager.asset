@@ -9,8 +9,11 @@ TagManager:
   - Enemy
   - coolTimeImg
   - Item
-  - PlayerUI
-  - MainMenuUI
+  - UI
+  - SceneUI
+  - PopupUI
+  - WeaponController
+  - WorldUI
   layers:
   - Default
   - TransparentFX
@@ -21,7 +24,7 @@ TagManager:
   - 
   - Player
   - Enemy
-  - 
+  - Weapon
   - 
   - ItemBox
   - Exp

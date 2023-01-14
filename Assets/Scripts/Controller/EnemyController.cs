@@ -45,14 +45,27 @@ public class EnemyController : BaseController
         _stat.HP = _stat.MaxHP;
     }
 
-    public void Init(Data.Monster monsterStat, int level)
+    public void Init(Data.Monster monsterStat, int level, Define.MonsterType type)
     {
+        int mul = 1;
+        switch (type)
+        {
+            case Define.MonsterType.Enemy:
+                mul = 1;
+                break;
+            case Define.MonsterType.middleBoss:
+                mul = 20;
+                break;
+            case Define.MonsterType.Boss:
+                mul = 30;
+                break;
+        }
         _anime.runtimeAnimatorController = animeCon[monsterStat.id-1];
-        _stat.MoveSpeed = monsterStat.moveSpeed *((float)(100f+ level)/100f);
-        _stat.MaxHP = SetRandomStat((int)(monsterStat.maxHp * ((100f + 10f*level)/ 100f)));
+        _stat.MoveSpeed = monsterStat.moveSpeed *((float)(100f+ level)/100f) * mul;
+        _stat.MaxHP = SetRandomStat((int)(monsterStat.maxHp * ((100f + 10f*level)/ 100f))) * mul;
         _stat.HP = _stat.MaxHP;
-        _stat.Damage = SetRandomStat((int)(monsterStat.damage * ((100f + level) / 100f)));
-        _stat.Defense = SetRandomStat((int)(monsterStat.defense * ((100f + level) / 100f)));
+        _stat.Damage = SetRandomStat((int)(monsterStat.damage * ((100f + level) / 100f)))* mul;
+        _stat.Defense = SetRandomStat((int)(monsterStat.defense * ((100f + level) / 100f))) * mul;
         _stat.ExpPoint = 5*level;
         _stat.ExpMul = monsterStat.expMul;
     }
@@ -69,9 +82,9 @@ public class EnemyController : BaseController
     {
         int calculateDamage = Mathf.Max(damage - _stat.Defense, 1);
         _stat.HP -= calculateDamage;
-        Debug.Log($"knockBack : {force * 500f}");
         _rigid.AddForce((_rigid.position - _target.position).normalized * (force * 500f));
         FloatDamageText(calculateDamage);
+        _anime.SetTrigger("Hit");
         OnDead();
     }
 

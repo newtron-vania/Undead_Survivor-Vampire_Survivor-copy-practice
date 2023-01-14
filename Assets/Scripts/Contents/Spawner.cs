@@ -29,7 +29,23 @@ public class Spawner : MonoBehaviour
     {
         _timer += Time.deltaTime;
         if ((timeLevel + 1) * 60 < Managers.GameTime)
-            timeLevel += 1;
+        {
+            if(timeLevel >= 3)
+            {
+                _spawnTime = 0.1f;
+            }
+            if(timeLevel <= 5)
+            {
+                timeLevel += 1;
+                int level = Managers.Game.getPlayer().GetComponent<PlayerStat>().Level;
+                GameObject middleBoss = Managers.Game.Spawn(Define.WorldObject.Enemy, "Monster/Enemy");
+                middleBoss.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
+                middleBoss.transform.localScale = Vector3.one * 2;
+                middleBoss.transform.GetComponent<EnemyController>().Init(monsterStat[timeLevel], level, Define.MonsterType.middleBoss);
+            }
+
+        }
+            
         if (_timer > _spawnTime)
         {
             SpawnMonster();
@@ -42,10 +58,11 @@ public class Spawner : MonoBehaviour
         if (enemyCount < _maxSpawnUnit)
         {
             int monsterType = SetRandomMonster(timeLevel);
+            
             int level = Managers.Game.getPlayer().GetComponent<PlayerStat>().Level;
             GameObject enemy = Managers.Game.Spawn(Define.WorldObject.Enemy, "Monster/Enemy");
             enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
-            enemy.transform.GetComponent<EnemyController>().Init(monsterStat[monsterType], level);
+            enemy.transform.GetComponent<EnemyController>().Init(monsterStat[monsterType], level, Define.MonsterType.Enemy);
         }
     }
 
@@ -65,9 +82,9 @@ public class Spawner : MonoBehaviour
         else if (rand1 < 90)
         {
             if (rand2 < 90 - (20 * timeLevel))
-                rd = 4;
-            else
                 rd = 3;
+            else
+                rd = 4;
         }
         else
             rd = 5;

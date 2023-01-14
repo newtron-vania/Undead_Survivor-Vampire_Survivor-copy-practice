@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1953673022690903777}
   m_Layer: 0
   m_Name: KnifeSpawningPool
-  m_TagString: Untagged
+  m_TagString: WeaponController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d917e8562d05c48a6b69936771b8df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponID: 0
-  _level: 1
+  _type: 3
   _damage: 1
   _movSpeed: 1
   _force: 1

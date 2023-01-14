@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6331201097994226115}
   m_Layer: 7
   m_Name: LightningSpawningPool
-  m_TagString: Untagged
+  m_TagString: WeaponController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,8 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f774dcb656b74f845870d5bad0314c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _weaponID: 0
-  _level: 1
+  _type: 3
   _damage: 1
   _movSpeed: 1
   _force: 1

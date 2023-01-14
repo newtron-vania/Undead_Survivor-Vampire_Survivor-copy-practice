@@ -452,29 +452,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682672562}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ed216abb9df23fd49b78c279d49fe0de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPoint: []
-  spawnData:
-  - Type: 2
-    spawnTime: 0.7
-    spriteType: 0
-    maxHp: 30
-    speed: 1.5
-    attack: 3
-    defense: 0
-    exp: 4
-  - Type: 2
-    spawnTime: 0.5
-    spriteType: 1
-    maxHp: 50
-    speed: 2.5
-    attack: 3
-    defense: 0
-    exp: 6
+  spawnPoint:
+  - {fileID: 181740242}
+  - {fileID: 1062864896}
+  - {fileID: 2012196387}
+  - {fileID: 590647409}
+  - {fileID: 447370142}
+  - {fileID: 405408507}
+  - {fileID: 1768402194}
+  - {fileID: 1910050768}
+  - {fileID: 1044879531}
+  - {fileID: 89034306}
+  - {fileID: 397533952}
+  - {fileID: 442147181}
+  - {fileID: 865145959}
+  - {fileID: 741854044}
   _spawnUnit: []
   _maxSpawnUnit: 50
   enemyCount: 0
@@ -649,7 +646,7 @@ GameObject:
   - component: {fileID: 6270601201515782472}
   - component: {fileID: 6097877082915252135}
   m_Layer: 7
-  m_Name: Player0
+  m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -777,6 +774,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _anime: {fileID: 0}
   _type: 0
+  animeCon:
+  - {fileID: 9100000, guid: 9d5ea2f1db80ccb40ad5b9c800bf26e4, type: 2}
+  - {fileID: 22100000, guid: b1a6c6335b355334f967a9868839dbaf, type: 2}
   _inputVec: {x: 0, y: 0}
   _lastDirVec: {x: 1, y: 0}
 --- !u!114 &6270601201515782472
@@ -797,6 +797,7 @@ MonoBehaviour:
   _Movespeed: 0
   _damage: 0
   _defense: 0
+  playertStartWeapon: 0
 --- !u!95 &6097877082915252135
 Animator:
   serializedVersion: 4

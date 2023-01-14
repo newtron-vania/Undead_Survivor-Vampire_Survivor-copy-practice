@@ -20,7 +20,7 @@ public class LightningController : WeaponController
 
     private void OnEnable()
     {
-        _playerUI = GameObject.FindWithTag("PlayerUI");
+        _playerUI = GameObject.Find("UI_Player");
         if (object.ReferenceEquals(_playerUI, null))
         {
             Managers.UI.ShowSceneUI<UI_Player>();

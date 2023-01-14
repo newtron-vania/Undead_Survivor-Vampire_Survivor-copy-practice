@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 156914533638325169}
   - component: {fileID: 3235724652027352453}
   - component: {fileID: 4691110059777808508}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Spin
   m_TagString: Untagged
   m_Icon: {fileID: 0}

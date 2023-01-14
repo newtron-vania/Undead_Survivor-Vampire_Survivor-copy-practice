@@ -3,6 +3,7 @@
     {
       "id": "1",
       "name": "player0",
+      "weaponID": "102",
       "maxHp": "50",
       "damage": "0",
       "defense": "0",
@@ -13,6 +14,7 @@
     {
       "id": "2",
       "name": "player1",
+      "weaponID": "101",
       "maxHp": "40",
       "damage": "-10",
       "defense": "0",
@@ -23,6 +25,7 @@
     {
       "id": "3",
       "name": "player2",
+      "weaponID": "101",
       "maxHp": "50",
       "damage": "20",
       "defense": "1",
@@ -33,6 +36,7 @@
     {
       "id": "4",
       "name": "player3",
+      "weaponID": "102",
       "maxHp": "50",
       "damage": "-50",
       "defense": "-1",

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerController : BaseController
 {
     protected PlayerStat _stat;
+    public RuntimeAnimatorController[] animeCon;
     [SerializeField] Vector2 _inputVec;
     [SerializeField] public Vector2 _lastDirVec = new Vector2(1, 0);
     bool _isDamaged = false;
@@ -52,7 +53,18 @@ public class PlayerController : BaseController
             _sprite.flipX = (_inputVec.x < 0) ? true : false;
         }
     }
-
+    public void Init(Data.Player playerData)
+    {
+        _anime.runtimeAnimatorController = animeCon[playerData.id - 1];
+        _stat.MaxHP = playerData.maxHp;
+        _stat.HP = playerData.maxHp;
+        _stat.Damage = playerData.damage;
+        _stat.Defense = playerData.defense;
+        _stat.MoveSpeed = playerData.moveSpeed;
+        _stat.Cooldown = playerData.coolDown;
+        _stat.Amount = playerData.amount;
+        _stat.AddOrSetWeaponDict((Define.Weapons)playerData.weaponID, 1);
+    }
     public void OnDamaged(Collision2D collision)
     {
         _isDamaged = true;

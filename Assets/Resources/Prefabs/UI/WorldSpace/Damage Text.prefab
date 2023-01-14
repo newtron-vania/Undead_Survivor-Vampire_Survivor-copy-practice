@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5333550336602734542}
   m_Layer: 0
   m_Name: Damage Text
-  m_TagString: Untagged
+  m_TagString: WorldUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

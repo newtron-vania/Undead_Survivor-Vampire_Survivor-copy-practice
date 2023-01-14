@@ -14,14 +14,14 @@ public class GameScene : BaseScene
     {
         base.Init();
         playerUI = Managers.UI.ShowSceneUI<UI_Player>("UI_Player");
-        GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "Player/Player0");
-        player.GetComponent<PlayerStat>().AddOrSetWeaponDict(Define.Weapons.Shotgun, 1, true);
+        GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "Player/Player");
+        player.GetOrAddComponent<PlayerController>().Init(Managers.Game.StartPlayer);
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
         Managers.Resource.Instantiate("Content/Grid");
     }
     private void Update()
     {
-        playerUI.SetGameTime();
+        playerUI.SetPlayerUI();
         if (Input.GetKeyDown(KeyCode.Q))
         {
             if (!Managers.gameStop)

@@ -16,14 +16,16 @@ public class PlayerStat : Stat
     {
         return _weaponDict;
     }
-    public void AddOrSetWeaponDict(Define.Weapons key, int value, bool addOrSet = false)
+    public bool AddOrSetWeaponDict(Define.Weapons key, int value, bool addOrSet = false)
     {
         if (_weaponDict.Count == 0)
         {
             playertStartWeapon = key;
         }
-            if (!_weaponDict.ContainsKey(key))
+        if (!_weaponDict.ContainsKey(key))
         {
+            if (_weaponDict.Count >= 4)
+                return false;
             //key spawn
             _weaponDict.Add(key, 0);
         }
@@ -34,6 +36,7 @@ public class PlayerStat : Stat
             _weaponDict[key] = value;
 
         SetWeaponLevel();
+        return true;
     }
 
 

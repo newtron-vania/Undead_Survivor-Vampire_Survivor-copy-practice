@@ -14,6 +14,6 @@ public class MainMenuScene : BaseScene
     }
     public override void Clear()
     {
-        
+        Managers.UI.Clear();
     }
 }

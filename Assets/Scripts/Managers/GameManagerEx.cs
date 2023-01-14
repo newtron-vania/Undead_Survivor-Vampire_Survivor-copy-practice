@@ -7,6 +7,7 @@ using System;
 public class GameManagerEx
 {
     GameObject _player;
+
     // int <-> gameobject
     //Dictionary<int, GameObject> _player = new Dictionary<int, GameObject>();
     HashSet<GameObject> _monster = new HashSet<GameObject>();
@@ -16,6 +17,7 @@ public class GameManagerEx
     public Vector3 WorldMousePos { get; set; }
 
     public GameObject getPlayer() { return _player; }
+    public Data.Player StartPlayer { get; set; } = new Data.Player();
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
     {
         GameObject go = Managers.Resource.Instantiate(path, parent);
