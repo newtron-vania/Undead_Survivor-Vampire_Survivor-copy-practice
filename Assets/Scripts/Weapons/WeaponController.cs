@@ -52,11 +52,6 @@ public abstract class WeaponController : MonoBehaviour
 
     }
 
-    protected virtual void Spawn()
-    {
-
-    }
-
     protected virtual void SetWeaponStat()
     {
         Debug.Log($"{gameObject.name} stat Setting Start");

@@ -10,7 +10,7 @@ public class ShotgunController : WeaponController
 {
     [SerializeField] private GameObject gunhole;
 
-    private bool isShot = false;
+    private bool _isCool = false;
     private float _bulletTargetRange = 60f;
 
     public override int _weaponType { get { return (int)Define.Weapons.Shotgun; } }
@@ -19,7 +19,7 @@ public class ShotgunController : WeaponController
     {
         transform.rotation = Quaternion.Slerp(transform.rotation,
             Quaternion.AngleAxis(SetAngleFromHandToCursor(), Vector3.forward), 5f * Time.deltaTime);
-        if (!isShot)
+        if (!_isCool)
         {
             StartCoroutine(ShotCoolTime());
         }
@@ -36,7 +36,7 @@ public class ShotgunController : WeaponController
             GameObject bullet = Managers.Game.Spawn(Define.WorldObject.Unknown, "Weapon/Bullet");
             bullet.transform.position = gunhole.transform.position;
             //set damage, dir 
-            Bullet bulletStat =bullet.GetComponent<Bullet>();
+            Bullet bulletStat = bullet.GetComponent<Bullet>();
             float _ang = startBulletAngle + bulletAngle * i + Random.Range(-5f,5f);
             Vector3 bulletDir = new Vector3(Mathf.Cos(_ang*Mathf.Deg2Rad), Mathf.Sin(_ang * Mathf.Deg2Rad), 0);
             bulletStat.SetBulletDir(bulletDir);
@@ -58,10 +58,10 @@ public class ShotgunController : WeaponController
 
     IEnumerator ShotCoolTime()
     {
-        isShot = true;
+        _isCool = true;
         SetWeaponStat();
         yield return new WaitForSeconds(_cooldown);
 
-        isShot = false;
+        _isCool = false;
     }
 }

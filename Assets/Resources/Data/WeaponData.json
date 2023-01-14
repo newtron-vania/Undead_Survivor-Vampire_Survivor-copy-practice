@@ -63,50 +63,52 @@
         {
           "level": "1",
           "damage": "40",
-          "movSpeed": "9",
+          "movSpeed": "4",
           "force": "2",
-          "cooldown": "8",
-          "size": "1",
+          "cooldown": "4",
+          "size": "0.8",
           "penetrate": "1",
           "countPerCreate": "1"
         },
         {
           "level": "2",
           "damage": "60",
-          "movSpeed": "9",
+          "movSpeed": "4.5",
           "force": "2",
-          "cooldown": "7",
-          "size": "1",
+          "cooldown": "4",
+          "size": "0.9",
           "penetrate": "1",
           "countPerCreate": "1"
         },
         {
           "level": "3",
           "damage": "80",
-          "movSpeed": "9",
-          "force": "2",
-          "cooldown": "7",
-          "countPerCreate": "2"
+          "movSpeed": "4",
+          "force": "3",
+          "cooldown": "4",
+          "size": "1.1",
+          "penetrate": "2",
+          "countPerCreate": "1"
         },
         {
           "level": "4",
           "damage": "90",
-          "movSpeed": "9",
-          "force": "2",
-          "cooldown": "6",
-          "size": "1",
-          "penetrate": "1",
-          "countPerCreate": "3"
+          "movSpeed": "5",
+          "force": "3",
+          "cooldown": "4",
+          "size": "1.15",
+          "penetrate": "2",
+          "countPerCreate": "2"
         },
         {
           "level": "5",
           "damage": "100",
-          "movSpeed": "9",
-          "force": "2",
+          "movSpeed": "6",
+          "force": "4",
           "cooldown": "4",
-          "size": "1",
-          "penetrate": "1",
-          "countPerCreate": "4"
+          "size": "1.25",
+          "penetrate": "3",
+          "countPerCreate": "3"
         }
       ]
     },

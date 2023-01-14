@@ -7,22 +7,16 @@ public class KnifeController : WeaponController
 {
 
     float _termKnifeThrow = 0.1f;
-    bool _isThrowing = false;
+    bool _isCool = false;
 
     public override int _weaponType { get { return (int)Define.Weapons.Knife; } }
 
     void Update()
     {
-        Spawn();
-    }
-
-    protected override void Spawn()
-    {
-        if (!_isThrowing)
+        if (!_isCool)
         {
             StartCoroutine(SpawnWeapon());
         }
-
     }
 
 
@@ -30,13 +24,13 @@ public class KnifeController : WeaponController
     {
 
         yield return new WaitForSeconds(_cooldown);
-        _isThrowing = false;
+        _isCool = false;
     }
 
      
     IEnumerator SpawnWeapon()
     {
-        _isThrowing = true;
+        _isCool = true;
         for (int i = 0; i < _countPerCreate; i++)
         {
             GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
@@ -59,7 +53,6 @@ public class KnifeController : WeaponController
 
         knife.dir = new Vector3(dirOfPlayer.x, dirOfPlayer.y, 0);
 
-        PlayerStat playerStat = _player.GetComponent<PlayerStat>();
         knife.damage = _damage;
         knife.speed = _movSpeed;
         knife.force = _force;

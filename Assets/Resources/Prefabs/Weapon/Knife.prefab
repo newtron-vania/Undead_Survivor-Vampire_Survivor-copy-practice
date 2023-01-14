@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3235724652027352453}
   m_Layer: 9
   m_Name: Knife
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,6 +103,7 @@ MonoBehaviour:
   damage: 10
   speed: 5
   force: 0
+  panatrate: 1
   lifeTime: 3
   createTime: 0
 --- !u!61 &156914533638325169

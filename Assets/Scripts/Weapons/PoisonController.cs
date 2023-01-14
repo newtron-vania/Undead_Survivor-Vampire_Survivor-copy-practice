@@ -5,7 +5,7 @@ using UnityEngine;
 public class PoisonController : WeaponController
 {
 
-    bool _isAttack = false;
+    bool _isCool = false;
     Transform _damageEffectImage;
 
     public override int _weaponType { get { return (int)Define.Weapons.Poison; } }
@@ -17,7 +17,7 @@ public class PoisonController : WeaponController
 
     private void Update()
     {
-        if (!_isAttack)
+        if (!_isCool)
         {
             StartCoroutine(DamageCoolTime());
             Collider2D[] collider2Ds = Physics2D.OverlapCircleAll((Vector2)transform.position, _size, LayerMask.GetMask("Enemy"));
@@ -37,8 +37,8 @@ public class PoisonController : WeaponController
 
     IEnumerator DamageCoolTime()
     {
-        _isAttack = true;
+        _isCool = true;
         yield return new WaitForSeconds(_cooldown);
-        _isAttack = false;
+        _isCool = false;
     }
 }
