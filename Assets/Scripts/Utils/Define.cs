@@ -63,6 +63,7 @@ public class Define
         Effect,
         MaxCount,
     }
+
     public enum UIEvent
     {
         Click,

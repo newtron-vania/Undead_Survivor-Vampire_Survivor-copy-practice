@@ -918,7 +918,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Option A
+  m_text: BGM_01
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 73f961e277348c744a836a0896929fcc, type: 2}
   m_sharedMaterial: {fileID: 6608546117220838858, guid: 73f961e277348c744a836a0896929fcc, type: 2}
@@ -1497,7 +1497,19 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5978096651885838158}
+        m_TargetAssemblyTypeName: UI_GameMenu, Assembly-CSharp
+        m_MethodName: OnVolumnChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7108182770783826155
 GameObject:
   m_ObjectHideFlags: 0
@@ -2331,15 +2343,29 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
+    - m_Text: BGM_01
       m_Image: {fileID: 0}
-    - m_Text: Option B
+    - m_Text: BGM_02
       m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: BGM_03
+      m_Image: {fileID: 0}
+    - m_Text: BGM_04
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5978096651885838158}
+        m_TargetAssemblyTypeName: UI_GameMenu, Assembly-CSharp
+        m_MethodName: OnValueChanged
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_AlphaFadeSpeed: 0.15
 --- !u!1 &7108182771207004177
 GameObject:
