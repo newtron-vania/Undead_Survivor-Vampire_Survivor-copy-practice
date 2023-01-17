@@ -30,8 +30,9 @@ public class PoisonController : WeaponController
 
     }
 
-    protected void SetWeaponStat(GameObject weapon)
+    protected override void SetWeaponStat()
     {
+        base.SetWeaponStat();
         _damageEffectImage.localScale = Vector3.one * _size * 2;
     }
 

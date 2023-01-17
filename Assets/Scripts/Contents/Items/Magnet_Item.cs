@@ -16,7 +16,7 @@ public class Magnet_Item : Base_Item
         float size = itemGetter._size;
         itemGetter.transform.GetComponent<CircleCollider2D>().radius = size * 100;
         Debug.Log($"Magnet Get! {size * 100}");
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForFixedUpdate();
         itemGetter.transform.GetComponent<CircleCollider2D>().radius = size;
         Debug.Log($"Range restore! : {size}");
 

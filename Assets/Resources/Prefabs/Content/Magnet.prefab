@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 4589130301884115295}
   - component: {fileID: 4589130301884115294}
   - component: {fileID: 2763365779697322226}
-  - component: {fileID: 7570127051539488598}
   m_Layer: 14
   m_Name: Magnet
   m_TagString: Item
@@ -28,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4589130301884115265}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.41, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -125,16 +124,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35b0eafd1aeb82f4096d02568308079d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &7570127051539488598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4589130301884115265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6513b7728502c3740a23c8b4b2d6bed7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isUsing: 1
