@@ -19,9 +19,11 @@ public class FireballController : WeaponController
     {
         _isCool = true;
         float angle = SetTarget();
+        Managers.Sound.Play("Shoot_03");
         for (int i = 0; i < _countPerCreate; i++)
         {
             GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Fireball");
+            go.transform.position = transform.position;
             SetWeapon(go, angle);
             if (i == _countPerCreate - 1)
                 break;

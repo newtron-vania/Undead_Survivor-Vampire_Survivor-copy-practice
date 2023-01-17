@@ -27,7 +27,7 @@ public class Fireball : MonoBehaviour
     {
         if (Managers.GameTime - createTime > lifeTime)
         {
-            Managers.Resource.Destroy(gameObject);
+            DoExplosion();
         }
         OnMove();
     }
@@ -40,19 +40,23 @@ public class Fireball : MonoBehaviour
             piercing++;
             if(piercing >= panatrate)
             {
-                GameObject explosion = Managers.Resource.Instantiate("Weapon/Explosion");
-                Explosion explosionStat = explosion.GetComponent<Explosion>();
-                explosionStat.damage = (int)(damage * 1.1);
-                explosionStat.force = force;
-                explosion.transform.localScale = Vector3.one * size;
-                explosion.transform.position = transform.position;
-                Managers.Resource.Destroy(gameObject);
+                DoExplosion();
             }
             else
                 go.GetComponent<EnemyController>().OnDamaged(damage, force/2);
         }
     }
-
+    void DoExplosion()
+    {
+        Managers.Sound.Play("Explosion_02");
+        GameObject explosion = Managers.Resource.Instantiate("Weapon/Explosion");
+        Explosion explosionStat = explosion.GetComponent<Explosion>();
+        explosionStat.damage = (int)(damage * 1.1);
+        explosionStat.force = force;
+        explosion.transform.localScale = Vector3.one * size;
+        explosion.transform.position = transform.position;
+        Managers.Resource.Destroy(gameObject);
+    }
 
     void OnMove()
     {

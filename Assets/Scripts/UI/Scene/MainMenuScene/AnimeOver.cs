@@ -9,5 +9,6 @@ public class AnimeOver : MonoBehaviour
     public void SetAnimeOver()
     {
         _animeOver = true;
+        Managers.Sound.Play("A_Bit_Of_Hope", Define.Sound.Bgm);
     }
 }

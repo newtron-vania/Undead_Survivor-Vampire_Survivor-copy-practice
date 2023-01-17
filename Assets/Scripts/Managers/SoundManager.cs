@@ -7,6 +7,9 @@ public class SoundManager
     AudioSource[] _audioSources = new AudioSource[(int)Define.Sound.MaxCount];
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
+
+    public float SoundVolumn = 1f;
+    public Define.BGMs BGM = Define.BGMs.A_Bit_Of_Hope;
     // MP3 Player   -> AudioSource
     // MP3 음원     -> AudioClip
     // 관객(귀)     -> AudioListener
@@ -58,7 +61,9 @@ public class SoundManager
 			if (audioSource.isPlaying)
 				audioSource.Stop();
 
-			audioSource.pitch = pitch;
+            BGM = (Define.BGMs)System.Enum.Parse(typeof(Define.BGMs), audioClip.name);
+
+            audioSource.pitch = pitch;
 			audioSource.clip = audioClip;
 			audioSource.Play();
 		}

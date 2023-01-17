@@ -21,8 +21,9 @@ public class Define
         Lightning = 101,
         Shotgun = 102
     }
-    public enum MonsterStype
+    public enum MonsterStyle
     {
+        unknown = 0,
         zombie = 1,
         zombieElite = 2,
         skeleton = 3,
@@ -31,6 +32,7 @@ public class Define
     }
     public enum MonsterType
     {
+        unknown,
         Enemy,
         middleBoss,
         Boss
@@ -47,6 +49,8 @@ public class Define
         UI_GameMenu,
         UI_ItemBoxOpen,
         UI_LevelUp,
+        UI_GameOver,
+        UI_GameVictory,
         UI_CharacterSelect
     }
 
@@ -63,7 +67,14 @@ public class Define
         Effect,
         MaxCount,
     }
-
+    public enum BGMs
+    {
+        BGM_01,
+        BGM_02,
+        BGM_03,
+        BGM_04,
+        A_Bit_Of_Hope
+    }
     public enum UIEvent
     {
         Click,

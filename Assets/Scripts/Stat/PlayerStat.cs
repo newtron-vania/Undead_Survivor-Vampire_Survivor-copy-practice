@@ -9,6 +9,7 @@ public class PlayerStat : Stat
 
     //1 : knife, 2 : firebal, 3: spin, 4: posion 5: lightning 6: shotgun
     //WeaponDict - WeaponID : WeaponLevel
+    Dictionary<string, int> _playerStat = new Dictionary<string, int>();
     [SerializeField]
     Dictionary<Define.Weapons, int> _weaponDict = new Dictionary<Define.Weapons, int>();
     public Define.Weapons playertStartWeapon;
@@ -39,8 +40,77 @@ public class PlayerStat : Stat
         return true;
     }
 
-
-
+    public override int Level { get { return base.Level; } 
+        set 
+        { 
+            base.Level = value;
+            if (!_playerStat.ContainsKey("Level"))
+                _playerStat.Add("Level", _level);
+            _playerStat["Level"] = _level;
+        } 
+    }
+    public override int MaxHP
+    {
+        get { return base.MaxHP; }
+        set
+        {
+            base.MaxHP = value;
+            if (!_playerStat.ContainsKey("MaxHP"))
+                _playerStat.Add("MaxHP", _maxHp);
+            _playerStat["MaxHP"] = _maxHp;
+        }
+    }
+    public override float MoveSpeed
+    {
+        get { return base.MoveSpeed; }
+        set
+        {
+            base.MoveSpeed = value;
+            if (!_playerStat.ContainsKey("MoveSpeed"))
+                _playerStat.Add("MoveSpeed", (int)_Movespeed);
+            _playerStat["MoveSpeed"] = (int)_Movespeed;
+        }
+    }
+    public override int Damage 
+    {
+        get { return base.Damage; }
+        set
+        {
+            base.Damage = value;
+            if (!_playerStat.ContainsKey("Damage"))
+                _playerStat.Add("Damage", _damage);
+            _playerStat["v"] = _damage;
+        }
+    }
+    public override int Defense
+    {
+        get { return base.Defense; }
+        set
+        {
+            base.Defense = value;
+            if (!_playerStat.ContainsKey("Defense"))
+                _playerStat.Add("Defense", _defense);
+            _playerStat["Defense"] = _defense;
+        }
+    }
+    public int Cooldown { get { return _cooldown; } 
+        set 
+        { 
+            _cooldown = value;
+            if (!_playerStat.ContainsKey("Cooldown"))
+                _playerStat.Add("Cooldown", _cooldown);
+            _playerStat["Cooldown"] = _cooldown;
+        } 
+    }
+    public int Amount { get { return _amount; }
+        set 
+        { 
+            _amount = value;
+            if (!_playerStat.ContainsKey("Amount"))
+                _playerStat.Add("Amount", _amount);
+            _playerStat["Amount"] = _amount;
+        } 
+    }
 
     private long _exp;
     public long Exp
@@ -67,8 +137,7 @@ public class PlayerStat : Stat
     private int _amount;
 
 
-    public int Cooldown { get { return _cooldown; } set { _cooldown = value; } }
-    public int Amount { get { return _amount; } set { _amount = value; } } 
+
 
     void Awake()
     {
@@ -124,5 +193,11 @@ public class PlayerStat : Stat
             Managers.UI.getSceneUI().GetComponent<UI_Player>().SetWeaponImage(Managers.Game.getPlayer().GetComponent<PlayerStat>());
             Debug.Log("WeaponList Updated!");
         }
+    }
+
+
+    public Dictionary<string, int> getPlayerStatData()
+    {
+        return _playerStat;
     }
 }

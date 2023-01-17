@@ -25,6 +25,7 @@ public class UI_Player : UI_Scene
     public override void Init()
     {
         base.Init();
+        Managers.Sound.Play(Define.BGMs.BGM_01.ToString(), Define.Sound.Bgm);
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Image>(typeof(Images));
         Bind<Slider>(typeof(Sliders));

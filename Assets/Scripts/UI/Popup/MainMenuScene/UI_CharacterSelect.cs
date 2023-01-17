@@ -76,6 +76,7 @@ public class UI_CharacterSelect : UI_Popup
 
     void OnClickUpdate(GameObject go, Data.Player playerStat)
     {
+        Managers.Sound.Play("Select", Define.Sound.Effect);
         Debug.Log($"gameobject : {go.name}, player = {playerStat.id}");
         currentPlayer = playerStat;
         foreach(GameObject goes in playerGOList)
@@ -84,9 +85,9 @@ public class UI_CharacterSelect : UI_Popup
         }
         go.GetComponent<Image>().color = Color.yellow;
         string name = playerStat.name;
-        string desc = $"HP : {playerStat.maxHp}\t Damage : {playerStat.damage}\n" +
-            $"Speed : {playerStat.moveSpeed}\t Defense : {playerStat.defense}\n" +
-            $"Cooldown : {playerStat.coolDown}\t Amount : {playerStat.amount}";
+        string desc = $"HP : {playerStat.maxHp}\tDamage : {playerStat.damage}\n" +
+            $"Speed : {playerStat.moveSpeed}\tDefense : {playerStat.defense}\n" +
+            $"Cooldown : {playerStat.coolDown}\tAmount : {playerStat.amount}";
 
         GetImage((int)Images.PlayerImage).sprite = Managers.Resource.LoadSprite(name);
         GetText((int)Texts.NameText).text = name;
@@ -94,12 +95,14 @@ public class UI_CharacterSelect : UI_Popup
     }
     void OnClickDelete(PointerEventData data)
     {
+        Managers.Sound.Play("Select", Define.Sound.Effect);
         Managers.UI.CloseAllGroupPopupUI(_popupID);
     }
 
 
     void OnClickStartGame(PointerEventData data)
     {
+        Managers.Sound.Play("Select", Define.Sound.Effect);
         //Todo
         //Setting PlayerStat
         Managers.Game.StartPlayer = currentPlayer;

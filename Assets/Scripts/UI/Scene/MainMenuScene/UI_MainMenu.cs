@@ -15,6 +15,7 @@ public class UI_MainMenu : UI_Scene
     enum Images
     {
         BackgroundImg,
+        FrontImage,
         Logo,
     }
 
@@ -45,8 +46,7 @@ public class UI_MainMenu : UI_Scene
         backgroundImg = GetImage((int)Images.BackgroundImg);
         _anime = backgroundImg.transform.GetComponent<Animator>();
 
-        backgroundImg.gameObject.AddUIEvent(SetAnimationOver);
-
+        GetImage((int)Images.FrontImage).gameObject.AddUIEvent(SetAnimationOver);
 
         GetButton((int)Buttons.GamePlayButton).gameObject.AddUIEvent(ShowCharacterSelectUI);
         GetButton((int)Buttons.GameExitButton).gameObject.AddUIEvent(ExitGame);
@@ -66,16 +66,19 @@ public class UI_MainMenu : UI_Scene
             {
                 GetButton((int)button).gameObject.SetActive(true);
             }
+            Managers.Resource.Destroy(GetImage((int)Images.FrontImage).gameObject);
         }
     }
     void ShowCharacterSelectUI(PointerEventData data)
     {
+        Managers.Sound.Play("Select", Define.Sound.Effect);
         Debug.Log("Show!");
         Managers.UI.ShowPopupUI<UI_CharacterSelect>();
     }
 
     void ExitGame(PointerEventData data)
     {
+        Managers.Sound.Play("Select", Define.Sound.Effect);
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else

@@ -27,25 +27,29 @@ public class ShotgunController : WeaponController
 
     protected override void SetWeaponStat()
     {
-        base.SetWeaponStat();
         float bulletAngle = _bulletTargetRange / (_countPerCreate+1);
         float angle = SetAngleFromHandToCursor();
         float startBulletAngle = angle - (_bulletTargetRange/2);
         for (int i = 1; i <= _countPerCreate; i++)
         {
-            GameObject bullet = Managers.Game.Spawn(Define.WorldObject.Unknown, "Weapon/Bullet");
-            bullet.transform.position = gunhole.transform.position;
-            //set damage, dir 
-            Bullet bulletStat = bullet.GetComponent<Bullet>();
-            float _ang = startBulletAngle + bulletAngle * i + Random.Range(-5f,5f);
-            Vector3 bulletDir = new Vector3(Mathf.Cos(_ang*Mathf.Deg2Rad), Mathf.Sin(_ang * Mathf.Deg2Rad), 0);
-            bulletStat.SetBulletDir(bulletDir);
-            bulletStat._damage = _damage;
-            bulletStat._movSpeed = _movSpeed;
-            bulletStat._penetrate = _penetrate;
-            bulletStat._force = _force;
+            CreateBullet(i, bulletAngle, startBulletAngle);
         }
         
+    }
+
+    void CreateBullet(int num, float bulletAngle, float startBulletAngle)
+    {
+        GameObject bullet = Managers.Game.Spawn(Define.WorldObject.Unknown, "Weapon/Bullet");
+        bullet.transform.position = gunhole.transform.position;
+        //set damage, dir 
+        Bullet bulletStat = bullet.GetComponent<Bullet>();
+        float _ang = startBulletAngle + bulletAngle * num + Random.Range(-5f, 5f);
+        Vector3 bulletDir = new Vector3(Mathf.Cos(_ang * Mathf.Deg2Rad), Mathf.Sin(_ang * Mathf.Deg2Rad), 0);
+        bulletStat.SetBulletDir(bulletDir);
+        bulletStat._damage = _damage;
+        bulletStat._movSpeed = _movSpeed;
+        bulletStat._penetrate = _penetrate;
+        bulletStat._force = _force;
     }
 
     float SetAngleFromHandToCursor()
@@ -59,6 +63,7 @@ public class ShotgunController : WeaponController
     IEnumerator ShotCoolTime()
     {
         _isCool = true;
+        Managers.Sound.Play("Shoot_02");
         SetWeaponStat();
         yield return new WaitForSeconds(_cooldown);
 

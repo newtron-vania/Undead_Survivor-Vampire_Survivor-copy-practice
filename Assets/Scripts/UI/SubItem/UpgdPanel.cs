@@ -33,6 +33,7 @@ public class UpgdPanel : UI_Base
 
     void OnStatOrWeaponUp(PointerEventData data)
     {
+        Managers.Sound.Play("Select", Define.Sound.Effect);
         string title =  Get<TextMeshProUGUI>((int)Texts.UpgdTitleText).text;
         Debug.Log($"{title} select!");
         Managers.Event.LevelUpOverEvent(itemType, itemName);

@@ -33,6 +33,7 @@ public class KnifeController : WeaponController
         _isCool = true;
         for (int i = 0; i < _countPerCreate; i++)
         {
+            Managers.Sound.Play("Shoot_01");
             GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
             SetWeapon(go);
             if (i == _countPerCreate-1)

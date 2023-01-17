@@ -11,85 +11,43 @@ public class UI_PlayerStat : UI_Popup
 
     public override Define.PopupUIGroup _popupID { get { return Define.PopupUIGroup.UI_GameMenu; } }
 
-
-    enum Images
+    enum Objects
     {
-        BackgroundImg,
+
         StatPanel,
         WeaponPanel
     }
-
-    enum Texts
+    enum Images
     {
-        MaxHpText,
-        DamageText,
-        DefenseText,
-        MoveSpeedText,
-        CooldownText,
-        AmountText,
-
-        KnifeText,
-        FireballText,
-        SpinText,
-        PoisonText,
-        LightningText,
-        ShotgunText
+        BackgroundImg,
     }
-
     public override void Init()
     {
         player = Managers.Game.getPlayer().GetOrAddComponent<PlayerStat>();
+        Bind<GameObject>(typeof(Objects));
         Bind<Image>(typeof(Images));
-        Bind<TextMeshProUGUI>(typeof(Texts));
 
-        foreach(Texts text in System.Enum.GetValues(typeof(Texts)))
+        GameObject statPanel = GetObject((int)Objects.StatPanel);
+        foreach(Transform child in statPanel.transform)
         {
-            int level = 0;
-            switch (text)
-            {
-                case Texts.MaxHpText:
-                    GetText((int)text).text = player.MaxHP.ToString();
-                    break;
-                case Texts.DamageText:
-                    GetText((int)text).text = player.Damage.ToString();
-                    break;
-                case Texts.DefenseText:
-                    GetText((int)text).text = player.Defense.ToString();
-                    break;
-                case Texts.MoveSpeedText:
-                    GetText((int)text).text = player.MoveSpeed.ToString();
-                    break;
-                case Texts.CooldownText:
-                    GetText((int)text).text = player.Cooldown.ToString();
-                    break;
-                case Texts.AmountText:
-                    GetText((int)text).text = player.Amount.ToString();
-                    break;
-                case Texts.KnifeText:
-                    player.GetWeaponDict().TryGetValue(Define.Weapons.Knife, out level);
-                    GetText((int)text).text = level.ToString();
-                    break;
-                case Texts.FireballText:
-                    player.GetWeaponDict().TryGetValue(Define.Weapons.Fireball, out level);
-                    GetText((int)text).text = level.ToString();
-                    break;
-                case Texts.SpinText:
-                    player.GetWeaponDict().TryGetValue(Define.Weapons.Spin, out level);
-                    GetText((int)text).text = level.ToString();
-                    break;
-                case Texts.PoisonText:
-                    player.GetWeaponDict().TryGetValue(Define.Weapons.Poison, out level);
-                    GetText((int)text).text = level.ToString();
-                    break;
-                case Texts.LightningText:
-                    player.GetWeaponDict().TryGetValue(Define.Weapons.Lightning, out level);
-                    GetText((int)text).text = level.ToString();
-                    break;
-                case Texts.ShotgunText:
-                    player.GetWeaponDict().TryGetValue(Define.Weapons.Shotgun, out level);
-                    GetText((int)text).text = level.ToString();
-                    break;
-            }
+            Managers.Resource.Destroy(child.gameObject);
+        }
+
+        foreach(KeyValuePair<string, int> stat in player.getPlayerStatData())
+        {
+            GameObject go = Managers.Resource.Instantiate("UI/SubItem/StatData", statPanel.transform);
+            go.GetOrAddComponent<StatInven>().SetInfo(stat.Key, stat.Value);
+        }
+
+        GameObject weaponPanel = GetObject((int)Objects.WeaponPanel);
+        foreach (Transform child in weaponPanel.transform)
+        {
+            Managers.Resource.Destroy(child.gameObject);
+        }
+        foreach (KeyValuePair<Define.Weapons, int> weapon in player.GetWeaponDict())
+        {
+            GameObject go = Managers.Resource.Instantiate("UI/SubItem/WeaponData", weaponPanel.transform);
+            go.GetOrAddComponent<WeaponInven>().SetInfo(weapon.Key.ToString(), weapon.Value);
         }
 
         GetImage((int)Images.BackgroundImg).gameObject.AddUIEvent(Close);
@@ -98,6 +56,7 @@ public class UI_PlayerStat : UI_Popup
 
     void Close(PointerEventData data)
     {
+        Managers.Sound.Play("Select", Define.Sound.Effect);
         Managers.UI.ClosePopupUI(_popupID);
     }
 }

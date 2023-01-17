@@ -92,6 +92,7 @@ public class PlayerController : BaseController
 
     public override void OnDamaged(int damage, float force = 0)
     {
+        Managers.Event.PlayHitPlayerEffectSound();
         _stat.HP -= Mathf.Max(damage - _stat.Defense, 1);
         OnDead();
     }
@@ -109,7 +110,13 @@ public class PlayerController : BaseController
 
     public override void OnDead()
     {
-        _stat.HP = 0;
+        if(_stat.HP < 0)
+        {
+            _anime.SetTrigger("dead");
+            _stat.HP = 0;
+            Managers.UI.ShowPopupUI<UI_GameOver>();
+        }
+            
     }
     
 

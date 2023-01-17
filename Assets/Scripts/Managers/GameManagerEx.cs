@@ -16,8 +16,14 @@ public class GameManagerEx
     public Vector3 MousePos { get; set; }
     public Vector3 WorldMousePos { get; set; }
 
-    public GameObject getPlayer() { return _player; }
+    public GameObject getPlayer() 
+    {
+        if (_player == null)
+            _player = GameObject.FindWithTag("Player");
+        return _player; 
+    }
     public Data.Player StartPlayer { get; set; } = new Data.Player();
+
     public GameObject Spawn(Define.WorldObject type, string path, Transform parent = null)
     {
         GameObject go = Managers.Resource.Instantiate(path, parent);

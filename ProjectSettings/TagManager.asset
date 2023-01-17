@@ -26,11 +26,11 @@ TagManager:
   - Player
   - Enemy
   - Weapon
-  - 
+  - Boss
   - ItemBox
   - Exp
-  - 
-  - 
+  - Health
+  - Magnet
   - 
   - PlayerUI
   - MainMenuUI

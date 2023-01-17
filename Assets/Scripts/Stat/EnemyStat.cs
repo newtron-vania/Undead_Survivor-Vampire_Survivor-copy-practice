@@ -1,5 +1,7 @@
 public class EnemyStat : Stat
 {
+    public Define.MonsterStyle MonsterStyle { get; set; } = Define.MonsterStyle.unknown;
+    public Define.MonsterType MonsterType { get; set; } = Define.MonsterType.Enemy;
     private long _expPoint;
     public long ExpPoint
     {

@@ -85,6 +85,8 @@ public class UIManager
 
     public T ShowPopupUI<T>(string name = null) where T : UI_Popup
     {
+        Managers.Sound.SetAudioVolumn(Define.Sound.Bgm, Managers.Sound.SoundVolumn/2);
+
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
 
@@ -99,7 +101,6 @@ public class UIManager
             _popupStackDict.Add(popupType, new Stack<UI_Popup>());
             
         _popupStackDict[popupType].Push(popup);
-
         
         return popup as T;
     }
@@ -190,6 +191,7 @@ public class UIManager
             
         if (_popupStackDict.Count == 0)
         {
+            Managers.Sound.SetAudioVolumn(Define.Sound.Bgm, Managers.Sound.SoundVolumn);
             Managers.GamePlay();
         }
     }

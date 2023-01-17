@@ -37,11 +37,7 @@ public class Spawner : MonoBehaviour
             if(timeLevel <= 5)
             {
                 timeLevel += 1;
-                int level = Managers.Game.getPlayer().GetComponent<PlayerStat>().Level;
-                GameObject middleBoss = Managers.Game.Spawn(Define.WorldObject.Enemy, "Monster/Enemy");
-                middleBoss.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
-                middleBoss.transform.localScale = Vector3.one * 2;
-                middleBoss.transform.GetComponent<EnemyController>().Init(monsterStat[timeLevel], level, Define.MonsterType.middleBoss);
+                SpawnBoss(timeLevel);
             }
 
         }
@@ -53,6 +49,30 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    void SpawnBoss(int timeLevel)
+    {
+        GameObject Boss = null;
+        if(timeLevel < 5)
+        {
+            int level = Managers.Game.getPlayer().GetComponent<PlayerStat>().Level;
+            Boss = Managers.Game.Spawn(Define.WorldObject.Enemy, "Monster/Enemy");
+            Boss.GetOrAddComponent<EnemyController>().Init(monsterStat[timeLevel], level, Define.MonsterType.middleBoss);
+        }
+        else
+        {
+            Boss = Managers.Game.Spawn(Define.WorldObject.Enemy, "Monster/Boss");
+        }
+        if(Boss == null)
+        {
+            Debug.Log($"Boss Load Failed! level : {timeLevel}");
+            return;
+        }
+
+        Boss.transform.localScale = Vector3.one * 2;
+        Boss.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
+
+
+    }
     void SpawnMonster()
     {
         if (enemyCount < _maxSpawnUnit)

@@ -20,6 +20,7 @@ public class UI_LevelUp : UI_Popup
     public override void Init()
     {
         base.Init();
+        Managers.Sound.Play("LevelUp", Define.Sound.Effect);
         Bind<GameObject>(typeof(Panels));
 
         GameObject gridPanel = Get<GameObject>((int)Panels.GridPanel);

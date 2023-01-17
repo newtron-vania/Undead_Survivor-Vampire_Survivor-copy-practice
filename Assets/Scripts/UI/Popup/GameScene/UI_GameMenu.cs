@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class UI_GameMenu : UI_Popup
 {
+
     enum Buttons
     {
         PlayerStatButton,
@@ -37,13 +38,9 @@ public class UI_GameMenu : UI_Popup
         BGMSelectorDD
     }
 
-    enum BGMs
-    {
-        BGM_01,
-        BGM_02,
-        BGM_03,
-        BGM_04
-    }
+
+    Slider volumnSlider;
+    TMP_Dropdown BGMdropdown;
 
     public override Define.PopupUIGroup _popupID
     {
@@ -56,42 +53,49 @@ public class UI_GameMenu : UI_Popup
         Bind<Image>(typeof(Images));
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Slider>(typeof(Sliders));
-        Bind<Dropdown>(typeof(Dropdowns));
+        Bind<TMP_Dropdown>(typeof(Dropdowns));
 
         GetImage((int)Images.BackgroundImage).gameObject.AddUIEvent(OnBackToGame);
         GetButton((int)Buttons.BackToGameButton).gameObject.AddUIEvent(OnBackToGame);
         GetButton((int)Buttons.BackToMainButton).gameObject.AddUIEvent(OnBackToMain);
         GetButton((int)Buttons.PlayerStatButton).gameObject.AddUIEvent(OnShowPlayerStatUI);
 
+        volumnSlider = Get<Slider>((int)Sliders.VolumeSlider);
+        BGMdropdown = Get<TMP_Dropdown>((int)Dropdowns.BGMSelectorDD);
 
+        volumnSlider.value = Managers.Sound.SoundVolumn;
+        BGMdropdown.value = (int)Managers.Sound.BGM;
     }
 
 
     public void OnBackToGame(PointerEventData data)
     {
+        Managers.Sound.Play("Select", Define.Sound.Effect);
         Managers.UI.CloseAllGroupPopupUI(Define.PopupUIGroup.UI_GameMenu);
     }
     public void OnBackToMain(PointerEventData data)
     {
+        Managers.Sound.Play("Select", Define.Sound.Effect);
         Managers.Scene.LoadScene(Define.SceneType.MainMenuScene);
         Managers.GamePlay();
     }
 
     void OnShowPlayerStatUI(PointerEventData data)
     {
+        Managers.Sound.Play("Select", Define.Sound.Effect);
         Managers.UI.ShowPopupUI<UI_PlayerStat>();
     }
 
     public void OnVolumnChanged()
     {
-        Slider volumnSlider = Get<Slider>((int)Sliders.VolumeSlider);
+        Managers.Sound.SoundVolumn = volumnSlider.value;
         Managers.Sound.SetAudioVolumn(Define.Sound.Bgm, volumnSlider.value);
         Managers.Sound.SetAudioVolumn(Define.Sound.Effect, volumnSlider.value);
     }
 
     public void OnValueChanged()
     {
-        Dropdown BGMdropdown =  Get<Dropdown>((int)Dropdowns.BGMSelectorDD);
-        Managers.Sound.Play(((BGMs)BGMdropdown.value).ToString(), Define.Sound.Bgm);
+        
+        Managers.Sound.Play(((Define.BGMs)BGMdropdown.value).ToString(), Define.Sound.Bgm);
     }
 }

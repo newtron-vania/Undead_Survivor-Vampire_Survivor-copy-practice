@@ -56,12 +56,11 @@ public class EnemyController : BaseController
             case Define.MonsterType.middleBoss:
                 mul = 20;
                 break;
-            case Define.MonsterType.Boss:
-                mul = 30;
-                break;
         }
         _anime.runtimeAnimatorController = animeCon[monsterStat.id-1];
-        _stat.MoveSpeed = monsterStat.moveSpeed *((float)(100f+ level)/100f) * mul;
+        _stat.MonsterStyle = (Define.MonsterStyle)System.Enum.Parse(typeof(Define.MonsterStyle), monsterStat.name);
+        _stat.MonsterType = type;
+        _stat.MoveSpeed = monsterStat.moveSpeed *((float)(100f+ level)/100f) * (mul*0.05f);
         _stat.MaxHP = SetRandomStat((int)(monsterStat.maxHp * ((100f + 10f*level)/ 100f))) * mul;
         _stat.HP = _stat.MaxHP;
         _stat.Damage = SetRandomStat((int)(monsterStat.damage * ((100f + level) / 100f)))* mul;
@@ -80,11 +79,13 @@ public class EnemyController : BaseController
     
     public override void OnDamaged(int damage, float force = 0)
     {
+        Managers.Event.PlayHitEnemyEffectSound();
+        _anime.SetTrigger("Hit");
         int calculateDamage = Mathf.Max(damage - _stat.Defense, 1);
         _stat.HP -= calculateDamage;
         _rigid.AddForce((_rigid.position - _target.position).normalized * (force * 500f));
         FloatDamageText(calculateDamage);
-        _anime.SetTrigger("Hit");
+
         OnDead();
     }
 
@@ -122,5 +123,30 @@ public class EnemyController : BaseController
         else
             expGo.GetComponent<SpriteRenderer>().sprite = expPoint._sprite[2];
 
+    }
+
+    void DropItem()
+    {
+        GameObject item = null;
+        float rand = Random.Range(0, 100);
+        if(rand < 3)
+        {
+            item = Managers.Resource.Instantiate("Content/ItemBox");
+        }
+        else if(rand < 8)
+        {
+            int rd = Random.Range(1, 11);
+            if(rd < 7)
+            {
+                item = Managers.Resource.Instantiate("Content/Health");
+            }
+            else
+            {
+                item = Managers.Resource.Instantiate("Content/Magnet");
+            }
+        }
+        if (item == null)
+            return;
+        item.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
     }
 }

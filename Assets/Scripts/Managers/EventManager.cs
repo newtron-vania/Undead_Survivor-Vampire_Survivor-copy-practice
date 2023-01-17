@@ -147,8 +147,24 @@ public class EventManager
         Managers.UI.ShowPopupUI<UI_ItemBoxOpen>();
         Managers.GamePause();
     }
-    public List<Define.Weapons> SetRandomWeaponfromItemBox()
+    public List<Define.Weapons> SetRandomWeaponfromItemBox(PlayerStat player)
     {
+        bool weaponFull = true;
+        if (player.GetWeaponDict().Count >= 4)
+        {
+            foreach(KeyValuePair<Define.Weapons, int> weapon in player.GetWeaponDict())
+            {
+                if(weapon.Value < 5)
+                {
+                    weaponFull = false;
+                    break;
+                }
+            }
+            if (weaponFull)
+            {
+                return null;
+            }
+        }
         int maxCount = 3;
         int rd = Random.Range(1, maxCount+1);
         int i = 0;
@@ -156,7 +172,7 @@ public class EventManager
         while(i < rd)
         {
             Define.Weapons wp = SetRandomWeaponInItem();
-            if (weaponList.Contains(wp) || wp == Define.Weapons.Fireball)
+            if (weaponList.Contains(wp) || player.GetWeaponDict().GetValueOrDefault<Define.Weapons, int>(wp) >= 5)
                 continue;
             weaponList.Add(wp);
             i++;
@@ -165,15 +181,37 @@ public class EventManager
         return weaponList;
     }
 
-    public void SetLevelUpWeaponfromItemBox(List<Define.Weapons> weaponList)
+    public void SetLevelUpWeaponfromItemBox(List<Define.Weapons> weaponList, PlayerStat player)
     {
-        PlayerStat player = Managers.Game.getPlayer().GetComponent<PlayerStat>();
+        if(weaponList == null)
+        {
+            player.HP += 30;
+        }
         foreach(Define.Weapons weaponType in weaponList)
         {
             player.AddOrSetWeaponDict(weaponType, 1);
             Debug.Log($"weapon up! {player.GetWeaponDict()[weaponType]}");
         }
         
+    }
+
+    public void PlayHitEnemyEffectSound()
+    {
+        int rd = Random.Range(1, 3);
+        switch (rd)
+        {
+            case 1:
+                Managers.Sound.Play("Hit0");
+                break;
+            case 2:
+                Managers.Sound.Play("Hit1");
+                break;
+        }
+    }
+
+    public void PlayHitPlayerEffectSound()
+    {
+        Managers.Sound.Play("Hit_01");
     }
 
 

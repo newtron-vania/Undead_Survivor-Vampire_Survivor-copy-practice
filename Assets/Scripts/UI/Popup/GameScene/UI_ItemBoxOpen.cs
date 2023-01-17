@@ -11,6 +11,7 @@ public class UI_ItemBoxOpen : UI_Popup
     [SerializeField]
     List<Transform> weaponUILocation;
     List<Define.Weapons> weaponList;
+    PlayerStat player;
 
     public override Define.PopupUIGroup _popupID { get { return Define.PopupUIGroup.UI_ItemBoxOpen; } }
 
@@ -31,6 +32,8 @@ public class UI_ItemBoxOpen : UI_Popup
 
     public override void Init()
     {
+        base.Init();
+        player = Managers.Game.getPlayer().GetOrAddComponent<PlayerStat>();
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Image>(typeof(Images));
         Bind<Button>(typeof(Buttons));
@@ -40,12 +43,18 @@ public class UI_ItemBoxOpen : UI_Popup
 
     void OnOpenChest(PointerEventData data)
     {
-        weaponList = Managers.Event.SetRandomWeaponfromItemBox();
+        Managers.Sound.Play("BoxOpen", Define.Sound.Effect, 0.8f);
+        weaponList = Managers.Event.SetRandomWeaponfromItemBox(player);
+        if(weaponList == null)
+        {
+            GameObject go = Managers.Resource.Instantiate("UI/SubItem/WeaponInven", parent: weaponUILocation[0].transform);
+            Util.FindChild<Image>(go, "WeaponImg", true).sprite = Managers.Resource.LoadSprite("Health");
+        }
 
         for (int i = 0; i < weaponList.Count; i++)
         {
             GameObject go = Managers.Resource.Instantiate("UI/SubItem/WeaponInven", parent: weaponUILocation[i].transform);
-            Util.FindChild<Image>(go, "WeaponImg", true).sprite = Managers.Resource.Load<Sprite>($"Prefabs/SpriteIcon/{weaponList[i].ToString()}");
+            Util.FindChild<Image>(go, "WeaponImg", true).sprite = Managers.Resource.LoadSprite(weaponList[i].ToString());
         }
         Get<Image>((int)Images.ItemBoxImage).GetComponent<Animator>().Play("Open");
 
@@ -56,7 +65,8 @@ public class UI_ItemBoxOpen : UI_Popup
 
     void Close(PointerEventData data)
     {
-        Managers.Event.SetLevelUpWeaponfromItemBox(weaponList);
+        Managers.Sound.Play("Select", Define.Sound.Effect);
+        Managers.Event.SetLevelUpWeaponfromItemBox(weaponList, player);
         Managers.UI.CloseAllGroupPopupUI(_popupID);
     }
 }
