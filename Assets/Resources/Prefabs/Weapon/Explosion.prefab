@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 443466}
   - component: {fileID: 9510688}
   - component: {fileID: 3579250614967571432}
-  - component: {fileID: 8336448042548768548}
+  - component: {fileID: 323858858653196288}
   m_Layer: 0
   m_Name: ExpAnimator
   m_TagString: Untagged
@@ -236,13 +236,13 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1.6
---- !u!114 &8336448042548768548
+--- !u!114 &323858858653196288
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

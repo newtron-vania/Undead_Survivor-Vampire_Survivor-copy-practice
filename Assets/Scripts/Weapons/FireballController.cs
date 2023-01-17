@@ -22,8 +22,7 @@ public class FireballController : WeaponController
         Managers.Sound.Play("Shoot_03");
         for (int i = 0; i < _countPerCreate; i++)
         {
-            GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Fireball");
-            go.transform.position = transform.position;
+            GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Fireball", transform.position);
             SetWeapon(go, angle);
             if (i == _countPerCreate - 1)
                 break;
@@ -52,7 +51,7 @@ public class FireballController : WeaponController
 
     protected void SetWeapon(GameObject weapon, float angle)
     {
-        Fireball fireball = weapon.GetComponent<Fireball>();
+        Fireball fireball = weapon.GetOrAddComponent<Fireball>();
         angle += Random.Range(-5f, 5f);
         fireball.dirVec = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
         fireball.damage = _damage;

@@ -14,6 +14,7 @@ public class GameScene : BaseScene
     {
         base.Init();
         playerUI = Managers.UI.ShowSceneUI<UI_Player>("UI_Player");
+        Managers.ResetGameTime();
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "Player/Player");
         player.GetOrAddComponent<PlayerController>().Init(Managers.Game.StartPlayer);
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);

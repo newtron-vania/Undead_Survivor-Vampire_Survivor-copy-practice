@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 381492236900238675}
   - component: {fileID: 381492236900238672}
   - component: {fileID: 381492236900238673}
+  - component: {fileID: 9005425191865795751}
+  - component: {fileID: -7174211718799621045}
   m_Layer: 13
   m_Name: Health
   m_TagString: Item
@@ -111,3 +113,28 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.5555556, y: 0.6111111}
   m_EdgeRadius: 0
+--- !u!114 &9005425191865795751
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381492236900238686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aff047e35f8e33c4db0a43ff027fe078, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-7174211718799621045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 381492236900238686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6513b7728502c3740a23c8b4b2d6bed7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isUsing: 1

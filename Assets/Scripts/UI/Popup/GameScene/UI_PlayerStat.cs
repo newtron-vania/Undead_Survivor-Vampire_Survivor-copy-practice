@@ -23,6 +23,7 @@ public class UI_PlayerStat : UI_Popup
     }
     public override void Init()
     {
+        base.Init();
         player = Managers.Game.getPlayer().GetOrAddComponent<PlayerStat>();
         Bind<GameObject>(typeof(Objects));
         Bind<Image>(typeof(Images));
@@ -35,8 +36,9 @@ public class UI_PlayerStat : UI_Popup
 
         foreach(KeyValuePair<string, int> stat in player.getPlayerStatData())
         {
-            GameObject go = Managers.Resource.Instantiate("UI/SubItem/StatData", statPanel.transform);
-            go.GetOrAddComponent<StatInven>().SetInfo(stat.Key, stat.Value);
+
+            StatInven statInven = Managers.UI.MakeSubItem<StatInven>(statPanel.transform, "StatData");
+            statInven.SetInfo(stat.Key, stat.Value);
         }
 
         GameObject weaponPanel = GetObject((int)Objects.WeaponPanel);
@@ -46,8 +48,8 @@ public class UI_PlayerStat : UI_Popup
         }
         foreach (KeyValuePair<Define.Weapons, int> weapon in player.GetWeaponDict())
         {
-            GameObject go = Managers.Resource.Instantiate("UI/SubItem/WeaponData", weaponPanel.transform);
-            go.GetOrAddComponent<WeaponInven>().SetInfo(weapon.Key.ToString(), weapon.Value);
+            WeaponInven weaponInven = Managers.UI.MakeSubItem<WeaponInven>(weaponPanel.transform, "WeaponData");
+            weaponInven.SetInfo(weapon.Key.ToString(), weapon.Value);
         }
 
         GetImage((int)Images.BackgroundImg).gameObject.AddUIEvent(Close);

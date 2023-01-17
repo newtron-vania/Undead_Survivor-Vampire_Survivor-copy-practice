@@ -32,7 +32,7 @@ public class SpinController : WeaponController
     //Todo
     protected void SetWeapon(GameObject weapon)
     {
-        SpinWeapon spin = weapon.GetComponent<SpinWeapon>();
+        SpinWeapon spin = weapon.GetOrAddComponent<SpinWeapon>();
         spin.damage = _damage;
         spin.force = _force;
     }

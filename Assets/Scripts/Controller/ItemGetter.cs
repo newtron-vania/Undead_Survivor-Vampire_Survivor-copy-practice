@@ -28,9 +28,9 @@ public class ItemGetter : MonoBehaviour
 
     IEnumerator GetItemInField(GameObject item)
     {
-        if (item.GetComponent<Base_Item>().target != _player)
+        if (item.GetOrAddComponent<Base_Item>().target != _player)
         {
-            item.GetComponent<Base_Item>().target = _player;
+            item.GetOrAddComponent<Base_Item>().target = _player;
             while (item.activeSelf)
             {
                 item.transform.position =

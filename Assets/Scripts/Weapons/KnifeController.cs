@@ -35,6 +35,7 @@ public class KnifeController : WeaponController
         {
             Managers.Sound.Play("Shoot_01");
             GameObject go = Managers.Game.Spawn(Define.WorldObject.Weapon, "Weapon/Knife");
+            go.transform.position = transform.position;
             SetWeapon(go);
             if (i == _countPerCreate-1)
                 break;
@@ -46,9 +47,9 @@ public class KnifeController : WeaponController
 
     protected void SetWeapon(GameObject weapon)
     {
-        Knife knife = weapon.GetComponent<Knife>();
+        Knife knife = weapon.GetOrAddComponent<Knife>();
         //Create Knife to ranmdom range position
-        knife.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+        knife.transform.position += new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
 
         Vector2 dirOfPlayer = _player.GetComponent<PlayerController>()._lastDirVec;
 

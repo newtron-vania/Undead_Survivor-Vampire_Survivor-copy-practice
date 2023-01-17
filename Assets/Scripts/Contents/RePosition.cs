@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RePosition : MonoBehaviour
@@ -32,14 +30,9 @@ public class RePosition : MonoBehaviour
         dirX = dirX > 0 ? 1 : -1;
         dirY = dirY > 0 ? 1 : -1;
 
-        switch (transform.tag)
+        if (coll.enabled)
         {
-            case "Enemy":
-                if (coll.enabled)
-                {
-                    transform.Translate(new Vector3(dirX, dirY, 0f).normalized * areaSize + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0));
-                }
-                break;
+            transform.Translate(new Vector3(dirX, dirY, 0f).normalized * areaSize + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0));
         }
     }
 }

@@ -797,7 +797,7 @@ MonoBehaviour:
   _Movespeed: 0
   _damage: 0
   _defense: 0
-  playertStartWeapon: 0
+  playerStartWeapon: 0
 --- !u!95 &6097877082915252135
 Animator:
   serializedVersion: 4

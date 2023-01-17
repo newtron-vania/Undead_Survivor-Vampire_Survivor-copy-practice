@@ -39,10 +39,9 @@ public class ShotgunController : WeaponController
 
     void CreateBullet(int num, float bulletAngle, float startBulletAngle)
     {
-        GameObject bullet = Managers.Game.Spawn(Define.WorldObject.Unknown, "Weapon/Bullet");
-        bullet.transform.position = gunhole.transform.position;
+        GameObject bullet = Managers.Game.Spawn(Define.WorldObject.Unknown, "Weapon/Bullet", gunhole.transform.position);
         //set damage, dir 
-        Bullet bulletStat = bullet.GetComponent<Bullet>();
+        Bullet bulletStat = bullet.GetOrAddComponent<Bullet>();
         float _ang = startBulletAngle + bulletAngle * num + Random.Range(-5f, 5f);
         Vector3 bulletDir = new Vector3(Mathf.Cos(_ang * Mathf.Deg2Rad), Mathf.Sin(_ang * Mathf.Deg2Rad), 0);
         bulletStat.SetBulletDir(bulletDir);

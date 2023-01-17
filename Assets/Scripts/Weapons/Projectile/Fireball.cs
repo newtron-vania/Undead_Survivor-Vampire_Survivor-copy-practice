@@ -14,7 +14,7 @@ public class Fireball : MonoBehaviour
     public int panatrate = 1;
     private int piercing = 0;
 
-    [SerializeField] private float lifeTime = 3f;
+    [SerializeField] private float lifeTime = 2f;
     [SerializeField] private float createTime = 0f;
 
     private void OnEnable()
@@ -49,12 +49,11 @@ public class Fireball : MonoBehaviour
     void DoExplosion()
     {
         Managers.Sound.Play("Explosion_02");
-        GameObject explosion = Managers.Resource.Instantiate("Weapon/Explosion");
-        Explosion explosionStat = explosion.GetComponent<Explosion>();
+        GameObject explosion = Managers.Game.Spawn(Define.WorldObject.Weapon,"Weapon/Explosion", transform.position);
+        explosion.transform.localScale = Vector3.one * size;
+        Explosion explosionStat = explosion.FindChild<Explosion>();
         explosionStat.damage = (int)(damage * 1.1);
         explosionStat.force = force;
-        explosion.transform.localScale = Vector3.one * size;
-        explosion.transform.position = transform.position;
         Managers.Resource.Destroy(gameObject);
     }
 

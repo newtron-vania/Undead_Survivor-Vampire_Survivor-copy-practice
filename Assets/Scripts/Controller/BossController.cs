@@ -91,7 +91,7 @@ public class BossController : BaseController
 
     IEnumerator TimePlay()
     {
-        GameObject TimeStopGo = Managers.Resource.Instantiate("Content/TimeStopImg", _target.transform);
+        GameObject TimeStopGo = Managers.Resource.Instantiate("Content/TimeStopImg", Vector3.zero, _target.transform);
         Managers.GamePause();
         yield return new WaitForSecondsRealtime(0.05f);
 
@@ -192,6 +192,7 @@ public class BossController : BaseController
             SpawnExp();
             _anime.Play("Mushromm_Death");
             Managers.UI.ShowPopupUI<UI_GameVictory>();
+            Managers.GamePause();
         }
     }
 

@@ -11,7 +11,7 @@ public class PlayerController : BaseController
     [SerializeField] Vector2 _inputVec;
     [SerializeField] public Vector2 _lastDirVec = new Vector2(1, 0);
     bool _isDamaged = false;
-    float _invincibility_time = 1f;
+    float _invincibility_time = 0.2f;
 
     Slider _slider;
 
@@ -115,6 +115,7 @@ public class PlayerController : BaseController
             _anime.SetTrigger("dead");
             _stat.HP = 0;
             Managers.UI.ShowPopupUI<UI_GameOver>();
+            Managers.GamePause();
         }
             
     }

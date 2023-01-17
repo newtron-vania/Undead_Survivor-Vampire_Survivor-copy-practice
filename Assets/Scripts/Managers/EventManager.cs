@@ -35,10 +35,10 @@ public class EventManager
 
             if (rd== 0)
             {
-                if (player.GetWeaponDict()[player.playertStartWeapon] >= 5)
+                if (player.GetWeaponDict()[player.playerStartWeapon] >= 5)
                     continue;
                 selected[0] = "0";
-                selected[1] = player.playertStartWeapon.ToString();
+                selected[1] = player.playerStartWeapon.ToString();
             }
             if (rd == 1)
             {
@@ -127,8 +127,16 @@ public class EventManager
                     player.Defense += 1;
                     Debug.Log($"Defense up! {player.Defense}");
                     break;
+                case "Cooldown":
+                    player.Cooldown += 10;
+                    Debug.Log($"Cooldown up! {player.Cooldown}");
+                    break;
+                case "Amount":
+                    player.Amount += 1;
+                    Debug.Log($"Amount up! {player.Amount}");
+                    break;
             }
-            player.AddOrSetWeaponDict(Define.Weapons.Shotgun, 0);
+            player.AddOrSetWeaponDict(player.playerStartWeapon, 0);
         }
             
         else
@@ -172,7 +180,8 @@ public class EventManager
         while(i < rd)
         {
             Define.Weapons wp = SetRandomWeaponInItem();
-            if (weaponList.Contains(wp) || player.GetWeaponDict().GetValueOrDefault<Define.Weapons, int>(wp) >= 5)
+            int weaponlevel = player.GetWeaponDict().GetValueOrDefault<Define.Weapons, int>(wp);
+            if (weaponlevel >= 5 || (player.GetWeaponDict().Count == 4 && weaponlevel == 0))
                 continue;
             weaponList.Add(wp);
             i++;
@@ -213,7 +222,5 @@ public class EventManager
     {
         Managers.Sound.Play("Hit_01");
     }
-
-
 
 }

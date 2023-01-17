@@ -36,7 +36,8 @@ public class Spawner : MonoBehaviour
             }
             if(timeLevel <= 5)
             {
-                timeLevel += 1;
+                timeLevel++;
+                Debug.Log($"{timeLevel}Boss Spawn!");
                 SpawnBoss(timeLevel);
             }
 
@@ -68,7 +69,6 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        Boss.transform.localScale = Vector3.one * 2;
         Boss.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
 
 
@@ -82,7 +82,7 @@ public class Spawner : MonoBehaviour
             int level = Managers.Game.getPlayer().GetComponent<PlayerStat>().Level;
             GameObject enemy = Managers.Game.Spawn(Define.WorldObject.Enemy, "Monster/Enemy");
             enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
-            enemy.transform.GetComponent<EnemyController>().Init(monsterStat[monsterType], level, Define.MonsterType.Enemy);
+            enemy.GetOrAddComponent<EnemyController>().Init(monsterStat[monsterType], level, Define.MonsterType.Enemy);
         }
     }
 

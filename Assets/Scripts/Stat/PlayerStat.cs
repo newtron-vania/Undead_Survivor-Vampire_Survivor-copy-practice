@@ -12,7 +12,7 @@ public class PlayerStat : Stat
     Dictionary<string, int> _playerStat = new Dictionary<string, int>();
     [SerializeField]
     Dictionary<Define.Weapons, int> _weaponDict = new Dictionary<Define.Weapons, int>();
-    public Define.Weapons playertStartWeapon;
+    public Define.Weapons playerStartWeapon;
     public Dictionary<Define.Weapons, int> GetWeaponDict()
     {
         return _weaponDict;
@@ -21,7 +21,7 @@ public class PlayerStat : Stat
     {
         if (_weaponDict.Count == 0)
         {
-            playertStartWeapon = key;
+            playerStartWeapon = key;
         }
         if (!_weaponDict.ContainsKey(key))
         {
@@ -79,7 +79,7 @@ public class PlayerStat : Stat
             base.Damage = value;
             if (!_playerStat.ContainsKey("Damage"))
                 _playerStat.Add("Damage", _damage);
-            _playerStat["v"] = _damage;
+            _playerStat["Damage"] = _damage;
         }
     }
     public override int Defense

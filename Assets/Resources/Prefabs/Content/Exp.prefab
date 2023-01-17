@@ -104,6 +104,7 @@ MonoBehaviour:
   - {fileID: 1807624531, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   - {fileID: -1997803578, guid: 0d5e657ee5a074e4baa53d5b248a01d2, type: 3}
   _exp: 0
+  _expMul: 0
 --- !u!58 &-8553698106554289827
 CircleCollider2D:
   m_ObjectHideFlags: 0

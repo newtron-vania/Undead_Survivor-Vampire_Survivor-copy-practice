@@ -1,19 +1,17 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 public class PoolManager
 {
     #region Pool
-    //���� ����� Ŭ����
+
     class Pool
     {
-        //����
+
         public GameObject Original { get; private set; }
-        //�θ� Ŭ����
+
         public Transform Root { get; set; }
 
-        //�ڽ�Ŭ������ �����ϴ� ����
+
         Stack<Poolable> _poolStack = new Stack<Poolable>();
 
         public void Init(GameObject original, int count = 5)
@@ -50,18 +48,24 @@ public class PoolManager
 
         public Poolable Pop(Transform parent)
         {
-            Poolable poolable;
+            Poolable poolable = null;
 
-            if (_poolStack.Count > 0)
+
+            while (_poolStack.Count > 0)
+            {
                 poolable = _poolStack.Pop();
-            else
+                if (poolable.gameObject.activeSelf == false)
+                    break;
+            }
+
+            if (poolable == null || poolable.gameObject.activeSelf == true)
                 poolable = Create();
 
             poolable.gameObject.SetActive(true);
 
             //DontDestroyOnLoad ����
             if (parent == null)
-                poolable.transform.parent = null;
+                poolable.transform.parent = Managers.Scene.CurrentScene.transform;
 
 
             poolable.transform.parent = parent;
@@ -77,19 +81,19 @@ public class PoolManager
 
     public void Init()
     {
-        if(_root == null)
+        if (_root == null)
         {
             _root = new GameObject { name = "@Pool_Root" }.transform;
             Object.DontDestroyOnLoad(_root);
         }
     }
 
-    public void Push(Poolable poolable)
+    public void Push(Poolable poolable, float time)
     {
         string name = poolable.gameObject.name;
         if (_pool.ContainsKey(name) == false)
         {
-            GameObject.Destroy(poolable.gameObject);
+            GameObject.Destroy(poolable.gameObject, time);
             return;
         }
 
@@ -106,7 +110,7 @@ public class PoolManager
         return _pool[original.name].Pop(parent);
     }
 
-    public void CreatePool(GameObject original, int count =5)
+    public void CreatePool(GameObject original, int count = 5)
     {
         Pool pool = new Pool();
         pool.Init(original, count);
@@ -123,7 +127,7 @@ public class PoolManager
 
     public void Clear()
     {
-        foreach(Transform child in _root)
+        foreach (Transform child in _root)
         {
             GameObject.Destroy(child.gameObject);
         }

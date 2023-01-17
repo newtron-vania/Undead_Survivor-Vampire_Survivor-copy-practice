@@ -3,7 +3,7 @@
     {
       "id": "1",
       "name": "zombie",
-      "maxHp": "20",
+      "maxHp": "30",
       "damage": "1",
       "defense": "0",
       "moveSpeed": "2.0",
@@ -12,7 +12,7 @@
     {
       "id": "2",
       "name": "zombieElite",
-      "maxHp": "45",
+      "maxHp": "55",
       "damage": "6",
       "defense": "1",
       "moveSpeed": "2.5",
@@ -21,7 +21,7 @@
     {
       "id": "3",
       "name": "skeleton",
-      "maxHp": "15",
+      "maxHp": "25",
       "damage": "2",
       "defense": "0",
       "moveSpeed": "4.0",
@@ -30,7 +30,7 @@
     {
       "id": "4",
       "name": "skeletonElite",
-      "maxHp": "30",
+      "maxHp": "38",
       "damage": "4",
       "defense": "0",
       "moveSpeed": "4.5",
@@ -39,10 +39,10 @@
     {
       "id": "5",
       "name": "tombStone",
-      "maxHp": "50",
-      "damage": "1",
+      "maxHp": "60",
+      "damage": "3",
       "defense": "0",
-      "moveSpeed": "0.2",
+      "moveSpeed": "1.0",
       "expMul": "3"
     }
   ]

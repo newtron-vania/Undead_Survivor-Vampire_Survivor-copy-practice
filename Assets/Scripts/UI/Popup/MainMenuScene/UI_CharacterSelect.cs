@@ -40,6 +40,7 @@ public class UI_CharacterSelect : UI_Popup
 
     public override void Init()
     {
+        base.Init();
         playerData = Managers.Data.PlayerData;
 
         Bind<Image>(typeof(Images));

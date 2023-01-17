@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5390729522360133489}
   - component: {fileID: 976300224812795700}
   m_Layer: 5
-  m_Name: KnifeText
+  m_Name: WeaponLevelText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

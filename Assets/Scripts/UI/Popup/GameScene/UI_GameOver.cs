@@ -25,6 +25,7 @@ public class UI_GameOver : UI_Popup
     public override void Init()
     {
         base.Init();
+        Managers.Sound.Play("Dead");
         anime = GetComponent<Animator>();
         anime.runtimeAnimatorController = animeCon[Managers.Game.StartPlayer.id - 1];
         Bind<Image>(typeof(Images));

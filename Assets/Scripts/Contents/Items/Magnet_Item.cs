@@ -11,11 +11,24 @@ public class Magnet_Item : Base_Item
 
     IEnumerator MagnetExp(PlayerStat player)
     {
-        Transform go = player.transform.Find("GetItemRange");
-        Vector3 itemRange = go.localScale;
-        go.localScale *= 100;
+        Managers.Sound.Play("GetMagnet");
+        ItemGetter itemGetter = player.transform.Find("GetItemRange").GetComponent<ItemGetter>();
+        float size = itemGetter._size;
+        itemGetter.transform.GetComponent<CircleCollider2D>().radius = size * 100;
+        Debug.Log($"Magnet Get! {size * 100}");
         yield return new WaitForSeconds(0.1f);
-        go.localScale = itemRange;
-        
+        itemGetter.transform.GetComponent<CircleCollider2D>().radius = size;
+        Debug.Log($"Range restore! : {size}");
+
+    }
+
+    protected override void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.transform.tag == "Player")
+        {
+            PlayerStat playerStat = col.GetComponent<PlayerStat>();
+            OnItemEvent(playerStat);
+            Managers.Resource.Destroy(gameObject, 0.3f);
+        }
     }
 }

@@ -45,6 +45,27 @@ public class GameManagerEx
 
     }
 
+    public GameObject Spawn(Define.WorldObject type, string path, Vector3 position, Transform parent = null)
+    {
+        GameObject go = Managers.Resource.Instantiate(path, position, parent);
+
+        switch (type)
+        {
+            case Define.WorldObject.Unknown:
+                break;
+            case Define.WorldObject.Enemy:
+                _monster.Add(go);
+                OnSpawnEvent.Invoke(1);
+                break;
+            case Define.WorldObject.Player:
+                _player = go;
+                break;
+        }
+
+        return go;
+
+    }
+
     public Define.WorldObject GetWorldObjectType(GameObject go)
     {
         Define.WorldObject type = go.GetComponent<BaseController>()._type;
@@ -85,6 +106,10 @@ public class GameManagerEx
     public void Clear()
     {
         Despawn(_player);
+        foreach(GameObject go in _monster)
+        {
+            Despawn(go);
+        }
     }
 
     public void SetMousePos()

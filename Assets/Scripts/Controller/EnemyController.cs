@@ -9,6 +9,8 @@ public class EnemyController : BaseController
     public RuntimeAnimatorController[] animeCon;
     public Rigidbody2D _target;
     bool _isLive = true;
+    bool _isRange = false;
+    bool _isAttack = false;
 
 
     protected override void Init()
@@ -26,6 +28,16 @@ public class EnemyController : BaseController
         if (!_isLive)
             return;
 
+        OnMove();
+
+        if (_isRange && !_isAttack)
+        {
+            StartCoroutine(RangeAttack());
+        }
+    }
+
+    void OnMove()
+    {
         Vector2 dirVec = _target.position - _rigid.position;
         Vector2 nextVec = dirVec.normalized * (_stat.MoveSpeed * Time.fixedDeltaTime);
 
@@ -33,6 +45,21 @@ public class EnemyController : BaseController
         _rigid.velocity = Vector2.zero;
     }
 
+    IEnumerator RangeAttack()
+    {
+        _isAttack = true;
+        SpawnBullet();
+        yield return new WaitForSeconds(2f);
+        _isAttack = false;
+    }
+
+    void SpawnBullet()
+    {
+        EnemyBullet bullet = Managers.Resource.Instantiate("Weapon/EnemyBullet",_rigid.position).GetOrAddComponent<EnemyBullet>();
+        bullet.damage = _stat.Damage;
+        bullet.speed = 5f;
+        bullet.dir = (_target.position - _rigid.position).normalized;
+    }
     private void LateUpdate()
     {
         _sprite.flipX = (_target.position.x - _rigid.position.x < 0) ? true : false;
@@ -40,9 +67,7 @@ public class EnemyController : BaseController
 
     private void OnEnable()
     {
-        _target = Managers.Game.getPlayer().GetComponent<Rigidbody2D>();
         _isLive = true;
-        _stat.HP = _stat.MaxHP;
     }
 
     public void Init(Data.Monster monsterStat, int level, Define.MonsterType type)
@@ -58,14 +83,19 @@ public class EnemyController : BaseController
                 break;
         }
         _anime.runtimeAnimatorController = animeCon[monsterStat.id-1];
+        if (monsterStat.id == 5)
+            _isRange = true;
+        if (type == Define.MonsterType.middleBoss)
+            transform.localScale = Vector3.one * 2;
         _stat.MonsterStyle = (Define.MonsterStyle)System.Enum.Parse(typeof(Define.MonsterStyle), monsterStat.name);
         _stat.MonsterType = type;
-        _stat.MoveSpeed = monsterStat.moveSpeed *((float)(100f+ level)/100f) * (mul*0.05f);
+        _stat.MoveSpeed = monsterStat.moveSpeed *((float)(100f+ level)/100f);
         _stat.MaxHP = SetRandomStat((int)(monsterStat.maxHp * ((100f + 10f*level)/ 100f))) * mul;
         _stat.HP = _stat.MaxHP;
-        _stat.Damage = SetRandomStat((int)(monsterStat.damage * ((100f + level) / 100f)))* mul;
-        _stat.Defense = SetRandomStat((int)(monsterStat.defense * ((100f + level) / 100f))) * mul;
-        _stat.ExpPoint = 5*level;
+        _stat.Damage = SetRandomStat((int)(monsterStat.damage * ((100f + level) / 100f)));
+        _stat.Defense = SetRandomStat((int)(monsterStat.defense * ((100f + level) / 100f)));
+        _rigid.mass = 3;
+        _stat.ExpPoint = 10*level;
         _stat.ExpMul = monsterStat.expMul;
     }
     
@@ -86,6 +116,7 @@ public class EnemyController : BaseController
         _rigid.AddForce((_rigid.position - _target.position).normalized * (force * 500f));
         FloatDamageText(calculateDamage);
 
+        
         OnDead();
     }
 
@@ -97,6 +128,20 @@ public class EnemyController : BaseController
         hudText.GetComponent<UI_DamageText>().damage = damage; // 데미지 전달
     }
     
+    public void OnDead(int Damage)
+    {
+
+        if (_stat.HP <= 0)
+        {
+            _isLive = false;
+            _stat.HP = 0;
+            Debug.Log($"Damage : {Damage}");
+            SpawnExp();
+            DropItem();
+            transform.localScale = Vector3.one;
+            Managers.Game.Despawn(gameObject);
+        }
+    }
     public override void OnDead()
     {
         if(_stat.HP <= 0)
@@ -105,6 +150,8 @@ public class EnemyController : BaseController
             _stat.HP = 0;
 
             SpawnExp();
+            DropItem();
+            transform.localScale = Vector3.one;
             Managers.Game.Despawn(gameObject);
         }
     }
@@ -129,9 +176,10 @@ public class EnemyController : BaseController
     {
         GameObject item = null;
         float rand = Random.Range(0, 100);
-        if(rand < 3)
+        Debug.Log($"Random num for Item :{rand}");
+        if(rand < 3 || _stat.MonsterType == Define.MonsterType.middleBoss)
         {
-            item = Managers.Resource.Instantiate("Content/ItemBox");
+            item = Managers.Resource.Instantiate("Content/Box");
         }
         else if(rand < 8)
         {
@@ -147,6 +195,6 @@ public class EnemyController : BaseController
         }
         if (item == null)
             return;
-        item.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+        item.transform.position += new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
     }
 }

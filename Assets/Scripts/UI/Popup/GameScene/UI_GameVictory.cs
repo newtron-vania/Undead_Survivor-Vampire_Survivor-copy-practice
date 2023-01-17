@@ -20,6 +20,8 @@ public class UI_GameVictory : UI_Popup
 
     public override void Init()
     {
+        base.Init();
+        Managers.Sound.Play("Win");
         Bind<Image>(typeof(Images));
         Bind<Button>(typeof(Buttons));
 

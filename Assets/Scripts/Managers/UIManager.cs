@@ -113,6 +113,7 @@ public class UIManager
 
         UI_Popup popup = _popupStackDict[popupType].Pop();
         Managers.Resource.Destroy(popup.gameObject);
+        _order--;
         popup = null;
 
         CheckPopupUICountAndRemove();
@@ -143,6 +144,7 @@ public class UIManager
             {
                 UI_Popup popup = popupStack.Pop();
                 Managers.Resource.Destroy(popup.gameObject);
+                _order--;
                 popup = null;
             }
         }
@@ -159,6 +161,7 @@ public class UIManager
         {
             UI_Popup popup = popupStack.Pop();
             Managers.Resource.Destroy(popup.gameObject);
+            _order--;
             popup = null;
         }
         CheckPopupUICountAndRemove();
