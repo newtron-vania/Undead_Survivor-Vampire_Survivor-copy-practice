@@ -31,7 +31,7 @@ public class ItemGetter : MonoBehaviour
         if (item.GetOrAddComponent<Base_Item>().target != _player)
         {
             item.GetOrAddComponent<Base_Item>().target = _player;
-            while (item.activeSelf)
+            while (item != null && item.activeSelf)
             {
                 item.transform.position =
                     Vector3.MoveTowards(item.transform.position, _player.transform.position, _movSpeed * Time.fixedDeltaTime);

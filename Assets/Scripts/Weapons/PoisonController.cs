@@ -6,14 +6,8 @@ public class PoisonController : WeaponController
 {
 
     bool _isCool = false;
-    Transform _damageEffectImage;
 
     public override int _weaponType { get { return (int)Define.Weapons.Poison; } }
-    private void Start()
-    {
-        _damageEffectImage = transform.GetChild(0);
-        Debug.Log(_damageEffectImage);
-    }
 
     private void Update()
     {
@@ -33,7 +27,9 @@ public class PoisonController : WeaponController
     protected override void SetWeaponStat()
     {
         base.SetWeaponStat();
-        _damageEffectImage.localScale = Vector3.one * _size * 2;
+        Transform DamageZonEffect = transform.GetChild(0);
+        Debug.Log(DamageZonEffect);
+        DamageZonEffect.localScale = Vector3.one * _size * 2;
     }
 
     IEnumerator DamageCoolTime()
