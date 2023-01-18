@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
         GameObject go = col.gameObject;
         if (go.CompareTag("Enemy"))
         {
-            go.GetComponent<EnemyController>().OnDamaged(_damage, _force);
+            go.GetComponent<BaseController>().OnDamaged(_damage, _force);
             piercing += 1;
             if(piercing >= _penetrate)
                 Managers.Resource.Destroy(gameObject);

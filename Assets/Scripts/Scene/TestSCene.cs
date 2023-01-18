@@ -16,7 +16,6 @@ public class TestSCene : BaseScene
     {
         base.Init();
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "Player/PlayerTest");
-        Debug.Log(Managers.Game.getPlayer().name);
         Camera.main.gameObject.GetOrAddComponent<CameraController>().SetPlayer(player);
         GameObject Boss = Managers.Resource.Instantiate("Monster/Boss");
     }

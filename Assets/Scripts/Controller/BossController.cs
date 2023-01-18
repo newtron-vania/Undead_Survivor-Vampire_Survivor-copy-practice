@@ -50,9 +50,13 @@ public class BossController : BaseController
             }
                 
         }
+        else if(useSkill && _isAttack)
+        {
+            _rigid.velocity = Vector2.zero;
+        }
         else if (!_isAttack)
         {
-            Vector2 nextVec = dirVec.normalized * (_stat.MoveSpeed * Time.fixedUnscaledDeltaTime);
+            Vector2 nextVec = dirVec.normalized * (_stat.MoveSpeed * Time.fixedDeltaTime);
             _rigid.MovePosition(_rigid.position + nextVec);
             _rigid.velocity = Vector2.zero;
         }
@@ -91,23 +95,33 @@ public class BossController : BaseController
 
     IEnumerator TimePlay()
     {
-        GameObject TimeStopGo = Managers.Resource.Instantiate("Content/TimeStopImg", Vector3.zero, _target.transform);
+        UI_TimeStop TimeStopUI = Managers.UI.ShowPopupUI<UI_TimeStop>(name:null,true);
+        TimeStopUI.gameObject.GetOrAddComponent<Canvas>().sortingOrder = 0;
         Managers.GamePause();
-        yield return new WaitForSecondsRealtime(0.05f);
-
-        Managers.Resource.Destroy(TimeStopGo);
+        float time = 0;
+        while(time < 2f)
+        {
+            if(Managers.UI.GetPopupUICount() < 2)
+            {
+                time += Time.fixedDeltaTime;
+            }
+            yield return new WaitForSecondsRealtime(Time.fixedDeltaTime);
+        }
         
-        yield return new WaitForSecondsRealtime(1f);
-
-        _isAttack = false;
-        _anime.Play("Mushromm_Run");
-
-        yield return new WaitForSecondsRealtime(2f);
 
         Debug.Log("Play!");
-        Managers.GamePlay();
+        Managers.UI.CloseAllGroupPopupUI(TimeStopUI._popupID);
+        int[] num = new int[] { -1, 1 };
+        int wRand = Random.Range(0, num.Length);
+        int hRand = Random.Range(0, num.Length);
 
+        _rigid.position = _target.position + new Vector2(num[wRand], num[hRand]);
+        _rigid.velocity = Vector2.zero;
+        _anime.Play("Mushromm_Run");
 
+        yield return new WaitForSecondsRealtime(Time.fixedDeltaTime);
+
+        _isAttack = false;
         yield return new WaitForSeconds(skillcool);
         useSkill = false;
     }
@@ -165,7 +179,6 @@ public class BossController : BaseController
     public override void OnDamaged(int damage, float force = 0)
     {
         Managers.Event.PlayHitEnemyEffectSound();
-        _anime.SetTrigger("Hit");
         int calculateDamage = Mathf.Max(damage - _stat.Defense, 1);
         _stat.HP -= calculateDamage;
         _rigid.AddForce((_rigid.position - _target.position).normalized * (force * 500f));
@@ -207,7 +220,5 @@ public class BossController : BaseController
             expPoint._expMul = _stat.ExpMul;
             expGo.transform.position = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
         }
-
-
     }
 }

@@ -105,11 +105,11 @@ public class GameManagerEx
 
     public void Clear()
     {
+        Spawner spanwer =  _player.GetComponentInChildren<Spawner>();
+        spanwer.gameObject.SetActive(false);
+
+        _monster.Clear();
         Despawn(_player);
-        foreach(GameObject go in _monster)
-        {
-            Despawn(go);
-        }
     }
 
     public void SetMousePos()

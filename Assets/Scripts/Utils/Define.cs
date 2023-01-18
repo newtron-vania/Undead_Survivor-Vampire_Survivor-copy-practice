@@ -51,6 +51,7 @@ public class Define
         UI_LevelUp,
         UI_GameOver,
         UI_GameVictory,
+        UI_TimeStop,
         UI_CharacterSelect
     }
 

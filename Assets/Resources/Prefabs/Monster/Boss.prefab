@@ -126,8 +126,8 @@ MonoBehaviour:
   hudDamageText: {fileID: 4480960751585585461, guid: bbda031a40b090b47939ff47d957f8b8, type: 3}
   animeCon: []
   _target: {fileID: 0}
-  skillcool: 2
-  randStat: 100
+  skillcool: 6
+  randStat: 50
 --- !u!50 &-6669866463926937626
 Rigidbody2D:
   serializedVersion: 4

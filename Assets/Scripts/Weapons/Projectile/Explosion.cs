@@ -10,7 +10,7 @@ public class Explosion : MonoBehaviour
     {
         if(collision.tag == "Enemy")
         {
-            collision.GetComponent<EnemyController>().OnDamaged(damage, force);
+            collision.GetComponent<BaseController>().OnDamaged(damage, force);
         }
     }
 

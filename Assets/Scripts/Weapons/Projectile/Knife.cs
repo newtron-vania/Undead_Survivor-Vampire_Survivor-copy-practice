@@ -32,7 +32,7 @@ public class Knife : MonoBehaviour
         if (go.CompareTag("Enemy"))
         {
             
-            go.GetComponent<EnemyController>().OnDamaged(damage, force);
+            go.GetComponent<BaseController>().OnDamaged(damage, force);
             piercing++;
             if (piercing >= panatrate)
                 Managers.Resource.Destroy(gameObject);

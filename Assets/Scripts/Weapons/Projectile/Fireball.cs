@@ -43,7 +43,7 @@ public class Fireball : MonoBehaviour
                 DoExplosion();
             }
             else
-                go.GetComponent<EnemyController>().OnDamaged(damage, force/2);
+                go.GetComponent<BaseController>().OnDamaged(damage, force/2);
         }
     }
     void DoExplosion()

@@ -70,13 +70,9 @@ public class Managers : MonoBehaviour
     public static void Clear()
     {
         Sound.Clear();
-        Debug.Log("Sound Clear!");
         UI.Clear();
-        Debug.Log("UI Clear!");
         Pool.Clear();
-        Debug.Log("Pool Clear!");
         Game.Clear();
-        Debug.Log("Player Clear!");
     }
     
     public static void ResetGameTime()

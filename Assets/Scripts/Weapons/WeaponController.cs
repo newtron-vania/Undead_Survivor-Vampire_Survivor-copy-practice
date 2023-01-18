@@ -41,20 +41,15 @@ public abstract class WeaponController : MonoBehaviour
     void Awake()
     {
         _player = Managers.Game.getPlayer();
-        Debug.Log($"player is null - {_player is null}");
         _playerStat = _player.GetComponent<PlayerStat>();
-        Debug.Log($"playerStat - {_playerStat}");
         _weaponData = Managers.Data.WeaponData;
-        Debug.Log($"{gameObject.name} WeaponData loaded!");
         _anime = transform.GetComponent<Animator>();
         _weaponStat = MakeLevelDataDict(_weaponType);
-        Debug.Log($"{gameObject.name} WeaponLevelData");
 
     }
 
     protected virtual void SetWeaponStat()
     {
-        Debug.Log($"{gameObject.name} stat Setting Start");
         if (_level > 5)
             _level = 5;
 
@@ -65,7 +60,6 @@ public abstract class WeaponController : MonoBehaviour
         _size = _weaponStat[_level].size;
         _penetrate = _weaponStat[_level].penetrate;
         _countPerCreate = _weaponStat[_level].countPerCreate + _playerStat.Amount;
-        Debug.Log($"{gameObject.name} stat Setting over!");
     }
 
     protected Dictionary<int, Data.WeaponLevelData> MakeLevelDataDict(int weaponID)

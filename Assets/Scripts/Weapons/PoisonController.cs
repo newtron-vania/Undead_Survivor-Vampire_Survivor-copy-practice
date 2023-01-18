@@ -18,7 +18,7 @@ public class PoisonController : WeaponController
             foreach(Collider2D coll in collider2Ds)
             {
                 GameObject go = coll.gameObject;
-                go.GetComponent<EnemyController>().OnDamaged(_damage);
+                go.GetComponent<BaseController>().OnDamaged(_damage, _force);
             }
         }
 
@@ -28,7 +28,6 @@ public class PoisonController : WeaponController
     {
         base.SetWeaponStat();
         Transform DamageZonEffect = transform.GetChild(0);
-        Debug.Log(DamageZonEffect);
         DamageZonEffect.localScale = Vector3.one * _size * 2;
     }
 

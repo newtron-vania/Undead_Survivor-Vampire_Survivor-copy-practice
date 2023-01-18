@@ -66,7 +66,6 @@ public class UI_Player : UI_Scene
         foreach(KeyValuePair<Define.Weapons, int> weapon in player.GetWeaponDict())
         {
             Image weaponImg =  Managers.Resource.Instantiate("UI/SubItem/WeaponInven", weaponImgList.transform).GetOrAddComponent<Image>();
-            Debug.Log($"WeaponImg get! {weaponImg.sprite.name} WeaponImg {weapon.Key.ToString()} is setting!");
             weaponImg.gameObject.GetOrAddComponent<WeaponListImage>().SetInfo(weapon.Key.ToString());
             
         }

@@ -79,11 +79,10 @@ public class UIManager
     }
     public UI_Scene getSceneUI()
     {
-        Debug.Log($"sceneUI - {_sceneUI.name}");
         return _sceneUI;
     }
 
-    public T ShowPopupUI<T>(string name = null) where T : UI_Popup
+    public T ShowPopupUI<T>(string name = null, bool forEffect = false) where T : UI_Popup
     {
         Managers.Sound.SetAudioVolumn(Define.Sound.Bgm, Managers.Sound.SoundVolumn/2);
 
@@ -101,7 +100,11 @@ public class UIManager
             _popupStackDict.Add(popupType, new Stack<UI_Popup>());
             
         _popupStackDict[popupType].Push(popup);
-        
+
+        if (forEffect)
+            popup.GetComponent<Canvas>().sortingOrder = -1;
+
+
         return popup as T;
     }
 

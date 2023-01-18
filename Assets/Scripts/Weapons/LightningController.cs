@@ -44,9 +44,8 @@ public class LightningController : WeaponController
                 foreach (Collider2D coll in collider2Ds)
                 {
                     GameObject go = coll.gameObject;
-                    go.GetComponent<EnemyController>().OnDamaged(_damage);
+                    go.GetComponent<BaseController>().OnDamaged(_damage, _force);
                 }
-                Debug.Log($"Lightning Attack! Give {_damage} to Enemy {collider2Ds.Length}");
             }
         }
     }

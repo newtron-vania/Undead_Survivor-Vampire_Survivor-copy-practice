@@ -26,9 +26,9 @@ public class EventManager
             float random = Random.Range(0, 100);
             int rd = 0;
 
-            if (random < 10)
+            if (random < 30)
                 rd = 0;
-            else if (random < 40)
+            else if (random < 50)
                 rd = 1;
             else
                 rd = 2;
@@ -113,27 +113,21 @@ public class EventManager
                 case "MaxHP":
                     player.MaxHP += 10;
                     player.HP = player.MaxHP;
-                    Debug.Log($"HP up! {player.MaxHP}");
                     break;
                 case "MoveSpeed":
                     player.MoveSpeed += 1;
-                    Debug.Log($"MoveSpeed up! {player.MoveSpeed}");
                     break;
                 case "Damage":
                     player.Damage += 10;
-                    Debug.Log($"Damage up! {player.Damage}");
                     break;
                 case "Defense":
                     player.Defense += 1;
-                    Debug.Log($"Defense up! {player.Defense}");
                     break;
                 case "Cooldown":
                     player.Cooldown += 10;
-                    Debug.Log($"Cooldown up! {player.Cooldown}");
                     break;
                 case "Amount":
                     player.Amount += 1;
-                    Debug.Log($"Amount up! {player.Amount}");
                     break;
             }
             player.AddOrSetWeaponDict(player.playerStartWeapon, 0);
@@ -143,7 +137,6 @@ public class EventManager
         {
             Define.Weapons weaponType = (Define.Weapons)System.Enum.Parse(typeof(Define.Weapons), itemName);
             player.AddOrSetWeaponDict(weaponType, 1);
-            Debug.Log($"weapon up! {player.GetWeaponDict()[weaponType]}");
         }
             
 
@@ -195,11 +188,11 @@ public class EventManager
         if(weaponList == null)
         {
             player.HP += 30;
+            return;
         }
         foreach(Define.Weapons weaponType in weaponList)
         {
             player.AddOrSetWeaponDict(weaponType, 1);
-            Debug.Log($"weapon up! {player.GetWeaponDict()[weaponType]}");
         }
         
     }

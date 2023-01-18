@@ -169,7 +169,7 @@ public class PlayerStat : Stat
         MaxExp += Math.Max(100, (long)(_maxExp*1.1));
     }
 
-    public void SetWeaponLevel()
+    void SetWeaponLevel()
     {
         //Set CommonWeaponSpawingPool 
         foreach (KeyValuePair<Define.Weapons, int> weapon in GetWeaponDict())
@@ -178,7 +178,6 @@ public class PlayerStat : Stat
             string weaponSpawningPool = weapon.Key + "SpawningPool";
 
             GameObject weaponPool = Util.FindChild(gameObject, weaponSpawningPool, true);
-            Debug.Log($"{weaponName} is {weaponPool} {weaponPool is null}");
             if (weaponPool == null)
             {
                 weaponPool = Managers.Resource.Instantiate($"Weapon/SpawningPool/{weaponSpawningPool}", transform);
@@ -191,7 +190,6 @@ public class PlayerStat : Stat
 
             weaponPool.GetComponentInChildren<WeaponController>().Level = weapon.Value;
             Managers.UI.getSceneUI().GetComponent<UI_Player>().SetWeaponImage(Managers.Game.getPlayer().GetComponent<PlayerStat>());
-            Debug.Log("WeaponList Updated!");
         }
     }
 

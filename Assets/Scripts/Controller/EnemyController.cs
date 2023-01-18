@@ -79,7 +79,7 @@ public class EnemyController : BaseController
                 mul = 1;
                 break;
             case Define.MonsterType.middleBoss:
-                mul = 20;
+                mul = 50;
                 break;
         }
         _anime.runtimeAnimatorController = animeCon[monsterStat.id-1];
@@ -97,6 +97,15 @@ public class EnemyController : BaseController
         _rigid.mass = 3;
         _stat.ExpPoint = 10*level;
         _stat.ExpMul = monsterStat.expMul;
+        if(type == Define.MonsterType.middleBoss)
+        {
+            Debug.Log("Boss Spawn! ");
+            Debug.Log($"MaxHp : {_stat.MaxHP}");
+            Debug.Log($"Hp : {_stat.HP}");
+            Debug.Log($"Damage : {_stat.Damage}");
+            Debug.Log($"Defense : {_stat.Defense}");
+            Debug.Log($"Weight : {_rigid.mass}");
+        }
     }
     
     int SetRandomStat(int value)
@@ -113,7 +122,7 @@ public class EnemyController : BaseController
         _anime.SetTrigger("Hit");
         int calculateDamage = Mathf.Max(damage - _stat.Defense, 1);
         _stat.HP -= calculateDamage;
-        _rigid.AddForce((_rigid.position - _target.position).normalized * (force * 500f));
+        _rigid.AddForce((_rigid.position - _target.position).normalized * (force * 200f));
         FloatDamageText(calculateDamage);
 
         
@@ -127,21 +136,7 @@ public class EnemyController : BaseController
         hudText.transform.position = transform.position + Vector3.up*1.5f; // 표시될 위치
         hudText.GetComponent<UI_DamageText>().damage = damage; // 데미지 전달
     }
-    
-    public void OnDead(int Damage)
-    {
 
-        if (_stat.HP <= 0)
-        {
-            _isLive = false;
-            _stat.HP = 0;
-            Debug.Log($"Damage : {Damage}");
-            SpawnExp();
-            DropItem();
-            transform.localScale = Vector3.one;
-            Managers.Game.Despawn(gameObject);
-        }
-    }
     public override void OnDead()
     {
         if(_stat.HP <= 0)
@@ -159,10 +154,11 @@ public class EnemyController : BaseController
     void SpawnExp()
     {
         GameObject expGo = Managers.Game.Spawn(Define.WorldObject.Unknown, "Content/Exp");
+        expGo.transform.position = transform.position;
         Exp_Item expPoint = expGo.GetComponent<Exp_Item>();
         expPoint._exp = _stat.ExpPoint;
         expPoint._expMul = _stat.ExpMul;
-        expGo.transform.position = transform.position;
+        
         if (expPoint._expMul == 1)
             expGo.GetComponent<SpriteRenderer>().sprite = expPoint._sprite[0];
         else if(expPoint._expMul == 2)
@@ -176,7 +172,6 @@ public class EnemyController : BaseController
     {
         GameObject item = null;
         float rand = Random.Range(0, 100);
-        Debug.Log($"Random num for Item :{rand}");
         if(rand < 3 || _stat.MonsterType == Define.MonsterType.middleBoss)
         {
             item = Managers.Resource.Instantiate("Content/Box");
@@ -195,6 +190,6 @@ public class EnemyController : BaseController
         }
         if (item == null)
             return;
-        item.transform.position += new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+        item.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
     }
 }

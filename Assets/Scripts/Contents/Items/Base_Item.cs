@@ -12,6 +12,7 @@ public abstract class Base_Item : MonoBehaviour
         {
             PlayerStat playerStat = col.GetComponent<PlayerStat>();
             OnItemEvent(playerStat);
+            target = null;
             Managers.Resource.Destroy(gameObject);
         }
     }

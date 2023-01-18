@@ -1,9 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
 public class UI_ItemBoxOpen : UI_Popup
@@ -45,17 +44,17 @@ public class UI_ItemBoxOpen : UI_Popup
     {
         Managers.Sound.Play("BoxOpen", Define.Sound.Effect, 0.8f);
         weaponList = Managers.Event.SetRandomWeaponfromItemBox(player);
-        if(weaponList == null)
+        if (weaponList == null)
         {
             GameObject go = Managers.Resource.Instantiate("UI/SubItem/WeaponInven", parent: weaponUILocation[0].transform);
             Util.FindChild<Image>(go, "WeaponImg", true).sprite = Managers.Resource.LoadSprite("Health");
         }
-
-        for (int i = 0; i < weaponList.Count; i++)
-        {
-            GameObject go = Managers.Resource.Instantiate("UI/SubItem/WeaponInven", parent: weaponUILocation[i].transform);
-            Util.FindChild<Image>(go, "WeaponImg", true).sprite = Managers.Resource.LoadSprite(weaponList[i].ToString());
-        }
+        else
+            for (int i = 0; i < weaponList.Count; i++)
+            {
+                GameObject go = Managers.Resource.Instantiate("UI/SubItem/WeaponInven", parent: weaponUILocation[i].transform);
+                Util.FindChild<Image>(go, "WeaponImg", true).sprite = Managers.Resource.LoadSprite(weaponList[i].ToString());
+            }
         Get<Image>((int)Images.ItemBoxImage).GetComponent<Animator>().Play("Open");
 
         Button btn = GetButton((int)Buttons.ItemBoxButton);

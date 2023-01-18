@@ -30,7 +30,7 @@ public class EnemyBullet : MonoBehaviour
         GameObject go = other.gameObject;
         if (go.CompareTag("Player"))
         {
-            go.GetComponent<PlayerController>().OnDamaged(damage);
+            go.GetComponent<BaseController>().OnDamaged(damage);
             Managers.Resource.Destroy(gameObject);
         }
     }
