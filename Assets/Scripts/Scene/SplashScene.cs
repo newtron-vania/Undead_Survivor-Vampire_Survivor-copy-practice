@@ -9,7 +9,7 @@ public class SplashScene : MonoBehaviour
     private void FixedUpdate()
     {
         time += Time.fixedDeltaTime;
-        if(time > 2.5)
+        if(time > 1.5)
         {
             SceneManager.LoadScene("MainMenuScene");
         }

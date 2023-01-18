@@ -12,7 +12,7 @@ public class BossController : BaseController
     bool _isLive = true;
     bool _isAttack = false;
     public float skillcool = 8f;
-    public int randStat = 0;
+    public int randStat = 50;
     bool useSkill = false;
 
     protected override void Init()

@@ -25,7 +25,7 @@ public class ShotgunController : WeaponController
         }
     }
 
-    protected override void SetWeaponStat()
+    void SetBulletAngle()
     {
         float bulletAngle = _bulletTargetRange / (_countPerCreate+1);
         float angle = SetAngleFromHandToCursor();
@@ -63,7 +63,7 @@ public class ShotgunController : WeaponController
     {
         _isCool = true;
         Managers.Sound.Play("Shoot_02");
-        SetWeaponStat();
+        SetBulletAngle();
         yield return new WaitForSeconds(_cooldown);
 
         _isCool = false;

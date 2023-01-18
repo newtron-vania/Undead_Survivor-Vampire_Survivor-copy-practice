@@ -145,7 +145,7 @@ public class EnemyController : BaseController
             _stat.HP = 0;
 
             SpawnExp();
-            DropItem();
+            Managers.Event.DropItem(_stat,transform);
             transform.localScale = Vector3.one;
             Managers.Game.Despawn(gameObject);
         }
@@ -168,28 +168,5 @@ public class EnemyController : BaseController
 
     }
 
-    void DropItem()
-    {
-        GameObject item = null;
-        float rand = Random.Range(0, 100);
-        if(rand < 3 || _stat.MonsterType == Define.MonsterType.middleBoss)
-        {
-            item = Managers.Resource.Instantiate("Content/Box");
-        }
-        else if(rand < 8)
-        {
-            int rd = Random.Range(1, 11);
-            if(rd < 7)
-            {
-                item = Managers.Resource.Instantiate("Content/Health");
-            }
-            else
-            {
-                item = Managers.Resource.Instantiate("Content/Magnet");
-            }
-        }
-        if (item == null)
-            return;
-        item.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
-    }
+
 }

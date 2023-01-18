@@ -26,12 +26,14 @@ public class EventManager
             float random = Random.Range(0, 100);
             int rd = 0;
 
+            Debug.Log($"Random number for levelUp : {random}");
             if (random < 30)
                 rd = 0;
             else if (random < 50)
                 rd = 1;
             else
                 rd = 2;
+
 
             if (rd== 0)
             {
@@ -40,7 +42,7 @@ public class EventManager
                 selected[0] = "0";
                 selected[1] = player.playerStartWeapon.ToString();
             }
-            if (rd == 1)
+            else if (rd == 1)
             {
                 selected[0] = "1";
                 PlayerStats stat = SetRandomStat();
@@ -62,6 +64,7 @@ public class EventManager
             {
                 if(selected[1] == type[1])
                 {
+                    Debug.Log($"{type[1]} is already contained");
                     isContains = true;
                     break;
                 }
@@ -88,10 +91,35 @@ public class EventManager
 
         return playerWeapon;
     }
+    public void DropItem(EnemyStat stat, Transform transform)
+    {
+        GameObject item = null;
+        float rand = Random.Range(0, 100);
+        Debug.Log($"rand dropItem : {rand}");
+        if (rand < 1 || stat.MonsterType == Define.MonsterType.middleBoss)
+        {
+            item = Managers.Resource.Instantiate("Content/Box");
+        }
+        else if (rand < 8)
+        {
+            int rd = Random.Range(1, 11);
+            if (rd < 7)
+            {
+                item = Managers.Resource.Instantiate("Content/Health");
+            }
+            else
+            {
+                item = Managers.Resource.Instantiate("Content/Magnet");
+            }
+        }
+        if (item == null)
+            return;
+        item.transform.position = transform.position + new Vector3(Random.Range(-0.5f, 0.5f), Random.Range(-0.5f, 0.5f), 0);
+    }
 
     public Define.Weapons SetRandomWeaponInItem()
     {
-        int weaponNum = Random.Range(1, System.Enum.GetValues(typeof(Define.Weapons)).Length - System.Enum.GetValues(typeof(Define.PlayerStartWeapon)).Length);
+        int weaponNum = Random.Range(1, System.Enum.GetValues(typeof(Define.Weapons)).Length+1 - System.Enum.GetValues(typeof(Define.PlayerStartWeapon)).Length);
         Define.Weapons playerWeapon = (Define.Weapons)weaponNum;
         return playerWeapon;
     }
