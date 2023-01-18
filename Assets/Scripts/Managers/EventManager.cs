@@ -155,6 +155,8 @@ public class EventManager
         {
             foreach(KeyValuePair<Define.Weapons, int> weapon in player.GetWeaponDict())
             {
+                if (weapon.Key == player.playerStartWeapon)
+                    continue;
                 if(weapon.Value < 5)
                 {
                     weaponFull = false;
