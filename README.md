@@ -6,7 +6,7 @@
 
 - 게임 개발에 대한 이해도와 숙련도를 높이기 위해 캐쥬얼하고 최소한의 기능만으로 최고의 재미를 보장하는 장르인 뱀서라이크 계열의 게임을 만들어봤다.
 
-- Game To Play - https://drive.google.com/file/d/1YgXHHbGiA_Kpw2S6dYT2AgyrommfWc5k/view?usp=sharing
+- Game To Play - https://drive.google.com/file/d/1DCUpQkDisK1UOMmwQSigFkcPXnLAeTBA/view?usp=sharing
 
 - 구현 기능
   - 캐릭터 선택
