@@ -16,6 +16,6 @@ public class Explosion : MonoBehaviour
 
     public void DoDestroy()
     {
-        Managers.Resource.Destroy(gameObject);
+        Managers.Resource.Destroy(transform.parent.gameObject);
     }
 }
