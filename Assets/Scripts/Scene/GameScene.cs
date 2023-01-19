@@ -34,27 +34,27 @@ public class GameScene : BaseScene
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameObject player = Managers.Game.getPlayer();
-            PlayerStat playerStat = player.GetOrAddComponent<PlayerStat>();
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    GameObject player = Managers.Game.getPlayer();
+        //    PlayerStat playerStat = player.GetOrAddComponent<PlayerStat>();
 
-            List<Define.Weapons> weapons = new List<Define.Weapons>(playerStat.GetWeaponDict().Keys);
-            foreach (Define.Weapons weapon  in weapons)
-            {
-                playerStat.AddOrSetWeaponDict(weapon, 5, true);
-            }
-            playerStat.Level = 100;
-            playerStat.MaxHP = 9999;
-            playerStat.HP = 9999;
-            playerStat.Damage = 100;
-            playerStat.MoveSpeed = 10;
-            playerStat.Defense = 100;
-            playerStat.MaxExp = 999999;
-            playerStat.Exp = 99999; 
-            Managers.GameTime = 300f;
+        //    List<Define.Weapons> weapons = new List<Define.Weapons>(playerStat.GetWeaponDict().Keys);
+        //    foreach (Define.Weapons weapon  in weapons)
+        //    {
+        //        playerStat.AddOrSetWeaponDict(weapon, 5, true);
+        //    }
+        //    playerStat.Level = 100;
+        //    playerStat.MaxHP = 9999;
+        //    playerStat.HP = 9999;
+        //    playerStat.Damage = 100;
+        //    playerStat.MoveSpeed = 10;
+        //    playerStat.Defense = 100;
+        //    playerStat.MaxExp = 999999;
+        //    playerStat.Exp = 99999; 
+        //    Managers.GameTime = 300f;
 
-        }
+        //}
     }
 
     void SetActiveSkillCursorImg()
