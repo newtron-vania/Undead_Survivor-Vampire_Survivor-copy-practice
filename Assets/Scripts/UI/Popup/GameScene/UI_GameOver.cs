@@ -26,7 +26,7 @@ public class UI_GameOver : UI_Popup
     {
         base.Init();
         Managers.Sound.Play("Dead");
-        anime = GetComponent<Animator>();
+        anime = gameObject.FindChild<Animator>("DeadImg");
         anime.runtimeAnimatorController = animeCon[Managers.Game.StartPlayer.id - 1];
         Bind<Image>(typeof(Images));
         Bind<Button>(typeof(Buttons));
