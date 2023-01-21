@@ -8,6 +8,7 @@
 
 - Game To Play - https://drive.google.com/file/d/1DCUpQkDisK1UOMmwQSigFkcPXnLAeTBA/view?usp=sharing
 - 프로젝트 설명서 - https://github.com/newtron-vania/Vampire-Survivor/raw/main/%EC%96%B8%EB%8D%B0%EB%93%9C%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4.hwpx
+- 플레이 영상 - https://youtu.be/Xxo9mynXYRA
 
 - 구현 기능
   - 캐릭터 선택
