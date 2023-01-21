@@ -70,6 +70,7 @@ public class EnemyController : BaseController
         _isLive = true;
     }
 
+    
     public void Init(Data.Monster monsterStat, int level, Define.MonsterType type)
     {
         int mul = 1;
