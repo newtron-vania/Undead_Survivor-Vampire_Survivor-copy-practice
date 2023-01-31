@@ -69,7 +69,7 @@
 </p>
 
 ## Item
-  몬스터는 사망 시 Exp과 일정 확률로 Item을 생성한다. 캐릭터는 ItemGetterObject를 통해 특정 거리의 아이템의 존재를 확인할 수 있으며, 아이템을 확인할 시 아이템이 캐릭터를 향헤 이동하며 캐릭터와 충돌 시 각 아이템의 OnItemEvent를 실행한다.
+  몬스터는 사망 시 Exp과 일정 확률로 Item을 생성한다. 캐릭터는 ItemGetterObject를 통해 특정 거리의 아이템의 존재를 확인할 수 있으며, 아이템을 확인할 시 아이템이 캐릭터를 향해 이동하며 캐릭터와 충돌 시 각 아이템의 OnItemEvent를 실행한다.
   
 <p align="center">
 <img src= "https://user-images.githubusercontent.com/118050445/213404095-ff6fb57f-997d-464e-a811-c83c217ba9f8.gif" alt="text" width="50%" height="50%">
@@ -101,7 +101,7 @@
 
 
 ## SpawningPool
-- 캐릭터의 일정 범위에는 몬스터를 생성하는 SpawningPool이 존재하며, 랜덤의로 위치를 지정하여 몬스터를 생성한다.
+- 캐릭터의 일정 범위에는 몬스터를 생성하는 SpawningPool이 존재하며, 랜덤으로 위치를 지정하여 몬스터를 생성한다.
 - 게임 시간이 1분이 지날 때마다 중간보스가 생성되며, 중간보스는 일반 몬스터보다 더 강한 능력치를 가진다.
 - 5분이 지날 시 보스가 생성되며, 보스가 사망 시 게임을 승리한다.
 
