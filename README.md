@@ -130,7 +130,7 @@
 <img src="https://user-images.githubusercontent.com/118050445/213421054-cb5d8223-3279-4d0d-9623-08725e602b18.gif" width="70%" height="70%">
 </p>
 
-## ==========================
+##
 - 제작기간 : 20일
 - 참고 에셋
   - 언데드 서바이버 에셋 팩 : https://www.youtube.com/watch?v=MmW166cHj54&t=2s
