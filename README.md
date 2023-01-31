@@ -133,7 +133,7 @@
 ##
 - 제작기간 : 20일
 - 참고 에셋
-  - 언데드 서바이버 에셋 팩 : https://www.youtube.com/watch?v=MmW166cHj54&t=2s
+  - 언데드 서바이버 에셋 팩 : https://assetstore.unity.com/packages/2d/undead-survivor-assets-pack-238068
   - 2d Flat Explosion : https://assetstore.unity.com/packages/2d/textures-materials/2d-flat-explosion-66932
   - 8-Bit Sfx : https://assetstore.unity.com/packages/audio/sound-fx/8-bit-sfx-32831
   - Casual Game BGM #5 : https://assetstore.unity.com/packages/audio/music/casual-game-bgm-5-135943
