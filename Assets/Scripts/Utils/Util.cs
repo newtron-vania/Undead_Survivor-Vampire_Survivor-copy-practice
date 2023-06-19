@@ -25,7 +25,7 @@ public class Util
         if (go == null)
             return null;
 
-        if (recursive == false)
+        if (!recursive)
         {
             for(int i=0; i<go.transform.childCount; i++)
             {

@@ -8,12 +8,14 @@ public class PlayerController : BaseController
 {
     protected PlayerStat _stat;
     public RuntimeAnimatorController[] animeCon;
-    [SerializeField] Vector2 _inputVec;
-    [SerializeField] public Vector2 _lastDirVec = new Vector2(1, 0);
+
+    [SerializeField] 
+    Vector2 _inputVec;
+    [SerializeField] 
+    public Vector2 _lastDirVec = new Vector2(1, 0);
+
     bool _isDamaged = false;
     float _invincibility_time = 0.2f;
-
-    Slider _slider;
 
     protected override void Init()
     {
@@ -22,7 +24,8 @@ public class PlayerController : BaseController
         _sprite = GetComponent<SpriteRenderer>();
         _anime = GetComponent<Animator>();
         _type = Define.WorldObject.Player;
-        if (gameObject.GetComponentInChildren<UI_HPBar>() == null)
+        if (gameObject.GetComponentInChildren<UI_HPBar>() 
+            null)
             Managers.UI.MakeWorldSpaceUI<UI_HPBar>(transform, "UI_HPBar");
     }
     

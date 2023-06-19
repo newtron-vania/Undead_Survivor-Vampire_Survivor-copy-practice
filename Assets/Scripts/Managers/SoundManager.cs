@@ -8,8 +8,8 @@ public class SoundManager
     Dictionary<string, AudioClip> _audioClips = new Dictionary<string, AudioClip>();
 
 
-    public float SoundVolumn = 1f;
-    public Define.BGMs BGM = Define.BGMs.A_Bit_Of_Hope;
+    public float _soundVolumn = 1f;
+    public Define.BGMs _BGM = Define.BGMs.A_Bit_Of_Hope;
     // MP3 Player   -> AudioSource
     // MP3 음원     -> AudioClip
     // 관객(귀)     -> AudioListener
@@ -61,7 +61,7 @@ public class SoundManager
 			if (audioSource.isPlaying)
 				audioSource.Stop();
 
-            BGM = (Define.BGMs)System.Enum.Parse(typeof(Define.BGMs), audioClip.name);
+            _BGM = (Define.BGMs)System.Enum.Parse(typeof(Define.BGMs), audioClip.name);
 
             audioSource.pitch = pitch;
 			audioSource.clip = audioClip;
@@ -86,7 +86,7 @@ public class SoundManager
 		}
 		else
 		{
-			if (_audioClips.TryGetValue(name, out audioClip) == false)
+			if (!_audioClips.TryGetValue(name, out audioClip))
 			{
                 string path = $"Audio/Effect/{name}";
                 audioClip = Managers.Resource.Load<AudioClip>(path);

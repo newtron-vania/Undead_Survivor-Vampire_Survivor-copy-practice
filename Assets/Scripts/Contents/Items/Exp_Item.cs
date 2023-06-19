@@ -17,4 +17,10 @@ public class Exp_Item : Base_Item
         player.Exp += _exp*_expMul;
     }
 
+    public void SetExp(long exp, int mul)
+    {
+        _exp = exp;
+        _expMul = mul;
+    }
+
 }

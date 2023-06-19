@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PoisonController : WeaponController
 {
-
-    bool _isCool = false;
-
     public override int _weaponType { get { return (int)Define.Weapons.Poison; } }
+
+    private bool _isCool = false;
+
 
     private void Update()
     {

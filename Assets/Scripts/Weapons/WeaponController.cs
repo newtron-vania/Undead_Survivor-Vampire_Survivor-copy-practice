@@ -5,15 +5,15 @@ using UnityEngine;
 public abstract class WeaponController : MonoBehaviour
 {
     protected GameObject _player = null;
-    PlayerStat _playerStat;
-    Dictionary<int, Data.WeaponData> _weaponData;
-    Dictionary<int, Data.WeaponLevelData> _weaponStat;
+    private PlayerStat _playerStat;
+    private Dictionary<int, Data.WeaponData> _weaponData;
+    private Dictionary<int, Data.WeaponLevelData> _weaponStat;
     public Define.WorldObject _type = Define.WorldObject.Weapon;
-    Animator _anime;
+    private Animator _anime;
 
 
     public abstract int _weaponType { get; }
-    int _level = 1;
+    private int _level = 1;
     public int Level 
     { 
         get 
@@ -28,6 +28,7 @@ public abstract class WeaponController : MonoBehaviour
             SetWeaponStat();
         } 
     }
+
     public int _damage=1;
     public float _movSpeed=1;
     public float _force=1;

@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    public int damage = 10;
-    public float force = 0f;
+    public int _damage = 10;
+    public float _force = 0f;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.tag == "Enemy")
         {
-            collision.GetComponent<BaseController>().OnDamaged(damage, force);
+            collision.GetComponent<BaseController>().OnDamaged(_damage, _force);
         }
     }
 

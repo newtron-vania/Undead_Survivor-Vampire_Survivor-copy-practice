@@ -7,11 +7,6 @@ using UnityEngine.EventSystems;
 
 public class UI_MainMenu : UI_Scene
 {
-    Animator _anime;
-    Image backgroundImg;
-    bool _animeOver;
-
-
     enum Images
     {
         BackgroundImg,
@@ -24,7 +19,7 @@ public class UI_MainMenu : UI_Scene
         Farmers,
         Monsters
     }
-    
+
     enum Texts
     {
         PresstoStartText
@@ -35,6 +30,11 @@ public class UI_MainMenu : UI_Scene
         GamePlayButton,
         GameExitButton
     }
+
+    private Animator _anime;
+    private Image backgroundImg;
+    private bool _animeOver;
+
 
     public override void Init()
     {

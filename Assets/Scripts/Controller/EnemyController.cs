@@ -6,7 +6,7 @@ public class EnemyController : BaseController
     public GameObject hudDamageText;
     
     protected EnemyStat _stat;
-    public RuntimeAnimatorController[] animeCon;
+    public RuntimeAnimatorController[] _animeCon;
     public Rigidbody2D _target;
     bool _isLive = true;
     bool _isRange = false;
@@ -56,9 +56,9 @@ public class EnemyController : BaseController
     void SpawnBullet()
     {
         EnemyBullet bullet = Managers.Resource.Instantiate("Weapon/EnemyBullet",_rigid.position).GetOrAddComponent<EnemyBullet>();
-        bullet.damage = _stat.Damage;
-        bullet.speed = 5f;
-        bullet.dir = (_target.position - _rigid.position).normalized;
+        bullet._damage = _stat.Damage;
+        bullet._speed = 5f;
+        bullet._dir = (_target.position - _rigid.position).normalized;
     }
     private void LateUpdate()
     {
@@ -83,9 +83,11 @@ public class EnemyController : BaseController
                 mul = 50;
                 break;
         }
-        _anime.runtimeAnimatorController = animeCon[monsterStat.id-1];
+        _anime.runtimeAnimatorController = _animeCon[monsterStat.id-1];
+
         if (monsterStat.id == 5)
             _isRange = true;
+
         if (type == Define.MonsterType.middleBoss)
             transform.localScale = Vector3.one * 2;
         _stat.MonsterStyle = (Define.MonsterStyle)System.Enum.Parse(typeof(Define.MonsterStyle), monsterStat.name);
@@ -133,9 +135,9 @@ public class EnemyController : BaseController
 
     void FloatDamageText(int damage)
     {
-        GameObject hudText = Instantiate(hudDamageText); // 생성할 텍스트 오브젝트
-        hudText.transform.position = transform.position + Vector3.up*1.5f; // 표시될 위치
-        hudText.GetComponent<UI_DamageText>().damage = damage; // 데미지 전달
+        GameObject hudText = Instantiate(hudDamageText); // ?�성???�스???�브?�트
+        hudText.transform.position = transform.position + Vector3.up*1.5f; // ?�시???�치
+        hudText.GetComponent<UI_DamageText>()._damage = damage; // ?��?지 ?�달
     }
 
     public override void OnDead()
@@ -157,9 +159,8 @@ public class EnemyController : BaseController
         GameObject expGo = Managers.Game.Spawn(Define.WorldObject.Unknown, "Content/Exp");
         expGo.transform.position = transform.position;
         Exp_Item expPoint = expGo.GetComponent<Exp_Item>();
-        expPoint._exp = _stat.ExpPoint;
-        expPoint._expMul = _stat.ExpMul;
-        
+        expPoint.SetExp(_stat.ExpPoint, _stat.ExpMul);
+
         if (expPoint._expMul == 1)
             expGo.GetComponent<SpriteRenderer>().sprite = expPoint._sprite[0];
         else if(expPoint._expMul == 2)

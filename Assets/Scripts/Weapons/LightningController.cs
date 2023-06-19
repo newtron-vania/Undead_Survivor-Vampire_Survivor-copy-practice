@@ -7,12 +7,13 @@ using UnityEngine.UI;
 
 public class LightningController : WeaponController
 {
-
-    bool _isAttack = false;
-    private GameObject _playerUI = null;
-    Image _image_skill;
     public override int _weaponType { get { return (int)Define.Weapons.Lightning; } }
 
+
+    private GameObject _playerUI = null;
+    private Image _image_skill;
+
+    private bool _isCool = false;
     protected override void SetWeaponStat()
     {
         base.SetWeaponStat();
@@ -36,7 +37,7 @@ public class LightningController : WeaponController
         UpdateSkillCoolTimeImage();
         if (Input.GetMouseButtonDown(0))
         {
-            if (!_isAttack)
+            if (!_isCool)
             {
                 StartCoroutine(DamageCoolTime());
                 StartCoroutine(LightnigEffect());
@@ -58,7 +59,7 @@ public class LightningController : WeaponController
 
     IEnumerator DamageCoolTime()
     {
-        _isAttack = true;
+        _isCool = true;
         float currentCooltime = _cooldown;
         while (currentCooltime > 0f)
         {
@@ -67,7 +68,7 @@ public class LightningController : WeaponController
             yield return new WaitForFixedUpdate();
 
         }
-        _isAttack = false;
+        _isCool = false;
     }
     IEnumerator LightnigEffect()
     {

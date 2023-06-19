@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UI_TimeStop : UI_Popup
 {
-    public override Define.PopupUIGroup _popupID { get { return Define.PopupUIGroup.UI_TimeStop; } }
-
     enum Images
     {
         Image
     }
+
+    public override Define.PopupUIGroup PopupID { get { return Define.PopupUIGroup.UI_TimeStop; } }
 
     public override void Init()
     {

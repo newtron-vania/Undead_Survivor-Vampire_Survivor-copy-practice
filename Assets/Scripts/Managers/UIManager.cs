@@ -84,7 +84,7 @@ public class UIManager
 
     public T ShowPopupUI<T>(string name = null, bool forEffect = false) where T : UI_Popup
     {
-        Managers.Sound.SetAudioVolumn(Define.Sound.Bgm, Managers.Sound.SoundVolumn/2);
+        Managers.Sound.SetAudioVolumn(Define.Sound.Bgm, Managers.Sound._soundVolumn/2);
 
         if (string.IsNullOrEmpty(name))
             name = typeof(T).Name;
@@ -94,7 +94,7 @@ public class UIManager
         go.transform.SetParent(Root().transform);
         
         T popup =  go.GetOrAddComponent<T>();
-        Define.PopupUIGroup popupType = popup._popupID;
+        Define.PopupUIGroup popupType = popup.PopupID;
 
         if (!_popupStackDict.ContainsKey(popupType))
             _popupStackDict.Add(popupType, new Stack<UI_Popup>());
@@ -110,7 +110,7 @@ public class UIManager
 
     public void ClosePopupUI(Define.PopupUIGroup popupType)
     {
-        if (_popupStackDict.TryGetValue(popupType, out Stack<UI_Popup> popupStack) == false
+        if (!_popupStackDict.TryGetValue(popupType, out Stack<UI_Popup> popupStack)
             || _popupStackDict[popupType].Count == 0)
             return;
 
@@ -124,8 +124,8 @@ public class UIManager
 
     public void ClosePopupUI(UI_Popup popup)
     {
-        Define.PopupUIGroup popupType = popup._popupID;
-        if (_popupStackDict.TryGetValue(popupType, out Stack<UI_Popup> popupStack) == false
+        Define.PopupUIGroup popupType = popup.PopupID;
+        if (!_popupStackDict.TryGetValue(popupType, out Stack<UI_Popup> popupStack)
             || _popupStackDict[popupType].Count == 0)
             return;
 
@@ -156,7 +156,7 @@ public class UIManager
 
     public void CloseAllGroupPopupUI(Define.PopupUIGroup popupType)
     {
-        if (_popupStackDict.TryGetValue(popupType, out Stack<UI_Popup> popupStack) == false
+        if (!_popupStackDict.TryGetValue(popupType, out Stack<UI_Popup> popupStack)
             || _popupStackDict[popupType].Count == 0)
             return;
 
@@ -197,7 +197,7 @@ public class UIManager
             
         if (_popupStackDict.Count == 0)
         {
-            Managers.Sound.SetAudioVolumn(Define.Sound.Bgm, Managers.Sound.SoundVolumn);
+            Managers.Sound.SetAudioVolumn(Define.Sound.Bgm, Managers.Sound._soundVolumn);
             Managers.GamePlay();
         }
     }

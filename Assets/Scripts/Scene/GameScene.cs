@@ -5,13 +5,13 @@ using System.Linq;
 
 public class GameScene : BaseScene
 {
-    private UI_Player playerUI;
+    private UI_Player _playerUI;
 
-    public override Define.SceneType _sceneType { get { return Define.SceneType.GameScene; } }
+    public override Define.SceneType SceneType { get { return Define.SceneType.GameScene; } }
     protected override void Init()
     {
         base.Init();
-        playerUI = Managers.UI.ShowSceneUI<UI_Player>("UI_Player");
+        _playerUI = Managers.UI.ShowSceneUI<UI_Player>("UI_Player");
         Managers.ResetGameTime();
         GameObject player = Managers.Game.Spawn(Define.WorldObject.Player, "Player/Player");
         player.GetOrAddComponent<PlayerController>().Init(Managers.Game.StartPlayer);
@@ -20,10 +20,10 @@ public class GameScene : BaseScene
     }
     private void Update()
     {
-        playerUI.SetPlayerUI();
+        _playerUI.SetPlayerUI();
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            if (!Managers.gameStop)
+            if (!Managers._gameStop)
             {
                 Managers.UI.ShowPopupUI<UI_GameMenu>("UI_GameMenu");
                 Managers.GamePause();
@@ -61,7 +61,7 @@ public class GameScene : BaseScene
     {
         if (!Managers.Game.getPlayer().GetOrAddComponent<PlayerStat>().GetWeaponDict().TryGetValue(Define.Weapons.Lightning, out int weapon))
             return;
-        Image cursorCoolTimeImg = playerUI.gameObject.FindChild<Image>("CursorCoolTimeImg");
+        Image cursorCoolTimeImg = _playerUI.gameObject.FindChild<Image>("CursorCoolTimeImg");
         if (Managers.UI.GetPopupUICount() == 0)
             cursorCoolTimeImg.gameObject.SetActive(true);
         else

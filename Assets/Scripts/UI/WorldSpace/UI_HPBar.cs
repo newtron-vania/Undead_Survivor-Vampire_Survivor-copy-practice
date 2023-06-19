@@ -5,13 +5,13 @@ using UnityEngine;
 using UnityEngine.UI;
 public class UI_HPBar : UI_Base
 {
-    Stat _stat;
     enum GameObjects
     {
         HPBar,
     }
 
-
+    private Stat _stat;
+  
     public override void Init()
     {
         Bind<GameObject>(typeof(GameObjects));

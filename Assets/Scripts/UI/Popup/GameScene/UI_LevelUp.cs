@@ -5,18 +5,21 @@ using UnityEngine.UI;
 
 public class UI_LevelUp : UI_Popup
 {
-    int MaxUpgradeNum = 3;
-    
     public enum Panels
     {
         GridPanel,
-        
+
     }
 
-    public override Define.PopupUIGroup _popupID
+    private int _maxUpgradeNum = 3;
+
+    public override Define.PopupUIGroup PopupID
     {
         get { return Define.PopupUIGroup.UI_LevelUp; }
     }
+
+
+
     public override void Init()
     {
         base.Init();
@@ -37,9 +40,9 @@ public class UI_LevelUp : UI_Popup
         }
 
         //here we choose stat or weapon random number.
-        string title = "íŒ¨ë„ í…ŒìŠ¤íŠ¸";
-        string desc = "íŒ¨ë„ ì„¤ëª… í…ŒìŠ¤íŠ¸";
-        for(int i = 0; i< MaxUpgradeNum; i++)
+        string title = "ÆĞ³Î Å×½ºÆ®";
+        string desc = "ÆĞ³Î ¼³¸í Å×½ºÆ®";
+        for(int i = 0; i< _maxUpgradeNum; i++)
         {
             GameObject upgradePanel = Managers.UI.MakeSubItem<UpgdPanel>(parent:gridPanel.transform).gameObject;
             UpgdPanel upgradeDesc = upgradePanel.GetOrAddComponent<UpgdPanel>();

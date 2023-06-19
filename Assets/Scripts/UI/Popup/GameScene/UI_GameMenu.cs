@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class UI_GameMenu : UI_Popup
 {
-
     enum Buttons
     {
         PlayerStatButton,
@@ -38,14 +37,15 @@ public class UI_GameMenu : UI_Popup
         BGMSelectorDD
     }
 
+    private Slider volumnSlider;
+    private TMP_Dropdown BGMdropdown;
 
-    Slider volumnSlider;
-    TMP_Dropdown BGMdropdown;
-
-    public override Define.PopupUIGroup _popupID
+    public override Define.PopupUIGroup PopupID
     {
         get { return Define.PopupUIGroup.UI_GameMenu; }
     }
+
+
     public override void Init()
     {
         base.Init();
@@ -63,8 +63,8 @@ public class UI_GameMenu : UI_Popup
         volumnSlider = Get<Slider>((int)Sliders.VolumeSlider);
         BGMdropdown = Get<TMP_Dropdown>((int)Dropdowns.BGMSelectorDD);
 
-        volumnSlider.value = Managers.Sound.SoundVolumn;
-        BGMdropdown.value = (int)Managers.Sound.BGM;
+        volumnSlider.value = Managers.Sound._soundVolumn;
+        BGMdropdown.value = (int)Managers.Sound._BGM;
     }
 
 
@@ -88,7 +88,7 @@ public class UI_GameMenu : UI_Popup
 
     public void OnVolumnChanged()
     {
-        Managers.Sound.SoundVolumn = volumnSlider.value;
+        Managers.Sound._soundVolumn = volumnSlider.value;
         Managers.Sound.SetAudioVolumn(Define.Sound.Bgm, volumnSlider.value);
         Managers.Sound.SetAudioVolumn(Define.Sound.Effect, volumnSlider.value);
     }

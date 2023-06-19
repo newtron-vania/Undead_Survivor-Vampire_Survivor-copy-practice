@@ -6,9 +6,10 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Vector3 dir = new Vector3(1, 0, 0);
+    private Vector3 _dir = new Vector3(1, 0, 0);
     
-    public void SetBulletDir(Vector3 value) { dir = value;}
+    public Vector3 BulletDir { set { _dir = value; } }
+
     public int _damage;
     public float _movSpeed;
     public int _penetrate;
@@ -44,8 +45,8 @@ public class Bullet : MonoBehaviour
     
     void OnMove()
     {
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        float angle = Mathf.Atan2(_dir.y, _dir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0,0,angle-90);
-        transform.position += dir * (_movSpeed * Time.fixedDeltaTime);
+        transform.position += _dir * (_movSpeed * Time.fixedDeltaTime);
     }
 }

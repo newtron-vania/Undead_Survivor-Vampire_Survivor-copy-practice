@@ -7,11 +7,6 @@ using UnityEngine.EventSystems;
 
 public class UI_CharacterSelect : UI_Popup
 {
-    public override Define.PopupUIGroup _popupID { get { return Define.PopupUIGroup.UI_CharacterSelect; } }
-    
-    Dictionary<int, Data.Player> playerData;
-    List<GameObject> playerGOList = new List<GameObject>();
-    Data.Player currentPlayer = null;
     enum Images
     {
         BackgroundImg,
@@ -37,6 +32,13 @@ public class UI_CharacterSelect : UI_Popup
     {
         StartButton
     }
+
+    public override Define.PopupUIGroup PopupID { get { return Define.PopupUIGroup.UI_CharacterSelect; } }
+    
+    private Dictionary<int, Data.Player> playerData;
+    private List<GameObject> playerGOList = new List<GameObject>();
+    private Data.Player currentPlayer = null;
+
 
     public override void Init()
     {
@@ -64,12 +66,12 @@ public class UI_CharacterSelect : UI_Popup
                 break;
             GameObject go = Managers.Resource.Instantiate("UI/SubItem/PlayerInven", parent: gridPanel.transform);
             go.FindChild<Image>("PlayerImg", true).sprite = Managers.Resource.LoadSprite(kv.Value.name);
-            go.GetOrAddComponent<PlayerInven>().player = kv.Value;
-            Data.Player playerStat = go.GetOrAddComponent<PlayerInven>().player;
+            go.GetOrAddComponent<PlayerInven>().Player = kv.Value;
+            Data.Player playerStat = go.GetOrAddComponent<PlayerInven>().Player;
             BindUIEvent(go, (PointerEventData data) => { OnClickUpdate(go, playerStat); });
             playerGOList.Add(go);
         }
-        OnClickUpdate(playerGOList[0], playerGOList[0].GetComponent<PlayerInven>().player);
+        OnClickUpdate(playerGOList[0], playerGOList[0].GetComponent<PlayerInven>().Player);
 
         GetButton((int)Buttons.StartButton).gameObject.AddUIEvent(OnClickStartGame);
         
@@ -97,7 +99,7 @@ public class UI_CharacterSelect : UI_Popup
     void OnClickDelete(PointerEventData data)
     {
         Managers.Sound.Play("Select", Define.Sound.Effect);
-        Managers.UI.CloseAllGroupPopupUI(_popupID);
+        Managers.UI.CloseAllGroupPopupUI(PopupID);
     }
 
 

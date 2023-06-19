@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class BossController : BaseController
 {
-    public GameObject hudDamageText;
+    public GameObject _hudDamageText;
 
     protected EnemyStat _stat;
-    public RuntimeAnimatorController[] animeCon;
+    public RuntimeAnimatorController[] _animeCon;
     public Rigidbody2D _target;
     bool _isLive = true;
     bool _isAttack = false;
-    public float skillcool = 8f;
-    public int randStat = 50;
-    bool useSkill = false;
+    public float _skillcool = 8f;
+    public int _randStat = 50;
+    bool _useSkill = false;
 
     protected override void Init()
     {
@@ -33,11 +33,11 @@ public class BossController : BaseController
         if (!_isLive)
             return;
         Vector2 dirVec = _target.position - _rigid.position;
-        if(!useSkill && dirVec.magnitude < 10)
+        if(!_useSkill && dirVec.magnitude < 10)
         {
             float rd = Random.Range(0, 100f);
 
-            if (rd < randStat)
+            if (rd < _randStat)
             {
                 Debug.Log("Play Skill1");
                 Skill1();
@@ -50,7 +50,7 @@ public class BossController : BaseController
             }
                 
         }
-        else if(useSkill && _isAttack)
+        else if(_useSkill && _isAttack)
         {
             _rigid.velocity = Vector2.zero;
         }
@@ -110,7 +110,7 @@ public class BossController : BaseController
         
 
         Debug.Log("Play!");
-        Managers.UI.CloseAllGroupPopupUI(TimeStopUI._popupID);
+        Managers.UI.CloseAllGroupPopupUI(TimeStopUI.PopupID);
         int[] num = new int[] { -1, 1 };
         int wRand = Random.Range(0, num.Length);
         int hRand = Random.Range(0, num.Length);
@@ -122,12 +122,12 @@ public class BossController : BaseController
         yield return new WaitForSecondsRealtime(Time.fixedDeltaTime);
 
         _isAttack = false;
-        yield return new WaitForSeconds(skillcool);
-        useSkill = false;
+        yield return new WaitForSeconds(_skillcool);
+        _useSkill = false;
     }
     void Skill1()
     {
-        useSkill = true;
+        _useSkill = true;
         _isAttack = true;
         _anime.Play("Mushromm_AttackReady1", -1, 0);
     }
@@ -163,15 +163,15 @@ public class BossController : BaseController
         _anime.SetBool("doRush", false);
         _anime.Play("Mushromm_Run");
         _isAttack = false;
-        yield return new WaitForSeconds(skillcool);
-        useSkill = false;
+        yield return new WaitForSeconds(_skillcool);
+        _useSkill = false;
 
 
     }
 
     void Skill2()
     {
-        useSkill = true;
+        _useSkill = true;
         _isAttack = true;
         _anime.Play("Mushromm_AttackReady2", -1, 0);
     }
@@ -190,9 +190,9 @@ public class BossController : BaseController
 
     void FloatDamageText(int damage)
     {
-        GameObject hudText = Instantiate(hudDamageText); // 생성할 텍스트 오브젝트
+        GameObject hudText = Instantiate(_hudDamageText); // 생성할 텍스트 오브젝트
         hudText.transform.position = transform.position + Vector3.up * 1.5f; // 표시될 위치
-        hudText.GetComponent<UI_DamageText>().damage = damage; // 데미지 전달
+        hudText.GetComponent<UI_DamageText>()._damage = damage; // 데미지 전달
     }
 
     public override void OnDead()
@@ -216,8 +216,7 @@ public class BossController : BaseController
             GameObject expGo = Managers.Game.Spawn(Define.WorldObject.Unknown, "Content/Exp");
             Exp_Item expPoint = expGo.GetComponent<Exp_Item>();
             expGo.GetComponent<SpriteRenderer>().sprite = expPoint._sprite[2];
-            expPoint._exp = _stat.ExpPoint;
-            expPoint._expMul = _stat.ExpMul;
+            expPoint.SetExp(_stat.ExpPoint, _stat.ExpMul);
             expGo.transform.position = transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0);
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class UI_Popup : UI_Base
 {
-    public abstract Define.PopupUIGroup _popupID { get; }
+    public abstract Define.PopupUIGroup PopupID { get; }
     public override void Init()
     {
         Managers.UI.SetCanvas(gameObject, true);

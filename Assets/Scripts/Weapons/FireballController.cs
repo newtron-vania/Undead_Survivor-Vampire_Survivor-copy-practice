@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class FireballController : WeaponController
 {
-    bool _isCool = false;
+
     public override int _weaponType { get { return (int)Define.Weapons.Fireball; } }
+
+    private bool _isCool = false;
 
     void Update()
     {
@@ -53,11 +55,11 @@ public class FireballController : WeaponController
     {
         Fireball fireball = weapon.GetOrAddComponent<Fireball>();
         angle += Random.Range(-5f, 5f);
-        fireball.dirVec = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
-        fireball.damage = _damage;
-        fireball.speed = _movSpeed;
-        fireball.force = _force;
-        fireball.size = _size;
-        fireball.panatrate = _penetrate;
+        fireball._dir = new Vector3(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad), 0);
+        fireball._damage = _damage;
+        fireball._speed = _movSpeed;
+        fireball._force = _force;
+        fireball._size = _size;
+        fireball._panatrate = _penetrate;
     }
 }

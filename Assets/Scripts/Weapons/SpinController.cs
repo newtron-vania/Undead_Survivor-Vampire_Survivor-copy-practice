@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class SpinController : WeaponController
 {
-    List<GameObject> _spinWeapons = new List<GameObject>();
+    public override int _weaponType { get { return (int)Define.Weapons.Spin; } }
+
+    private List<GameObject> _spinWeapons = new List<GameObject>();
+
     private float _circleR = 4;
     private float _deg = 0;
 
-    public override int _weaponType { get { return (int)Define.Weapons.Spin; } }
     void FixedUpdate()
     {
         _deg += Time.deltaTime * _movSpeed;
@@ -33,8 +35,8 @@ public class SpinController : WeaponController
     protected void SetWeapon(GameObject weapon)
     {
         SpinWeapon spin = weapon.GetOrAddComponent<SpinWeapon>();
-        spin.damage = _damage;
-        spin.force = _force;
+        spin._damage = _damage;
+        spin._force = _force;
     }
 
     protected override void SetWeaponStat()

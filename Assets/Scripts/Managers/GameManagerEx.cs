@@ -11,7 +11,7 @@ public class GameManagerEx
     // int <-> gameobject
     //Dictionary<int, GameObject> _player = new Dictionary<int, GameObject>();
     HashSet<GameObject> _monster = new HashSet<GameObject>();
-    public Action<int> OnSpawnEvent;
+    public Action<int> _OnSpawnEvent;
 
     public Vector3 MousePos { get; set; }
     public Vector3 WorldMousePos { get; set; }
@@ -34,7 +34,7 @@ public class GameManagerEx
                 break;
             case Define.WorldObject.Enemy:
                 _monster.Add(go);
-                OnSpawnEvent.Invoke(1);
+                _OnSpawnEvent.Invoke(1);
                 break;
             case Define.WorldObject.Player:
                 _player = go;
@@ -55,7 +55,7 @@ public class GameManagerEx
                 break;
             case Define.WorldObject.Enemy:
                 _monster.Add(go);
-                OnSpawnEvent.Invoke(1);
+                _OnSpawnEvent.Invoke(1);
                 break;
             case Define.WorldObject.Player:
                 _player = go;
@@ -94,8 +94,8 @@ public class GameManagerEx
                     if (_monster.Contains(go))
                     {
                         _monster.Remove(go);
-                        if (OnSpawnEvent != null)
-                            OnSpawnEvent.Invoke(-1);
+                        if (_OnSpawnEvent != null)
+                            _OnSpawnEvent.Invoke(-1);
                     }
                 }
                 break;

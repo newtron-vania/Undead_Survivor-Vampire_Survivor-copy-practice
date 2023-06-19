@@ -8,12 +8,14 @@ using Random = UnityEngine.Random;
 
 public class ShotgunController : WeaponController
 {
-    [SerializeField] private GameObject gunhole;
+    public override int _weaponType { get { return (int)Define.Weapons.Shotgun; } }
+
+    [SerializeField] 
+    private GameObject gunhole;
 
     private bool _isCool = false;
     private float _bulletTargetRange = 60f;
 
-    public override int _weaponType { get { return (int)Define.Weapons.Shotgun; } }
 
     void Update()
     {
@@ -44,7 +46,7 @@ public class ShotgunController : WeaponController
         Bullet bulletStat = bullet.GetOrAddComponent<Bullet>();
         float _ang = startBulletAngle + bulletAngle * num + Random.Range(-5f, 5f);
         Vector3 bulletDir = new Vector3(Mathf.Cos(_ang * Mathf.Deg2Rad), Mathf.Sin(_ang * Mathf.Deg2Rad), 0);
-        bulletStat.SetBulletDir(bulletDir);
+        bulletStat.BulletDir = bulletDir;
         bulletStat._damage = _damage;
         bulletStat._movSpeed = _movSpeed;
         bulletStat._penetrate = _penetrate;

@@ -6,13 +6,13 @@ using UnityEngine.UI;
 
 public class Managers : MonoBehaviour
 {
-    static Managers s_instance;
-    public static Managers Instance { get { Init(); return s_instance; } }
+    static Managers _instance;
+    public static Managers Instance { get { Init(); return _instance; } }
 
     #region Contents
     GameManagerEx _game = new GameManagerEx();
 
-    public static GameManagerEx Game { get { return s_instance._game; } }
+    public static GameManagerEx Game { get { return _instance._game; } }
     #endregion
 
     #region core
@@ -35,7 +35,7 @@ public class Managers : MonoBehaviour
     #endregion
 
     public static float GameTime { get; set; } = 0;
-    public static bool gameStop = false;
+    public static bool _gameStop = false;
 
     void Awake()
     {
@@ -44,7 +44,7 @@ public class Managers : MonoBehaviour
 
     static void Init()
     {
-        if (s_instance == null)
+        if (_instance == null)
         {
             GameObject go = GameObject.Find("@Managers");
             if (go == null) 
@@ -53,10 +53,10 @@ public class Managers : MonoBehaviour
                 go.AddComponent<Managers>();
             }
             DontDestroyOnLoad(go);
-            s_instance = go.GetComponent<Managers>();
-            s_instance._sound.Init();
-            s_instance._pool.Init();
-            s_instance._data.Init();
+            _instance = go.GetComponent<Managers>();
+            _instance._sound.Init();
+            _instance._pool.Init();
+            _instance._data.Init();
         }
     }
 
@@ -82,13 +82,13 @@ public class Managers : MonoBehaviour
     public static void GamePause()
     {
         Time.timeScale = 0;
-        Managers.gameStop = true;
+        Managers._gameStop = true;
     }
 
     public static void GamePlay()
     {
         Time.timeScale = 1;
-        Managers.gameStop = false;
+        Managers._gameStop = false;
     }
 
 

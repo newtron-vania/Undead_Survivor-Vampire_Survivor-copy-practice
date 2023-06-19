@@ -31,7 +31,8 @@ public class PoolManager
         public void Push(Poolable poolable)
         {
             //object가 존재하지 않을 시 배치하지 않는다.
-            if (poolable == null)
+            if (poolable 
+                null)
                 return;
             //pool역할을 하는 Object의 자식오브젝트로 배치하고, 비활성화하여 사용되지 않음을 확인시킨다.
             poolable.transform.parent = Root;
@@ -48,11 +49,11 @@ public class PoolManager
             while (_poolStack.Count > 0)
             {
                 poolable = _poolStack.Pop();
-                if (poolable.gameObject.activeSelf == false)
+                if (!poolable.gameObject.activeSelf)
                     break;
             }
             //pool에 남아있는 Object가 없다면 원본을 통해 새로 생성하여 꺼내온다.
-            if (poolable == null || poolable.gameObject.activeSelf == true)
+            if (poolable == null || poolable.gameObject.activeSelf)
                 poolable = Create();
             poolable.gameObject.SetActive(true);
             //부모 오브젝트로 배치되지 않을 경우 Scene 위치에 배치된다.
@@ -82,7 +83,7 @@ public class PoolManager
     {
         //해당 원본을 담당하는 Pool이 존재하는지 확인. 존재하지 않을 경우 Poolable 	Object가 아니라는 의미이므로 해당 오브젝트를 파괴한다.
         string name = poolable.gameObject.name;
-        if (_pool.ContainsKey(name) == false)
+        if (!_pool.ContainsKey(name))
         {
             GameObject.Destroy(poolable.gameObject, time);
             return;
@@ -94,7 +95,7 @@ public class PoolManager
     public Poolable Pop(GameObject original, Transform parent = null)
     {
         //원본에 해당되는 pool이 존재하지 않을 경우 pool을 생성
-        if (_pool.ContainsKey(original.name) == false)
+        if (!_pool.ContainsKey(original.name))
             CreatePool(original);
         //해당 pool의 Object를 꺼낸다.
         return _pool[original.name].Pop(parent);
@@ -112,7 +113,7 @@ public class PoolManager
     //해당 풀의 원본을 가져온다.
     public GameObject GetOriginal(string name)
     {
-        if (_pool.ContainsKey(name) == false)
+        if (!_pool.ContainsKey(name))
             return null;
         return _pool[name].Original;
     }

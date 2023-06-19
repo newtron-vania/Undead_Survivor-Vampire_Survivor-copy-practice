@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 public class WeaponListImage : UI_Base
 {
-    string imgName;
-
     enum Images
     {
         WeaponInven,

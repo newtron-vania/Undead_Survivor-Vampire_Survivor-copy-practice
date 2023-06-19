@@ -4,14 +4,15 @@ using UnityEngine;
 public class SpinWeapon : MonoBehaviour
 {
 
-    public int damage = 10;
-    public float force = 0f;
-    private float createTime = 0f;
+    public int _damage = 10;
+    public float _force = 0f;
+
+    public float _createTime = 0f;
 
 
     private void OnEnable()
     {
-        createTime = Managers.GameTime;
+        _createTime = Managers.GameTime;
     }
 
 
@@ -21,7 +22,7 @@ public class SpinWeapon : MonoBehaviour
         GameObject go = other.gameObject;
         if (go.CompareTag("Enemy"))
         {
-            go.GetComponent<BaseController>().OnDamaged(damage, force);
+            go.GetComponent<BaseController>().OnDamaged(_damage, _force);
         }
     }
 }

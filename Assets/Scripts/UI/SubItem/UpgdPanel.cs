@@ -8,8 +8,6 @@ using System;
 
 public class UpgdPanel : UI_Base
 {
-    int itemType;
-    string itemName;
     enum Texts
     {
         UpgdTitleText,
@@ -23,6 +21,10 @@ public class UpgdPanel : UI_Base
         UpgdPanel,
         UpgdDescPanel,
     }
+
+    private int _itemType;
+    private string _itemName;
+
     public override void Init()
     {
         Bind<TextMeshProUGUI>(typeof(Texts));
@@ -36,7 +38,7 @@ public class UpgdPanel : UI_Base
         Managers.Sound.Play("Select", Define.Sound.Effect);
         string title =  Get<TextMeshProUGUI>((int)Texts.UpgdTitleText).text;
         Debug.Log($"{title} select!");
-        Managers.Event.LevelUpOverEvent(itemType, itemName);
+        Managers.Event.LevelUpOverEvent(_itemType, _itemName);
     }
 
     public void SetInfo(string title, string desc)
@@ -48,7 +50,7 @@ public class UpgdPanel : UI_Base
 
     internal void SetData(string[] data)
     {
-        itemType = Int32.Parse(data[0]);
-        itemName = data[1];
+        _itemType = Int32.Parse(data[0]);
+        _itemName = data[1];
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class KnifeController : WeaponController
 {
-
-    float _termKnifeThrow = 0.1f;
-    bool _isCool = false;
-
     public override int _weaponType { get { return (int)Define.Weapons.Knife; } }
+
+    private float _termKnifeThrow = 0.1f;
+    private bool _isCool = false;
+
 
     void Update()
     {
@@ -53,10 +53,10 @@ public class KnifeController : WeaponController
 
         Vector2 dirOfPlayer = _player.GetComponent<PlayerController>()._lastDirVec;
 
-        knife.dir = new Vector3(dirOfPlayer.x, dirOfPlayer.y, 0);
+        knife._dir = new Vector3(dirOfPlayer.x, dirOfPlayer.y, 0);
 
-        knife.damage = _damage;
-        knife.speed = _movSpeed;
-        knife.force = _force;
+        knife._damage = _damage;
+        knife._speed = _movSpeed;
+        knife._force = _force;
     }
 }

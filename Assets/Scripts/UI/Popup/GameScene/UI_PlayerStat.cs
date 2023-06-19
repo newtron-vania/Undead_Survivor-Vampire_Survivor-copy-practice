@@ -7,10 +7,6 @@ using UnityEngine.EventSystems;
 
 public class UI_PlayerStat : UI_Popup
 {
-    PlayerStat player;
-
-    public override Define.PopupUIGroup _popupID { get { return Define.PopupUIGroup.UI_GameMenu; } }
-
     enum Objects
     {
 
@@ -21,10 +17,16 @@ public class UI_PlayerStat : UI_Popup
     {
         BackgroundImg,
     }
+
+    private PlayerStat _player;
+
+    public override Define.PopupUIGroup PopupID { get { return Define.PopupUIGroup.UI_GameMenu; } }
+
+
     public override void Init()
     {
         base.Init();
-        player = Managers.Game.getPlayer().GetOrAddComponent<PlayerStat>();
+        _player = Managers.Game.getPlayer().GetOrAddComponent<PlayerStat>();
         Bind<GameObject>(typeof(Objects));
         Bind<Image>(typeof(Images));
 
@@ -34,7 +36,7 @@ public class UI_PlayerStat : UI_Popup
             Managers.Resource.Destroy(child.gameObject);
         }
 
-        foreach(KeyValuePair<string, int> stat in player.getPlayerStatData())
+        foreach(KeyValuePair<string, int> stat in _player.getPlayerStatData())
         {
 
             StatInven statInven = Managers.UI.MakeSubItem<StatInven>(statPanel.transform, "StatData");
@@ -46,7 +48,7 @@ public class UI_PlayerStat : UI_Popup
         {
             Managers.Resource.Destroy(child.gameObject);
         }
-        foreach (KeyValuePair<Define.Weapons, int> weapon in player.GetWeaponDict())
+        foreach (KeyValuePair<Define.Weapons, int> weapon in _player.GetWeaponDict())
         {
             WeaponInven weaponInven = Managers.UI.MakeSubItem<WeaponInven>(weaponPanel.transform, "WeaponData");
             weaponInven.SetInfo(weapon.Key.ToString(), weapon.Value);
@@ -59,6 +61,6 @@ public class UI_PlayerStat : UI_Popup
     void Close(PointerEventData data)
     {
         Managers.Sound.Play("Select", Define.Sound.Effect);
-        Managers.UI.ClosePopupUI(_popupID);
+        Managers.UI.ClosePopupUI(PopupID);
     }
 }

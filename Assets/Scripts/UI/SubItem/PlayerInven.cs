@@ -4,6 +4,5 @@ using UnityEngine;
 
 public class PlayerInven : MonoBehaviour
 {
-
-    public Data.Player player { get; set; } = new Data.Player();
+    public Data.Player Player { get; set; } = new Data.Player();
 }

@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class EnemyBullet : MonoBehaviour
 {
-    public Vector3 dir = new Vector3(1, 0, 0);
-    public int damage = 3;
-    public float speed = 6f;
-    [SerializeField] private float lifeTime = 2f;
-    [SerializeField] private float createTime = 0f;
+    public Vector3 _dir = new Vector3(1, 0, 0);
 
+    [SerializeField] 
+    private float lifeTime = 2f;
+    [SerializeField]
+    private float createTime = 0f;
+
+    public int _damage = 3;
+    public float _speed = 6f;
 
     private void OnEnable()
     {
@@ -30,7 +33,7 @@ public class EnemyBullet : MonoBehaviour
         GameObject go = other.gameObject;
         if (go.CompareTag("Player"))
         {
-            go.GetComponent<BaseController>().OnDamaged(damage);
+            go.GetComponent<BaseController>().OnDamaged(_damage);
             Managers.Resource.Destroy(gameObject);
         }
     }
@@ -38,6 +41,6 @@ public class EnemyBullet : MonoBehaviour
 
     void OnMove()
     {
-        transform.position += dir * (speed * Time.fixedDeltaTime);
+        transform.position += _dir * (_speed * Time.fixedDeltaTime);
     }
 }

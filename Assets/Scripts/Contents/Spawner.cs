@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    Dictionary<int, Data.Monster> monsterStat = new Dictionary<int, Data.Monster>();
-    public Transform[] spawnPoint;
+    Dictionary<int, Data.Monster> _monsterStat = new Dictionary<int, Data.Monster>();
+    public Transform[] _spawnPoint;
     float _spawnTime = 0.5f;
     bool _isSpawning = false;
     [SerializeField]
@@ -20,10 +20,10 @@ public class Spawner : MonoBehaviour
     public void AddEnemyCount(int value) { enemyCount += value; }
     private void Start()
     {
-        monsterStat = Managers.Data.MonsterData;
-        spawnPoint = GetComponentsInChildren<Transform>();
-        Managers.Game.OnSpawnEvent -= AddEnemyCount;
-        Managers.Game.OnSpawnEvent += AddEnemyCount;
+        _monsterStat = Managers.Data.MonsterData;
+        _spawnPoint = GetComponentsInChildren<Transform>();
+        Managers.Game._OnSpawnEvent -= AddEnemyCount;
+        Managers.Game._OnSpawnEvent += AddEnemyCount;
     }
 
     private void Update()
@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour
         {
             int level = Managers.Game.getPlayer().GetComponent<PlayerStat>().Level;
             Boss = Managers.Game.Spawn(Define.WorldObject.Enemy, "Monster/Enemy");
-            Boss.GetOrAddComponent<EnemyController>().Init(monsterStat[timeLevel], level, Define.MonsterType.middleBoss);
+            Boss.GetOrAddComponent<EnemyController>().Init(_monsterStat[timeLevel], level, Define.MonsterType.middleBoss);
         }
         else
         {
@@ -61,7 +61,7 @@ public class Spawner : MonoBehaviour
             return;
         }
 
-        Boss.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
+        Boss.transform.position = _spawnPoint[Random.Range(1, _spawnPoint.Length)].position;
 
 
     }
@@ -76,8 +76,8 @@ public class Spawner : MonoBehaviour
 
             int level = Managers.Game.getPlayer().GetComponent<PlayerStat>().Level;
             GameObject enemy = Managers.Game.Spawn(Define.WorldObject.Enemy, "Monster/Enemy");
-            enemy.transform.position = spawnPoint[Random.Range(1, spawnPoint.Length)].position;
-            enemy.GetOrAddComponent<EnemyController>().Init(monsterStat[monsterType], level, Define.MonsterType.Enemy);
+            enemy.transform.position = _spawnPoint[Random.Range(1, _spawnPoint.Length)].position;
+            enemy.GetOrAddComponent<EnemyController>().Init(_monsterStat[monsterType], level, Define.MonsterType.Enemy);
         }
         yield return new WaitForSeconds(_spawnTime);
         _isSpawning = false;

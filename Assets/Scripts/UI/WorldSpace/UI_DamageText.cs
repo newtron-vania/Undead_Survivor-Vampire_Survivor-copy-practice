@@ -5,33 +5,37 @@ using UnityEngine;
 
 public class UI_DamageText : MonoBehaviour
 {
-        private float moveSpeed;
-        private float alphaSpeed;
-        private float destroyTime;
-        TextMeshPro text;
-        Color alpha;
-        public int damage;
-    
-        // Start is called before the first frame update
-        void Start()
+
+    private TextMeshPro _text;
+    private Color _alpha;
+
+    public int _damage;
+
+    private float _moveSpeed;
+    private float _alphaSpeed;
+    private float _destroyTime;
+
+
+    // Start is called before the first frame update
+    void Start()
         {
-            moveSpeed = 2.0f;
-            alphaSpeed = 2.0f;
-            destroyTime = 2.0f;
+            _moveSpeed = 2.0f;
+            _alphaSpeed = 2.0f;
+            _destroyTime = 2.0f;
     
-            text = GetComponent<TextMeshPro>();
-            alpha = text.color;
-            text.text = damage.ToString();
-            Invoke("DestroyObject", destroyTime);
+            _text = GetComponent<TextMeshPro>();
+            _alpha = _text.color;
+            _text.text = _damage.ToString();
+            Invoke("DestroyObject", _destroyTime);
         }
     
         // Update is called once per frame
         void Update()
         {
-            transform.Translate(new Vector3(0, moveSpeed * Time.deltaTime, 0)); // 텍스트 위치
+            transform.Translate(new Vector3(0, _moveSpeed * Time.deltaTime, 0)); // ?�스???�치
             
-            alpha.a = Mathf.Lerp(alpha.a, 0, Time.deltaTime * alphaSpeed); // 텍스트 알파값
-            text.color = alpha;
+            _alpha.a = Mathf.Lerp(_alpha.a, 0, Time.deltaTime * _alphaSpeed); // ?�스???�파�?
+            _text.color = _alpha;
         }
     
         private void DestroyObject()

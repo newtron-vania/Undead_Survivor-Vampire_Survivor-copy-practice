@@ -5,11 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SplashScene : MonoBehaviour
 {
-    float time = 0;
+    float _time = 0;
     private void FixedUpdate()
     {
-        time += Time.fixedDeltaTime;
-        if(time > 1.5)
+        _time += Time.fixedDeltaTime;
+        if(_time > 1.5)
         {
             SceneManager.LoadScene("MainMenuScene");
         }

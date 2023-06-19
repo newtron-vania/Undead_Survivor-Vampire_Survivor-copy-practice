@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class UI_GameVictory : UI_Popup
 {
-    public override Define.PopupUIGroup _popupID { get { return Define.PopupUIGroup.UI_GameVictory; } }
-
     enum Images
     {
         VictoryLogo
@@ -17,6 +15,8 @@ public class UI_GameVictory : UI_Popup
     {
         BackToMainButton
     }
+
+    public override Define.PopupUIGroup PopupID { get { return Define.PopupUIGroup.UI_GameVictory; } }
 
     public override void Init()
     {

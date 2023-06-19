@@ -37,10 +37,10 @@ public class EventManager
 
             if (rd== 0)
             {
-                if (player.GetWeaponDict()[player.playerStartWeapon] >= 5)
+                if (player.GetWeaponDict()[player._playerStartWeapon] >= 5)
                     continue;
                 selected[0] = "0";
-                selected[1] = player.playerStartWeapon.ToString();
+                selected[1] = player._playerStartWeapon.ToString();
             }
             else if (rd == 1)
             {
@@ -158,7 +158,7 @@ public class EventManager
                     player.Amount += 1;
                     break;
             }
-            player.AddOrSetWeaponDict(player.playerStartWeapon, 0);
+            player.AddOrSetWeaponDict(player._playerStartWeapon, 0);
         }
             
         else
@@ -183,7 +183,7 @@ public class EventManager
         {
             foreach(KeyValuePair<Define.Weapons, int> weapon in player.GetWeaponDict())
             {
-                if (weapon.Key == player.playerStartWeapon)
+                if (weapon.Key == player._playerStartWeapon)
                     continue;
                 if(weapon.Value < 5)
                 {
