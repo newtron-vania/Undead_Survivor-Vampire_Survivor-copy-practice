@@ -7,7 +7,7 @@
 - 게임 개발에 대한 이해도와 숙련도를 높이기 위해 캐쥬얼하고 최소한의 기능만으로 최고의 재미를 보장하는 장르인 뱀서라이크 계열의 게임을 만들어봤다.
 
 - Game To Play - https://drive.google.com/file/d/1DCUpQkDisK1UOMmwQSigFkcPXnLAeTBA/view?usp=sharing
-- 프로젝트 설명서 - https://github.com/newtron-vania/Vampire-Survivor/raw/main/%EC%96%B8%EB%8D%B0%EB%93%9C%20%EC%84%9C%EB%B0%94%EC%9D%B4%EB%B2%84%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%84%A4%EB%AA%85%EC%84%9C.hwp
+- 프로젝트 설명서 - https://github.com/newtron-vania/Undead_Survivor-Vampire_Survivor-copy-practice/blob/main/%EC%96%B8%EB%8D%B0%EB%93%9C%20%EC%84%9C%EB%B0%94%EC%9D%B4%EB%B2%84%20%EC%84%A4%EB%AA%85%EC%84%9C.pdf
 - 플레이 영상 - https://youtu.be/Xxo9mynXYRA
 
 - 구현 기능
