@@ -31,8 +31,7 @@ public class PoolManager
         public void Push(Poolable poolable)
         {
             //object가 존재하지 않을 시 배치하지 않는다.
-            if (poolable 
-                null)
+            if (poolable == null)
                 return;
             //pool역할을 하는 Object의 자식오브젝트로 배치하고, 비활성화하여 사용되지 않음을 확인시킨다.
             poolable.transform.parent = Root;

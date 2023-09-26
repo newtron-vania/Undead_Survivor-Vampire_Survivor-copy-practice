@@ -21,8 +21,7 @@ public class Magnet_Item : Base_Item
 
     protected override void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.transform.tag 
-            "Player")
+        if (col.transform.tag == "Player")
         {
             PlayerStat playerStat = col.GetComponent<PlayerStat>();
             OnItemEvent(playerStat);

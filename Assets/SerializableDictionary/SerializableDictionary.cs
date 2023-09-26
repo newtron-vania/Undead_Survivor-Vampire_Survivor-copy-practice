@@ -39,8 +39,7 @@ public abstract class SerializableDictionaryBase<TKey, TValue, TValueStorage> : 
 
 	public void OnAfterDeserialize()
 	{
-		if(m_keys != null && m_values != null && m_keys.Length 
-			m_values.Length)
+		if(m_keys != null && m_values != null && m_keys.Length == m_values.Length)
 		{
 			this.Clear();
 			int n = m_keys.Length;

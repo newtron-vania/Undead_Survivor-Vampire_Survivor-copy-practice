@@ -178,8 +178,7 @@ public class PlayerStat : Stat
             string weaponSpawningPool = weapon.Key + "SpawningPool";
 
             GameObject weaponPool = Util.FindChild(gameObject, weaponSpawningPool, true);
-            if (weaponPool 
-                null)
+            if (weaponPool == null)
             {
                 weaponPool = Managers.Resource.Instantiate($"Weapon/SpawningPool/{weaponSpawningPool}", transform);
             }

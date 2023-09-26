@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public abstract class BaseScene : MonoBehaviour
 {
-    public abstract Define.SceneType SceneType { get; }
+    public abstract Define.SceneType _sceneType { get; }
 
     void Awake()
     {

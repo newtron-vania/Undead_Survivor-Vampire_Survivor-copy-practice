@@ -35,7 +35,7 @@ public class Managers : MonoBehaviour
     #endregion
 
     public static float GameTime { get; set; } = 0;
-    public static bool _gameStop = false;
+    public static bool gameStop = false;
 
     void Awake()
     {
@@ -82,13 +82,13 @@ public class Managers : MonoBehaviour
     public static void GamePause()
     {
         Time.timeScale = 0;
-        Managers._gameStop = true;
+        Managers.gameStop = true;
     }
 
     public static void GamePlay()
     {
         Time.timeScale = 1;
-        Managers._gameStop = false;
+        Managers.gameStop = false;
     }
 
 

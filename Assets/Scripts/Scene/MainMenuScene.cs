@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MainMenuScene : BaseScene
 {
-    public override Define.SceneType SceneType { get { return Define.SceneType.MainMenuScene; } }
+    public override Define.SceneType _sceneType { get { return Define.SceneType.MainMenuScene; } }
 
 
     protected override void Init()
